@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- The link preview card. Rendered to site/og.png by `make og`, using the
+     app's own typeface and palette so a shared link looks like the thing it
+     opens. Chrome rather than an image library because the card is mostly type,
+     and it is a static page, so the screenshot is reliable. -->
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('../site/vendor/fonts/oswald.woff2') format('woff2');
+    font-weight: 200 700;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px;
+    background: #06283d;
+    color: #dff6ff;
+    font-family: 'Oswald', sans-serif;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 5.5rem;
+    position: relative; overflow: hidden;
+  }
+  /* The coastline motif from the favicon, oversized and bled off the edge. */
+  .waves {
+    position: absolute; right: -6rem; bottom: -8rem;
+    width: 46rem; opacity: .16;
+  }
+  h1 {
+    font-size: 7.4rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .01em; line-height: .95; max-width: 16ch;
+  }
+  p {
+    margin-top: 2rem; font-size: 2.1rem; font-weight: 200;
+    letter-spacing: .02em; color: rgba(223, 246, 255, .72); max-width: 34ch;
+  }
+  .verdicts { margin-top: 2.6rem; display: flex; gap: 1rem; font-size: 1.5rem; font-weight: 500; }
+  .verdicts span { padding: .35rem 1.1rem; border: 2px solid currentColor; }
+  .y { color: #4ade80; } .g { color: #a3e635; } .h { color: #fbbf24; } .n { color: #f87171; }
+</style>
+
+<svg class="waves" viewBox="0 0 64 64" fill="none" stroke="#3ec5e0" stroke-width="4" stroke-linecap="round">
+  <path d="M2 20c5 0 5-7 10-7s5 7 10 7 5-7 10-7 5 7 10 7 5-7 10-7 5 7 10 7"/>
+  <path d="M2 34c5 0 5-7 10-7s5 7 10 7 5-7 10-7 5 7 10 7 5-7 10-7 5 7 10 7"/>
+  <path d="M2 48c5 0 5-7 10-7s5 7 10 7 5-7 10-7 5 7 10 7 5-7 10-7 5 7 10 7"/>
+</svg>
+
+<h1>Get in the fucking sea</h1>
+<p>Should you? Sea temperature, waves, wind, tide and water quality — measured, not guessed.</p>
+<div class="verdicts">
+  <span class="y">HELL YEAH</span><span class="g">YEAH</span><span class="h">HMMM</span><span class="n">FUCK NO</span>
+</div>

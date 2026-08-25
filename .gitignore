@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.cache/
+.env
+.env.local
+.DS_Store
+*.log
+# Intermediate geodata from the coastline build; the published artefact is
+# committed, the multi-hundred-megabyte source extracts are not.
+tmp/
+*.zip
+*.shp
+*.dbf
+*.shx
+*.prj

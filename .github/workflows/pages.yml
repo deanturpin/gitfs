@@ -1,0 +1,68 @@
+name: Deploy to Pages
+
+on:
+  push:
+    branches: [main]
+  # Buoys report every half hour. GitHub's scheduler is not punctual and
+  # routinely fires 10 to 30 minutes late, so treat this as roughly hourly and
+  # let the UI show each station's own observation time.
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; queue rather than cancel so a data refresh
+# already in flight still reaches production.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Regenerate the data that blocks CORS and so cannot be fetched by the
+      # browser. A source having a moment must not take the site down with it:
+      # on failure the committed copy ships instead, and the page shows its age.
+      - name: Refresh buoy readings
+        run: python3 tools/fetch_buoys.py || echo "::warning::buoy refresh failed, shipping committed data"
+
+      - name: Refresh bathing water forecasts
+        run: python3 tools/fetch_bathing.py || echo "::warning::bathing refresh failed, shipping committed data"
+
+      # Stamp the commit onto local imports so a deploy cannot be half-applied.
+      # Pages caches for four hours and files fall out of cache at different
+      # times; a fresh app.js against a cached providers.js does not merely look
+      # stale, it fails to start.
+      - name: Version the module graph
+        run: python3 tools/version_assets.py "${GITHUB_SHA::7}"
+
+      # Version tracking: stamp the short commit hash into the page. Fails
+      # loudly if the placeholder has gone, because a substitution that matches
+      # nothing is otherwise a silent no-op — which is exactly how the version
+      # marker was lost once already.
+      - name: Inject commit hash
+        run: |
+          grep -q "__COMMIT__" site/index.html || {
+            echo "::error::__COMMIT__ placeholder missing from site/index.html"
+            exit 1
+          }
+          sed -i "s/__COMMIT__/${GITHUB_SHA::7}/g" site/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

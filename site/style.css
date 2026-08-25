@@ -1,0 +1,411 @@
+/* Committed to a single dark palette: this is a map of the sea at all hours,
+   and a light theme would fight the water. */
+/* Oswald, self-hosted so the app owns its look offline and asks nothing of a
+   third party. Variable weight, one 21KB file, SIL Open Font Licence. */
+@font-face {
+  font-family: 'Oswald';
+  src: url('vendor/fonts/oswald.woff2') format('woff2');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  color-scheme: dark;
+  /* The condensed face is the app's voice: headings, the verdict and every
+     number. Running prose stays in the system UI face, which is easier at
+     small sizes and needs no download. */
+  --display: 'Oswald', 'Helvetica Neue Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --header-height: 4.25rem;
+  --panel-height: 19.5rem;
+  --sea: #06283d;
+  --land: #0e3b54;
+  --ink: #dff6ff;
+  --accent: #3ec5e0;
+  --dim: rgba(223, 246, 255, .55);
+  --panel: rgba(6, 40, 61, .94);
+  --edge: rgba(62, 197, 224, .25);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; height: 100%;
+  background: var(--sea); color: var(--ink);
+  font: 16px/1.45 system-ui, -apple-system, sans-serif;
+  overscroll-behavior: none;
+}
+
+#map { position: absolute; inset: calc(var(--header-height) + env(safe-area-inset-top)) 0 0; }
+
+/* Controls sit above the map and clear the notch on phones. */
+.controls {
+  position: absolute; z-index: 2;
+  /* Clear of the scale, which now sits centred across the top of the map. */
+  top: calc(var(--header-height) + env(safe-area-inset-top) + 3.25rem); right: .75rem;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+
+button {
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--edge); border-radius: .75rem;
+  background: var(--panel); color: var(--accent);
+  cursor: pointer; padding: 0;
+}
+button:hover { border-color: var(--accent); }
+button svg { width: 1.35rem; height: 1.35rem; }
+
+/* The reading panel. Numbers are the content; glyphs label them. */
+#panel {
+  position: absolute; z-index: 3;
+  left: .75rem; right: .75rem;
+  bottom: max(.75rem, env(safe-area-inset-bottom));
+  max-width: 30rem; margin-inline: auto;
+  background: var(--panel); border: 1px solid var(--edge);
+  border-radius: 1rem; padding: 1rem;
+  backdrop-filter: blur(12px);
+  transform: translateY(calc(100% + 1.5rem));
+  transition: transform .25s ease;
+  /* Fixed rather than fitted. The contents vary — a spot with no bathing water
+     classification is a tile short — and a card that resized between spots was
+     jarring to swipe through, and moved the map underneath it as it went. The
+     cap keeps it sane on a short screen; anything taller scrolls inside. */
+  height: var(--panel-height);
+  max-height: 62dvh;
+  overflow-y: auto;
+}
+#panel[data-open] { transform: none; }
+
+.spot-name {
+  font-family: var(--display);
+  font-size: 1.25rem; font-weight: 500; letter-spacing: .01em;
+  margin: 0 0 .6rem;
+}
+
+.readings {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: .6rem; margin: 0;
+}
+
+.reading {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .5rem .6rem;
+  border: 1px solid var(--edge); border-radius: .6rem;
+}
+.reading svg { width: 1.25rem; height: 1.25rem; flex: none; color: var(--accent); }
+
+/* A flex item will not shrink below its content by default, which is how a
+   long word like "Excellent" pushed out of its tile rather than fitting in it.
+   min-width lets it shrink; the ellipsis catches anything longer still. */
+.reading > div { min-width: 0; }
+.reading > div > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+
+/* Tiles holding a word rather than a number need more room than the grid gives
+   a two or three digit number, but not a whole row to themselves — two columns
+   is enough for a classification, and on a narrow screen that is the full width
+   anyway because the grid only fits two. */
+.reading--word { grid-column: span 2; }
+.reading--word b { font-size: 1.15rem; }
+.reading b {
+  font-family: var(--display);
+  font-size: 1.4rem; font-weight: 500;
+  font-variant-numeric: tabular-nums; line-height: 1.05;
+}
+.reading small { display: block; color: var(--dim); font-size: .7rem; }
+
+/* The water quality tile is always drawn, showing a dash where the Environment
+   Agency has no rating or no forecast for a spot. Rendering it conditionally
+   meant the grid gained and lost a whole tile between spots, so every field
+   below shuffled as you swiped along the coast. */
+
+/* Provenance, drawn rather than written: a filled dot is an instrument in the
+   water, a hollow ring is a model's opinion. Never let them look alike. */
+.mark {
+  width: .5rem; height: .5rem; border-radius: 50%;
+  border: 1.5px solid var(--accent); flex: none; margin-left: auto;
+}
+.mark[data-measured] { background: var(--accent); }
+
+.tide { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .6rem; color: var(--dim); font-size: .8rem; }
+.tide span { font-variant-numeric: tabular-nums; }
+
+.stale { color: #ffb454; }
+
+
+/* Attribution. A licence condition rather than decoration — OGL, CC-BY and
+   ODbL each require it in the running app — so it is quiet rather than hidden.
+   Left in the corner a map's credits normally occupy, and toned down rather
+   than boxed up: a heavy control there reads as clutter. */
+.maplibregl-ctrl-bottom-right { z-index: 1; }
+
+.maplibregl-ctrl-bottom-right .maplibregl-ctrl-attrib,
+.maplibregl-ctrl-bottom-right .maplibregl-ctrl-attrib.maplibregl-compact,
+.maplibregl-ctrl-attrib,
+.maplibregl-ctrl-attrib.maplibregl-compact {
+  /* MapLibre paints a translucent white panel behind this. Over a dark map it
+     reads as a smudge rather than a label, and the text is legible without it. */
+  /* Qualified by the container as well, because the container's own rules are
+     more specific than a bare class and were winning on background. */
+  background: none;
+  background-color: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0 .4rem .3rem 0;
+  padding: 0;
+  min-height: 0;
+}
+.maplibregl-ctrl-attrib-inner {
+  color: var(--dim); font-size: .6rem; line-height: 1.3;
+  opacity: .6; text-align: right;
+}
+.maplibregl-ctrl-attrib a { color: var(--accent); }
+
+
+/* The verdict. It is the reason the app exists, so it is the largest thing in
+   the panel and the readings beneath it are the argument for it. */
+.verdict {
+  margin: 0 0 .5rem;
+  display: flex; align-items: baseline; justify-content: space-between; gap: .75rem;
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 8vw, 2.4rem);
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: .02em; line-height: 1;
+}
+
+/* The score behind the word. Quieter than the verdict, because the verdict is
+   the decision and this is the working. */
+.verdict .pct {
+  flex: none; font-size: .62em; font-weight: 600;
+  opacity: .75; font-variant-numeric: tabular-nums;
+}
+.verdict .pct i { font-style: normal; font-size: .7em; opacity: .7; }
+.verdict small {
+  /* Always rendered, empty when the verdict needs no justifying, and a fixed
+     height so the line is reserved either way. Otherwise a HELL YEAH — which
+     explains itself and carries no reason — is a line shorter than everything
+     else, and every field below it jumps as you swipe between spots. */
+  display: block; margin-top: .15rem;
+  height: 1.05rem; line-height: 1.05rem;
+  font-size: .75rem; font-weight: 400; letter-spacing: 0;
+  color: var(--dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.verdict[data-tone="yes"] { color: #4ade80; }
+.verdict[data-tone="good"] { color: #a3e635; }
+.verdict[data-tone="hmm"] { color: #fbbf24; }
+.verdict[data-tone="no"] { color: #f87171; }
+
+/* Full-width header. A solid bar rather than a floating pill: it names the app
+   and sets the type, and the map begins beneath it. */
+#banner {
+  position: absolute; z-index: 4;
+  top: 0; left: 0; right: 0;
+  height: calc(var(--header-height) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) .5rem 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sea);
+  border-bottom: 1px solid var(--edge);
+}
+
+#banner h1 {
+  margin: 0;
+  font-family: var(--display);
+  /* The same size as the verdict: the question and the answer are the two
+     loudest things in the app and should be set alike. */
+  font-size: clamp(1.75rem, 8vw, 2.4rem);
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: .04em; line-height: 1;
+  white-space: nowrap;
+}
+
+/* On narrow screens the pill would run into the buttons, so it steps down and
+   the map keeps the full width. */
+@media (max-width: 30rem) {
+  #banner { font-size: .85rem; padding: .45rem .8rem; }
+}
+
+/* Geolocation state, drawn rather than written. Seeking pulses; failed goes
+   red and stays red until the next attempt, because a silent no-op reads as a
+   broken button. */
+button[data-state="seeking"] { animation: pulse 1.1s ease-in-out infinite; }
+button[data-state="failed"] { color: #f87171; border-color: #f87171; }
+
+@keyframes pulse {
+  50% { opacity: .45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button[data-state="seeking"] { animation: none; opacity: .6; }
+}
+
+
+/* Swipe hint, hovering just above the details pane.
+   It used to be a child of the panel anchored to its top edge, which stopped
+   working the moment the panel became a fixed height with its own scrolling:
+   an overflow container clips anything positioned outside it. The panel's
+   height and offset are both known, so its position is calculated rather than
+   measured. */
+#swipehint {
+  position: absolute; z-index: 3;
+  left: 0; right: 0;
+  bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + var(--panel-height) + .4rem);
+  display: flex; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+#panel[data-open] ~ #swipehint { opacity: 1; }
+
+/* Nothing to swipe with on a laptop, so the cue would be an instruction that
+   cannot be followed. Arrow keys still page — they are not advertised, but the
+   people who try them are the people who already expect them to work. */
+@media (hover: hover) and (pointer: fine) {
+  #swipehint { display: none; }
+}
+#swipehint svg {
+  /* The viewBox is 32 by 24, so these keep its proportions rather than
+     stretching the hand. */
+  width: 3.6rem; height: 2.7rem;
+  color: var(--accent);
+  filter: drop-shadow(0 1px 3px var(--sea));
+  /* One sweep left to right along a shallow arc, a second from side to side,
+     then a beat before it repeats. The pause matters: a hand tracking back and
+     forth without rest reads as an error state rather than an invitation. */
+  animation: swipe-across 1.6s ease-in-out infinite;
+}
+
+@keyframes swipe-across {
+  0%   { transform: translate(-1.1rem, 0); opacity: 0; }
+  8%   { opacity: .85; }
+  31%  { transform: translate(0, -.3rem); opacity: .85; }
+  55%  { opacity: .85; }
+  62%  { transform: translate(1.1rem, 0); opacity: 0; }
+  100% { transform: translate(1.1rem, 0); opacity: 0; }
+}
+
+/* Once a swipe has happened the demonstration has served its purpose, so the
+   hand stops and settles in the middle. It stays visible: it is still the cue
+   that the gesture exists, it just no longer needs to mime it. */
+#swipehint[data-swiped] svg {
+  animation: none;
+  transform: none;
+  opacity: .55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #swipehint svg { animation: none; opacity: .6; }
+}
+
+/* MapLibre only offers the four corners, so the top-right container is
+   stretched across the map and its contents centred. The float has to go with
+   it, and the container stops taking pointer events so it does not sit over the
+   map catching drags that were meant for it. */
+.maplibregl-ctrl-top-right {
+  left: 0; right: 0;
+  display: flex; justify-content: center;
+  pointer-events: none;
+}
+.maplibregl-ctrl-top-right .maplibregl-ctrl {
+  float: none;
+  pointer-events: auto;
+}
+
+/* Scale bar. Drawn as a measuring line rather than a boxed control: a rule with
+   ticks at each end reads as a distance, where a filled bar reads as a button. */
+.maplibregl-ctrl-scale {
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--dim);
+  border-left: 2px solid var(--dim);
+  border-right: 2px solid var(--dim);
+  border-radius: 0;
+  margin: .75rem 0 0;
+  padding: 0 .25rem 2px;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: .7rem; letter-spacing: .04em;
+  line-height: 1.2; text-align: center;
+  opacity: .75;
+  text-shadow: 0 1px 2px var(--sea);
+}
+
+/* The title is set at the verdict's size and must not wrap, so on the narrowest
+   phones the tracking closes up rather than the line running off the edge. */
+@media (max-width: 23rem) {
+  #banner h1 { letter-spacing: 0; }
+  #banner { padding-inline: .35rem; }
+}
+
+/* Loading. A rolling swell rather than a spinning ring: the app is about the
+   sea, and a wave reads as "still coming" without borrowing an icon from
+   somewhere else. Positioned over the middle of the card from outside it,
+   because the card scrolls and would clip anything laid over it. */
+#loading {
+  position: absolute; z-index: 4;
+  left: 0; right: 0;
+  bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + var(--panel-height) / 2 - 1.25rem);
+  display: flex; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+#panel[data-loading] ~ #loading { opacity: 1; }
+
+#loading svg { width: 5rem; height: 2.1rem; overflow: visible; }
+
+.swell path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+/* One wavelength is 24 units, so translating by exactly that returns the path
+   to where it started and the loop is seamless. */
+.swell { animation: swell 1.6s linear infinite; }
+.swell--back { opacity: .35; animation-duration: 2.6s; }
+.swell--front { opacity: .9; }
+
+@keyframes swell {
+  to { transform: translateX(24px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swell { animation: none; }
+  #panel[data-loading] ~ #loading { opacity: .8; }
+}
+
+/* A one-off nudge towards the locate button, for someone who has just arrived
+   and is looking at a map of the whole country. Chunky and white so it reads
+   instantly against the sea, and gone for good once the button has been used. */
+#locatehint {
+  position: absolute; z-index: 5;
+  /* Level with the middle of the locate button, just off its left edge: the
+     button is 2.75rem square at .75rem from the right, so its centre line sits
+     4.625rem below the header and its left edge 3.5rem in. */
+  top: calc(var(--header-height) + env(safe-area-inset-top) + 4.625rem - 1.15rem);
+  right: 3.9rem;
+  width: 3.6rem;
+  pointer-events: none;
+  animation: nudge 1.4s ease-in-out infinite;
+  transition: opacity .4s ease;
+  filter: drop-shadow(0 2px 4px rgba(3, 20, 31, .7));
+}
+#locatehint[data-gone] { opacity: 0; }
+/* preserveAspectRatio is off so the shape fills whatever box it is given. With
+   a filled arrow that simply makes it bigger in both directions, where a
+   stroked one would have thinned in one and thickened in the other. The offset
+   above is half this height, keeping it level with the button's centre. */
+#locatehint svg {
+  display: block;
+  width: 100%; height: 2.3rem;
+  color: #fff;
+}
+
+@keyframes nudge {
+  50% { transform: translateX(.4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #locatehint { animation: none; }
+}

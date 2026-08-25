@@ -1,0 +1,14 @@
+{
+  "name": "gitfs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sea conditions for swimmers and other sea goers",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@maplibre/maplibre-gl-style-spec": "^26.4.0"
+  }
+}

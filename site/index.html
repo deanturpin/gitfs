@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Get In The Fucking Sea</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<!-- Written for the whole audience rather than swimmers alone: the same
+     readings serve surfers, paddleboarders, kayakers and divers, who simply
+     weight them differently — which is what the persona table in verdict.js is
+     for. Coverage is stated honestly: the bathing waters are England only. -->
+<meta name="description" content="Should you get in? Live sea temperature, waves, swell, wind, tide and water quality for wild swimming, surfing, paddleboarding, kayaking, diving, windsurfing and every other reason to get in the water. Covers every designated bathing water in England, with measured readings from offshore wave buoys.">
+<meta name="theme-color" content="#06283d">
+
+<!-- Link previews. og:image must be an absolute URL — a relative one is simply
+     ignored by every scraper — and a raster, since the SVG favicon will not do.
+     Rebuild the card with `make og` after changing the wording. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://turpin.dev/gitfs/">
+<meta property="og:title" content="Get In The Fucking Sea">
+<meta property="og:description" content="Should you get in? Sea temperature, waves, wind, tide and water quality for swimming, surfing, paddleboarding, kayaking and diving — measured, not guessed.">
+<meta property="og:image" content="https://turpin.dev/gitfs/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Get in the fucking sea, with the four verdicts: hell yeah, yeah, hmmm, fuck no">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Version tracking. Invisible but inspectable, so it survives the UI being
+     stripped back — it previously lived in the credits panel and disappeared
+     with it, leaving the workflow's substitution matching nothing. -->
+<meta name="version" content="__COMMIT__">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Glyph set. The UI carries no translatable text, so every label here is a
+     drawing; the words survive only as accessible names. -->
+<svg style="display:none" aria-hidden="true"><defs>
+  <symbol id="g-temp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/>
+  </symbol>
+  <symbol id="g-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M2 8c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M2 14c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M2 20c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/>
+  </symbol>
+  <symbol id="g-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 16h15a3 3 0 1 1-3 3"/>
+  </symbol>
+  <symbol id="g-tide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M3 21h18"/>
+  </symbol>
+  <symbol id="g-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M12 3s6 6.4 6 10.2A6 6 0 0 1 6 13.2C6 9.4 12 3 12 3z"/>
+  </symbol>
+  <symbol id="g-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M12 3v5"/><path d="m8.5 6.5 3.5-3.5 3.5 3.5"/>
+    <circle cx="12" cy="15" r="3.5"/><path d="M2 21h20"/><path d="M4.5 15H3M21 15h-1.5"/>
+  </symbol>
+  <symbol id="g-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M12 8V3"/><path d="m8.5 4.5 3.5 3.5 3.5-3.5"/>
+    <circle cx="12" cy="15" r="3.5"/><path d="M2 21h20"/><path d="M4.5 15H3M21 15h-1.5"/>
+  </symbol>
+  <symbol id="g-swipe" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- motion, left and right -->
+    <path d="M5.5 7 3 9.5 5.5 12"/><path d="M3 9.5h3.5"/>
+    <path d="M26.5 7 29 9.5 26.5 12"/><path d="M25.5 9.5H29"/>
+    <!-- a hand, mid-swipe: three fingers folded, index extended -->
+    <path d="M16 21.5a5.5 5.5 0 0 0 5.5-5.5v-4a1.4 1.4 0 0 0-2.8 0"/>
+    <path d="M18.7 12v-.8a1.4 1.4 0 0 0-2.8 0V12"/>
+    <path d="M15.9 11.2a1.4 1.4 0 0 0-2.8 0V16"/>
+    <path d="M13.1 16v-2.2a1.4 1.4 0 0 0-2.7.5l.6 3.4a5.5 5.5 0 0 0 1.6 3l1.4 1.4"/>
+    <path d="M16 8.5v-4"/>
+  </symbol>
+  <symbol id="g-locate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
+<div id="map"></div>
+
+<!-- The question the whole app answers. It sits between the zoom control and
+     the buttons, because both corners are already spoken for. -->
+<header id="banner"><h1>Get in the fucking sea</h1></header>
+
+<div class="controls">
+  <button id="locate" aria-label="Find my location">
+    <svg aria-hidden="true"><use href="#g-locate"/></svg>
+  </button>
+</div>
+
+<section id="panel" aria-live="polite" aria-label="Conditions at the selected spot"></section>
+
+<!-- Outside the panel, not inside it: the panel scrolls, and an overflow
+     container clips anything positioned beyond its edges. Placed after it so a
+     sibling selector can show it only while a spot is selected. -->
+<!-- Points at the locate button until it has been used once, then never again. -->
+<div id="locatehint" hidden aria-hidden="true">
+  <!-- A filled block arrow rather than a stroked one. Strokes need caps and
+       joins, and rounding those fought the condensed type; a solid shape has
+       corners instead, and stretches without the line weight going odd. -->
+  <svg viewBox="0 0 48 24" preserveAspectRatio="none" fill="currentColor">
+    <path d="M0 7h28V0l20 12-20 12v-7H0z"/>
+  </svg>
+</div>
+
+<div id="swipehint" aria-hidden="true"><svg><use href="#g-swipe"/></svg></div>
+
+<!-- Loading. Outside the panel for the same reason as the hint: the panel
+     scrolls, and an overflow container clips what sits over it. Two ranks of
+     swell sliding at different speeds — the paths run wider than the viewBox
+     and shift by exactly one wavelength, so the loop has no seam. -->
+<div id="loading" role="status" aria-label="Reading the conditions">
+  <svg viewBox="0 0 48 20" aria-hidden="true">
+    <g class="swell swell--back">
+      <path d="M-24 13q6-5 12 0t12 0 12 0 12 0 12 0 12 0"/>
+    </g>
+    <g class="swell swell--front">
+      <path d="M-24 8q6-5 12 0t12 0 12 0 12 0 12 0 12 0"/>
+    </g>
+  </svg>
+</div>
+
+
+<!-- data-cfasync opts this out of Cloudflare Rocket Loader, which is enabled on
+     the zone in front of turpin.dev and injects a preload for this file. Rocket
+     Loader rewrites and defers scripts, which is a poor fit for ES modules and
+     was producing console warnings about a preload it then declined to use. -->
+<script type="module" src="app.js" data-cfasync="false"></script>
+</body>
+</html>

@@ -1,0 +1,4648 @@
+{
+ "generated": "2026-08-25T11:20:00Z",
+ "source": "Environment Agency",
+ "licence": "OGL v3",
+ "measured": false,
+ "spots": [
+  {
+   "id": "ukd5300-41300",
+   "name": "Ainsdale",
+   "lat": 53.60793515083233,
+   "lon": -3.063969846000971,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1101-46100",
+   "name": "Allonby",
+   "lat": 54.76803473787631,
+   "lon": -3.434608476413831,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2101-04250",
+   "name": "Amble Links",
+   "lat": 55.32564590871283,
+   "lon": -1.552397954526308,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2100-04220",
+   "name": "Amble Little Shore",
+   "lat": 55.33691324083656,
+   "lon": -1.57486180575255,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf3102-09400",
+   "name": "Anderby",
+   "lat": 53.25980121003406,
+   "lon": 0.325520422539733,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-23501",
+   "name": "Anstey's Cove (Torquay)",
+   "lat": 50.47182407170853,
+   "lon": -3.501093359202774,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-23400",
+   "name": "Babbacombe",
+   "lat": 50.4790555378573,
+   "lon": -3.509412650912728,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2102-03700",
+   "name": "Bamburgh Castle",
+   "lat": 55.610951487599735,
+   "lon": -1.707902922897897,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25700",
+   "name": "Bantham",
+   "lat": 50.27895078225824,
+   "lon": -3.878814815030624,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-23700",
+   "name": "Beacon Cove",
+   "lat": 50.45746639794916,
+   "lon": -3.523518070527209,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2102-03900",
+   "name": "Beadnell",
+   "lat": 55.548750892712384,
+   "lon": -1.632288132669377,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4301-21700",
+   "name": "Beer",
+   "lat": 50.696530777851144,
+   "lon": -3.08988548959849,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-18200",
+   "name": "Bembridge",
+   "lat": 50.68620066346025,
+   "lon": -1.069670328823699,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2302-35500",
+   "name": "Berrow North of Unity Farm",
+   "lat": 51.28173368068762,
+   "lon": -3.017751052337732,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2205-14200",
+   "name": "Bexhill",
+   "lat": 50.83651861983744,
+   "lon": 0.470373139504789,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-25900",
+   "name": "Bigbury-on-Sea North",
+   "lat": 50.28315367563654,
+   "lon": -3.896948022486347,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25800",
+   "name": "Bigbury-on-Sea South",
+   "lat": 50.28165534771269,
+   "lon": -3.895063665552046,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2201-14550",
+   "name": "Birling Gap",
+   "lat": 50.742579673737495,
+   "lon": 0.200707746754768,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd4200-42600",
+   "name": "Bispham",
+   "lat": 53.84890576949986,
+   "lon": -3.054869767619019,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4200-42300",
+   "name": "Blackpool Central",
+   "lat": 53.80265842922889,
+   "lon": -3.056200177794543,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4200-42500",
+   "name": "Blackpool North",
+   "lat": 53.81612859181931,
+   "lon": -3.056569017332642,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-24800",
+   "name": "Blackpool Sands",
+   "lat": 50.3194159836367,
+   "lon": -3.60970754285821,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd4200-42100",
+   "name": "Blackpool South",
+   "lat": 53.79064259107068,
+   "lon": -3.059086159238381,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2305-35200",
+   "name": "Blue Anchor West",
+   "lat": 51.18240778352082,
+   "lon": -3.401200559800488,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2103-04600",
+   "name": "Blyth South Beach",
+   "lat": 55.10887191552686,
+   "lon": -1.496824471223949,
+   "classification": "Excellent",
+   "risk": "increased",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2402-15700",
+   "name": "Bognor Regis (Aldwick)",
+   "lat": 50.77923589764446,
+   "lon": -0.691328567556921,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2402-15680",
+   "name": "Bognor Regis East",
+   "lat": 50.78234219649502,
+   "lon": -0.669396152909609,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3104-32750",
+   "name": "Booby's Bay",
+   "lat": 50.53903716125394,
+   "lon": -5.0258580848193,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12660",
+   "name": "Botany Bay, Broadstairs",
+   "lat": 51.38944157243337,
+   "lon": 1.435294752968038,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19160",
+   "name": "Bournemouth Alum Chine",
+   "lat": 50.711113986161706,
+   "lon": -1.895402269211638,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19060",
+   "name": "Bournemouth Boscombe Pier",
+   "lat": 50.71944739521689,
+   "lon": -1.844020302357056,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2101-19150",
+   "name": "Bournemouth Durley Chine",
+   "lat": 50.71305031738002,
+   "lon": -1.888741147744736,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19030",
+   "name": "Bournemouth Fisherman`s Walk",
+   "lat": 50.72070320194038,
+   "lon": -1.816860588485414,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19000",
+   "name": "Bournemouth Hengistbury West",
+   "lat": 50.716827933587915,
+   "lon": -1.771081738193689,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19050",
+   "name": "Bournemouth Manor Steps",
+   "lat": 50.7202495759178,
+   "lon": -1.832274419945797,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2101-19100",
+   "name": "Bournemouth Pier",
+   "lat": 50.715465501090364,
+   "lon": -1.875860241218663,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2101-19020",
+   "name": "Bournemouth Southbourne",
+   "lat": 50.71897071380313,
+   "lon": -1.791710158585046,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-26300",
+   "name": "Bovisand",
+   "lat": 50.33552516436526,
+   "lon": -4.11952288011347,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20400",
+   "name": "Bowleaze Cove",
+   "lat": 50.63618767781551,
+   "lon": -2.422236530165176,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2403-16000",
+   "name": "Bracklesham Bay",
+   "lat": 50.760993122078624,
+   "lon": -0.860538272557859,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-24500",
+   "name": "Breakwater Beach (Shoalstone)",
+   "lat": 50.40006254076284,
+   "lon": -3.504510070091992,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2302-35600",
+   "name": "Brean",
+   "lat": 51.321226248428644,
+   "lon": -3.011650047268998,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-08000",
+   "name": "Bridlington North Beach",
+   "lat": 54.08676707130436,
+   "lon": -0.182688833790864,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke1200-08100",
+   "name": "Bridlington South Beach",
+   "lat": 54.077228774938455,
+   "lon": -0.198758284289504,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3311-11700",
+   "name": "Brightlingsea",
+   "lat": 51.80571083466384,
+   "lon": 1.01053773140046,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2100-14950",
+   "name": "Brighton Central",
+   "lat": 50.82025634693602,
+   "lon": -0.145844809909213,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2100-14900",
+   "name": "Brighton Kemptown",
+   "lat": 50.81594686736635,
+   "lon": -0.122123261573308,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-24300",
+   "name": "Broadsands",
+   "lat": 50.405999875047776,
+   "lon": -3.554348268729958,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12750",
+   "name": "Broadstairs, Stone Bay",
+   "lat": 51.366271970965286,
+   "lon": 1.4453279329694,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12800",
+   "name": "Broadstairs, Viking Bay",
+   "lat": 51.357732765963895,
+   "lon": 1.442977096679106,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4301-22100",
+   "name": "Budleigh Salterton",
+   "lat": 50.62932092648733,
+   "lon": -3.318248600635247,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1303-10350",
+   "name": "Caister Point",
+   "lat": 52.64624926810105,
+   "lon": 1.737438207333146,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3308-16900",
+   "name": "Calshot",
+   "lat": 50.80930372507521,
+   "lon": -1.31814781758902,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2204-13900",
+   "name": "Camber",
+   "lat": 50.933200586076914,
+   "lon": 0.796375555008748,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3304-11906",
+   "name": "Canvey Island Foreshore",
+   "lat": 51.51145622767272,
+   "lon": 0.593096094324913,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-31100",
+   "name": "Carbis Bay",
+   "lat": 50.198743487111486,
+   "lon": -5.464979857926979,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26530",
+   "name": "Cawsand",
+   "lat": 50.330855517949935,
+   "lon": -4.201377459873182,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-07500",
+   "name": "Cayton Bay",
+   "lat": 54.24479191783662,
+   "lon": -0.362946628988699,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-26000",
+   "name": "Challaborough",
+   "lat": 50.287641076129326,
+   "lon": -3.897547609135589,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-31650",
+   "name": "Chapel Porth",
+   "lat": 50.30041024758236,
+   "lon": -5.234876016017111,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf3102-09500",
+   "name": "Chapel St Leonards",
+   "lat": 53.22367175524304,
+   "lon": 0.339966925508284,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-27600",
+   "name": "Charlestown",
+   "lat": 50.33118443987883,
+   "lon": -4.755341206910302,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2205-21300",
+   "name": "Charmouth West",
+   "lat": 50.73354010619156,
+   "lon": -2.904557604285713,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2201-18800",
+   "name": "Christchurch Avon Beach",
+   "lat": 50.72924859072594,
+   "lon": -1.733644685233053,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2201-17200",
+   "name": "Christchurch Bay",
+   "lat": 50.73431722543745,
+   "lon": -1.662694516455852,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2201-18750",
+   "name": "Christchurch Friar`s Cliff",
+   "lat": 50.73204459027096,
+   "lon": -1.729392227367008,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2201-18700",
+   "name": "Christchurch Highcliffe Castle",
+   "lat": 50.7356331243121,
+   "lon": -1.714435887219141,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2201-18900",
+   "name": "Christchurch Mudeford Sandbank East",
+   "lat": 50.7192316666589,
+   "lon": -1.742129795988796,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29501",
+   "name": "Church Cove",
+   "lat": 50.03856677687165,
+   "lon": -5.267924543097124,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20500",
+   "name": "Church Ope Cove",
+   "lat": 50.53797182312265,
+   "lon": -2.428075266920466,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11500",
+   "name": "Clacton",
+   "lat": 51.79309947559957,
+   "lon": 1.171319951192254,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3311-11650",
+   "name": "Clacton Beach Martello Tower",
+   "lat": 51.77999691152549,
+   "lon": 1.140095257455826,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke1301-09000",
+   "name": "Cleethorpes",
+   "lat": 53.55685223189815,
+   "lon": -0.022231183047955,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk1202-36000",
+   "name": "Clevedon Beach",
+   "lat": 51.442236990094436,
+   "lon": -2.861457654629344,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4312-42800",
+   "name": "Cleveleys",
+   "lat": 53.88132297482882,
+   "lon": -3.048077762204383,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-26050",
+   "name": "Coastguards Beach, Erme Estuary",
+   "lat": 50.31206,
+   "lon": -3.94699,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-17600",
+   "name": "Colwell Bay",
+   "lat": 50.68945860420148,
+   "lon": -1.538450970988754,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukf1400-09750",
+   "name": "Colwick Country Park (West Lake)",
+   "lat": 52.94516380152393,
+   "lon": -1.098153763924492,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4304-34700",
+   "name": "Combe Martin",
+   "lat": 51.207316565673665,
+   "lon": -4.038184203580404,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4304-34410",
+   "name": "Combesgate Beach, Woolacombe",
+   "lat": 51.178247540612425,
+   "lon": -4.212462095656805,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-17400",
+   "name": "Compton Bay",
+   "lat": 50.65606596712299,
+   "lon": -1.468299355173796,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1230-45750",
+   "name": "Coniston Water, Boating Centre",
+   "lat": 54.36396,
+   "lon": -3.06608,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1230-45725",
+   "name": "Coniston Water, Brown Howe",
+   "lat": 54.31134,
+   "lon": -3.09122,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1230-45775",
+   "name": "Coniston Water, Monk Coniston",
+   "lat": 54.37179,
+   "lon": -3.05435,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-32700",
+   "name": "Constantine Bay",
+   "lat": 50.53323640833779,
+   "lon": -5.022692244773718,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk1302-11760",
+   "name": "Cotswold Country Park and Beach",
+   "lat": 51.66097999799158,
+   "lon": -1.960909719962519,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29100",
+   "name": "Coverack",
+   "lat": 50.02436158631497,
+   "lon": -5.097157134548582,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-17800",
+   "name": "Cowes",
+   "lat": 50.76783127759815,
+   "lon": -1.309363422153536,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33360",
+   "name": "Crackington Haven",
+   "lat": 50.74192286553918,
+   "lon": -4.633803990812524,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-32100",
+   "name": "Crantock",
+   "lat": 50.40681791797864,
+   "lon": -5.119221503916047,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1404-05900",
+   "name": "Crimdon",
+   "lat": 54.72807976877461,
+   "lon": -1.248729788380296,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-27500",
+   "name": "Crinnis Beach",
+   "lat": 50.33609981662796,
+   "lon": -4.733841447922212,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1305-10200",
+   "name": "Cromer",
+   "lat": 52.93254114631521,
+   "lon": 1.302181256100388,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33600",
+   "name": "Crooklets",
+   "lat": 50.83580233992227,
+   "lon": -4.554007949429832,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4304-34200",
+   "name": "Croyde Bay",
+   "lat": 51.13152405671773,
+   "lon": -4.238529434699125,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke1200-07950",
+   "name": "Danes Dyke, Flamborough",
+   "lat": 54.10404951925485,
+   "lon": -0.141857991604335,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-24700",
+   "name": "Dartmouth Castle Cove",
+   "lat": 50.342055424936,
+   "lon": -3.565498917213719,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4306-22600",
+   "name": "Dawlish Coryton Cove",
+   "lat": 50.57482114899544,
+   "lon": -3.468548647670714,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4306-22500",
+   "name": "Dawlish Town",
+   "lat": 50.580862932698885,
+   "lon": -3.463693984082954,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4306-22400",
+   "name": "Dawlish Warren",
+   "lat": 50.5996530157733,
+   "lon": -3.438940914543866,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33200",
+   "name": "Daymer Bay",
+   "lat": 50.5613325702196,
+   "lon": -4.926484246445725,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4204-13100",
+   "name": "Deal Castle",
+   "lat": 51.22486304198136,
+   "lon": 1.404925707974265,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd1101-45800",
+   "name": "Derwent Water at Crow Park",
+   "lat": 54.59499,
+   "lon": -3.14218,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-24660",
+   "name": "Dittisham, Dart Estuary",
+   "lat": 50.38456,
+   "lon": -3.59721,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11100",
+   "name": "Dovercourt",
+   "lat": 51.928717049764344,
+   "lon": 1.273696364647091,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26700",
+   "name": "Downderry",
+   "lat": 50.360983061814046,
+   "lon": -4.370798313705646,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2104-04280",
+   "name": "Druridge Bay North",
+   "lat": 55.29110916206403,
+   "lon": -1.568532719733309,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2104-04300",
+   "name": "Druridge Bay South",
+   "lat": 55.2402505449666,
+   "lon": -1.543920718052364,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2305-35100",
+   "name": "Dunster Beach",
+   "lat": 51.192406603754826,
+   "lon": -3.426591495300738,
+   "classification": "Poor",
+   "risk": "increased",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-27700",
+   "name": "Duporth",
+   "lat": 50.3274314014497,
+   "lon": -4.761868907753872,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-20100",
+   "name": "Durdle Door East",
+   "lat": 50.621989988532334,
+   "lon": -2.274144955206742,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-20200",
+   "name": "Durdle Door West",
+   "lat": 50.621929009837075,
+   "lon": -2.277113213563494,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13600",
+   "name": "Dymchurch",
+   "lat": 51.024613309377024,
+   "lon": 0.996611814185222,
+   "classification": "Poor",
+   "risk": "increased",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2207-20990",
+   "name": "East Beach at West Bay",
+   "lat": 50.709274126804615,
+   "lon": -2.761638166307538,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-17850",
+   "name": "East Cowes",
+   "lat": 50.76476936026451,
+   "lon": -1.283289967118494,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-27000",
+   "name": "East Looe",
+   "lat": 50.35256267635997,
+   "lon": -4.451498081181772,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1305-10150",
+   "name": "East Runton",
+   "lat": 52.93708002216914,
+   "lon": 1.275985967187263,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2201-14500",
+   "name": "Eastbourne",
+   "lat": 50.762498,
+   "lon": 0.288003,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3100-16500",
+   "name": "Eastney",
+   "lat": 50.78461852703445,
+   "lon": -1.045119146890172,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4301-22300",
+   "name": "Exmouth",
+   "lat": 50.61107934994528,
+   "lon": -3.401693565122055,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2205-21100",
+   "name": "Eypemouth",
+   "lat": 50.716089177039926,
+   "lon": -2.78487992421657,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1406-10712",
+   "name": "Falcon Meadow, River Waveney",
+   "lat": 52.45647770491852,
+   "lon": 1.443042065642678,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1406-10900",
+   "name": "Felixstowe North",
+   "lat": 51.96034359322559,
+   "lon": 1.355028705384109,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1406-11000",
+   "name": "Felixstowe South",
+   "lat": 51.954333457100994,
+   "lon": 1.341507104744206,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2402-15650",
+   "name": "Felpham",
+   "lat": 50.786285588536565,
+   "lon": -0.65254437647151,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke2206-07600",
+   "name": "Filey",
+   "lat": 54.20824693207295,
+   "lon": -0.284226049497505,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-32200",
+   "name": "Fistral North",
+   "lat": 50.41771612760746,
+   "lon": -5.098537124652402,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-32150",
+   "name": "Fistral South",
+   "lat": 50.41415464410884,
+   "lon": -5.101542629662413,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-07900",
+   "name": "Flamborough South Landing",
+   "lat": 54.104251657488376,
+   "lon": -0.118415393137514,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd4312-43000",
+   "name": "Fleetwood",
+   "lat": 53.92659567671065,
+   "lon": -3.019972502286207,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4208-13300",
+   "name": "Folkestone",
+   "lat": 51.08196357311625,
+   "lon": 1.191314626866399,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd5300-41200",
+   "name": "Formby",
+   "lat": 53.5482261646304,
+   "lon": -3.106241432760207,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-08300",
+   "name": "Fraisthorpe",
+   "lat": 54.04856607390669,
+   "lon": -0.214020385991274,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2310-11945",
+   "name": "Frensham Great Pond",
+   "lat": 51.15730922324361,
+   "lon": -0.791803740453079,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1401-11051",
+   "name": "Friars Meadow, River Stour",
+   "lat": 52.03408,
+   "lon": 0.73489,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11300",
+   "name": "Frinton",
+   "lat": 51.82780056823315,
+   "lon": 1.248339232765255,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-31450",
+   "name": "Godrevy Towans",
+   "lat": 50.232735440965584,
+   "lon": -5.392071943188155,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-24200",
+   "name": "Goodrington",
+   "lat": 50.42353233707098,
+   "lon": -3.559497533654101,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2407-15450",
+   "name": "Goring Beach",
+   "lat": 50.80529,
+   "lon": -0.41537,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1303-10650",
+   "name": "Gorleston Beach",
+   "lat": 52.569817190589475,
+   "lon": 1.73349731928401,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-28200",
+   "name": "Gorran Haven Little Perhaver",
+   "lat": 50.24082249654092,
+   "lon": -4.787575467256791,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-32310",
+   "name": "Great Western",
+   "lat": 50.41595984701269,
+   "lon": -5.076600418961373,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1303-10400",
+   "name": "Great Yarmouth North",
+   "lat": 52.63227449529552,
+   "lon": 1.742735668548983,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1303-10500",
+   "name": "Great Yarmouth Pier",
+   "lat": 52.605300795637355,
+   "lon": 1.739531699977325,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1303-10600",
+   "name": "Great Yarmouth South",
+   "lat": 52.596329942449074,
+   "lon": 1.738766857115263,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-17700",
+   "name": "Gurnard",
+   "lat": 50.760728721025984,
+   "lon": -1.325063587908411,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-31400",
+   "name": "Gwithian Towans",
+   "lat": 50.22798045801165,
+   "lon": -5.391930689924775,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30750",
+   "name": "Gwynver",
+   "lat": 50.089302054564136,
+   "lon": -5.688927671042629,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-28600",
+   "name": "Gyllyngvase",
+   "lat": 50.14461889183703,
+   "lon": -5.067404244295827,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uki2203-11942",
+   "name": "Ham and Kingston, River Thames",
+   "lat": 51.42702402293735,
+   "lon": -0.310741348239147,
+   "classification": null,
+   "risk": "increased",
+   "riskExpiresAt": "2026-08-18T14:49:51",
+   "rainSensitive": false
+  },
+  {
+   "id": "uki1101-11910",
+   "name": "Hampstead Heath (Ladies Pond)",
+   "lat": 51.56672374875844,
+   "lon": -0.160094351971831,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uki1101-11920",
+   "name": "Hampstead Heath (Mens Pond)",
+   "lat": 51.563342095736694,
+   "lon": -0.15662381451985,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uki1101-11930",
+   "name": "Hampstead Heath (Mixed Pond)",
+   "lat": 51.560705232062936,
+   "lon": -0.166252403338055,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-32900",
+   "name": "Harlyn Bay",
+   "lat": 50.54027976933611,
+   "lon": -4.997311029899912,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4307-33800",
+   "name": "Hartland Quay",
+   "lat": 50.995535183450286,
+   "lon": -4.533694568865084,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2202-14100",
+   "name": "Hastings Pelham Beach",
+   "lat": 50.85354404286179,
+   "lon": 0.5857954003092,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd1103-44800",
+   "name": "Haverigg",
+   "lat": 54.18907071697454,
+   "lon": -3.288806054188797,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-31300",
+   "name": "Hayle Towans",
+   "lat": 50.20475243723058,
+   "lon": -5.417055620258719,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3307-16350",
+   "name": "Hayling Beachlands Central",
+   "lat": 50.7835726010608,
+   "lon": -0.989249185506088,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3307-16400",
+   "name": "Hayling Beachlands West",
+   "lat": 50.78358643497926,
+   "lon": -1.001306696975126,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3307-16300",
+   "name": "Hayling Eastoke",
+   "lat": 50.78059297941697,
+   "lon": -0.967327158509046,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1304-09800",
+   "name": "Heacham",
+   "lat": 52.90921846864188,
+   "lon": 0.471523847450913,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1303-10325",
+   "name": "Hemsby",
+   "lat": 52.69528452004281,
+   "lon": 1.710110760866245,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk1100-36050",
+   "name": "Henleaze Lake",
+   "lat": 51.49462281893482,
+   "lon": -2.605706908746493,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4202-12200",
+   "name": "Herne Bay",
+   "lat": 51.37435710325768,
+   "lon": 1.139544400747574,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4202-12150",
+   "name": "Herne Bay Central",
+   "lat": 51.372039870464164,
+   "lon": 1.118548468494485,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2201-17300",
+   "name": "Highcliffe",
+   "lat": 50.7369779306785,
+   "lon": -1.698471256684587,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3304-16850",
+   "name": "Hillhead",
+   "lat": 50.813437334491546,
+   "lon": -1.225369966558602,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2205-20970",
+   "name": "Hive",
+   "lat": 50.69624551789942,
+   "lon": -2.723226623461948,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11350",
+   "name": "Holland",
+   "lat": 51.81320172479971,
+   "lon": 1.22584143875814,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-23900",
+   "name": "Hollicombe",
+   "lat": 50.44879532733753,
+   "lon": -3.553524388097443,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-32000",
+   "name": "Holywell Bay",
+   "lat": 50.39189541579557,
+   "lon": -5.145540679817082,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25400",
+   "name": "Hope Cove",
+   "lat": 50.24262410687842,
+   "lon": -3.859125090603487,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke1200-08700",
+   "name": "Hornsea",
+   "lat": 53.91410993995743,
+   "lon": -0.160484521899418,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2100-15000",
+   "name": "Hove",
+   "lat": 50.823211672951224,
+   "lon": -0.166684558773012,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1301-09020",
+   "name": "Humberston Fitties",
+   "lat": 53.53521627679113,
+   "lon": 0.008374419031881,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1304-09900",
+   "name": "Hunstanton (Old Hunstanton)",
+   "lat": 52.95365719192685,
+   "lon": 0.496388660943862,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh1304-09850",
+   "name": "Hunstanton Main Beach",
+   "lat": 52.93683650219976,
+   "lon": 0.48381224712594,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukf3102-09300",
+   "name": "Huttoft and Marsh Yard",
+   "lat": 53.27302981010478,
+   "lon": 0.318439111596705,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13500",
+   "name": "Hythe",
+   "lat": 51.064683030745755,
+   "lon": 1.081421889530718,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4304-34600",
+   "name": "Ilfracombe Hele",
+   "lat": 51.2108577557785,
+   "lon": -4.097302527866871,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4304-34450",
+   "name": "Ilfracombe Tunnels Beach",
+   "lat": 51.21045139584133,
+   "lon": -4.127266087534065,
+   "classification": "Closed",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf3102-09600",
+   "name": "Ingoldmells",
+   "lat": 53.193934454428074,
+   "lon": 0.35387206214699,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3311-11600",
+   "name": "Jaywick",
+   "lat": 51.77262931380517,
+   "lon": 1.112762317973562,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12700",
+   "name": "Joss Bay, Broadstairs",
+   "lat": 51.379219014808704,
+   "lon": 1.446142630132952,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29200",
+   "name": "Kennack Sands",
+   "lat": 50.0051145430488,
+   "lon": -5.16361764652506,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2204-19900",
+   "name": "Kimmeridge Bay",
+   "lat": 50.61147302027232,
+   "lon": -2.131407992731875,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26520",
+   "name": "Kingsand",
+   "lat": 50.33359139747659,
+   "lon": -4.199395954504258,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4301-22000",
+   "name": "Ladram Bay",
+   "lat": 50.65858520679001,
+   "lon": -3.279552270381738,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2401-15300",
+   "name": "Lancing, Beach Green",
+   "lat": 50.819862756714556,
+   "lon": -0.321921858737898,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3305-16800",
+   "name": "Lee-on-Solent",
+   "lat": 50.8009570638879,
+   "lon": -1.204262010643014,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3100-11904",
+   "name": "Leigh Bell Wharf",
+   "lat": 51.539022887876975,
+   "lon": 0.652567904722018,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3308-17000",
+   "name": "Lepe",
+   "lat": 50.78427689171927,
+   "lon": -1.354514214476178,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4209-12000",
+   "name": "Leysdown",
+   "lat": 51.40014835227358,
+   "lon": 0.921827823102863,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2402-15500",
+   "name": "Littlehampton",
+   "lat": 50.80227443041339,
+   "lon": -0.538835647163759,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2204-05250",
+   "name": "Littlehaven Beach",
+   "lat": 55.00455,
+   "lon": -1.42127,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13800",
+   "name": "Littlestone",
+   "lat": 50.97678874193849,
+   "lon": 0.96731518804359,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30300",
+   "name": "Long Rock",
+   "lat": 50.12751,
+   "lon": -5.505328,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3008-27080",
+   "name": "Lostwithiel, River Fowey",
+   "lat": 50.407443745846976,
+   "lon": -4.666359184479336,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2101-04000",
+   "name": "Low Newton",
+   "lat": 55.513207709216196,
+   "lon": -1.615516489199073,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1407-10750",
+   "name": "Lowestoft (North of Claremont Pier)",
+   "lat": 52.46832115480514,
+   "lon": 1.748783678636152,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1407-10800",
+   "name": "Lowestoft (South of Claremont Pier)",
+   "lat": 52.46390139880056,
+   "lon": 1.74519731039964,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-20000",
+   "name": "Lulworth Cove",
+   "lat": 50.61891606966623,
+   "lon": -2.249333471476767,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-32330",
+   "name": "Lusty Glaze",
+   "lat": 50.421753411210396,
+   "lon": -5.065007625612633,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2205-21400",
+   "name": "Lyme Regis Church Cliff Beach",
+   "lat": 50.725027701195046,
+   "lon": -2.930321023052255,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2205-21500",
+   "name": "Lyme Regis Front Beach",
+   "lat": 50.72248583256525,
+   "lon": -2.937779284373491,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4304-34800",
+   "name": "Lynmouth",
+   "lat": 51.231690161017816,
+   "lon": -3.824498121373426,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukf3102-09100",
+   "name": "Mablethorpe Town",
+   "lat": 53.34416062120259,
+   "lon": 0.26436524824349,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-28800",
+   "name": "Maenporth",
+   "lat": 50.12494280778024,
+   "lon": -5.093572395033213,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-23100",
+   "name": "Maidencombe",
+   "lat": 50.506435151413704,
+   "lon": -3.513388073103245,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11050",
+   "name": "Manningtree Beach, Stour Estuary",
+   "lat": 51.94639,
+   "lon": 1.06523,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30200",
+   "name": "Marazion",
+   "lat": 50.1264952951233,
+   "lon": -5.480789644537383,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4210-12600",
+   "name": "Margate Fulsam Rock",
+   "lat": 51.392678701614855,
+   "lon": 1.386538154257397,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4210-12500",
+   "name": "Margate The Bay",
+   "lat": 51.38769982307236,
+   "lon": 1.375790552419346,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2204-05400",
+   "name": "Marsden",
+   "lat": 54.97801732102611,
+   "lon": -1.37659442703996,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1202-06650",
+   "name": "Marske Sands",
+   "lat": 54.59999555445701,
+   "lon": -1.0170751447538,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-32500",
+   "name": "Mawgan Porth",
+   "lat": 50.46746945104093,
+   "lon": -5.033433876076066,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-23600",
+   "name": "Meadfoot",
+   "lat": 50.45708599356928,
+   "lon": -3.509220494924685,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd5400-40800",
+   "name": "Meols",
+   "lat": 53.40659375489932,
+   "lon": -3.15972594419281,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-31250",
+   "name": "Mexico Towans",
+   "lat": 50.20104507197195,
+   "lon": -5.423798805885463,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2402-15600",
+   "name": "Middleton-on-sea",
+   "lat": 50.79030021449079,
+   "lon": -0.60390668831765,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3308-17100",
+   "name": "Milford-on-sea",
+   "lat": 50.72497354019215,
+   "lon": -1.610597266739971,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25100",
+   "name": "Mill Bay",
+   "lat": 50.22997707533169,
+   "lon": -3.766960112097832,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26900",
+   "name": "Millendreath",
+   "lat": 50.36106704002505,
+   "lon": -4.436327857389018,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2305-35000",
+   "name": "Minehead Terminus",
+   "lat": 51.20757155104795,
+   "lon": -3.467058970405523,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4210-12300",
+   "name": "Minnis Bay, Birchington",
+   "lat": 51.38029832223167,
+   "lon": 1.283684806754969,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4209-11975",
+   "name": "Minster Leas",
+   "lat": 51.43293721413515,
+   "lon": 0.805325503474074,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4305-43550",
+   "name": "Morecambe North",
+   "lat": 54.07745445944751,
+   "lon": -2.860727733701429,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4305-43260",
+   "name": "Morecambe South",
+   "lat": 54.07282920213978,
+   "lon": -2.876449196479144,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd5400-40900",
+   "name": "Moreton",
+   "lat": 53.417765572885806,
+   "lon": -3.119402914547438,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-26100",
+   "name": "Mothecombe",
+   "lat": 50.30957285877536,
+   "lon": -3.952775115720852,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3104-32800",
+   "name": "Mother Ivey`s Bay",
+   "lat": 50.54412805108646,
+   "lon": -5.015483516396951,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1305-10300",
+   "name": "Mundesley",
+   "lat": 52.87696084494732,
+   "lon": 1.441775726252517,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4306-23000",
+   "name": "Ness Cove",
+   "lat": 50.53609536432295,
+   "lon": -3.498179275537058,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd7400-41100",
+   "name": "New Brighton Beach East",
+   "lat": 53.440892092764805,
+   "lon": -3.038970802228123,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2106-04400",
+   "name": "Newbiggin North",
+   "lat": 55.18440846275651,
+   "lon": -1.51032213701256,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2106-04500",
+   "name": "Newbiggin South",
+   "lat": 55.17885507447854,
+   "lon": -1.514786810240242,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-26150",
+   "name": "Newton and Noss",
+   "lat": 50.31163123408207,
+   "lon": -4.039859348122493,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2203-08903",
+   "name": "Nidd at the Lido, Knaresborough",
+   "lat": 53.9982,
+   "lon": -1.45145,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2205-14300",
+   "name": "Norman`s Bay",
+   "lat": 50.82280870144683,
+   "lon": 0.386696038608708,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33650",
+   "name": "Northcott Mouth",
+   "lat": 50.847970518807266,
+   "lon": -4.556945819111498,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-23300",
+   "name": "Oddicombe",
+   "lat": 50.482447025805186,
+   "lon": -3.514891159043062,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2402-15800",
+   "name": "Pagham",
+   "lat": 50.76752942075107,
+   "lon": -0.736466764997683,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-24100",
+   "name": "Paignton Paignton Sands",
+   "lat": 50.43505334594111,
+   "lon": -3.558848075399885,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4200-24000",
+   "name": "Paignton Preston Sands",
+   "lat": 50.44444250761605,
+   "lon": -3.55619878157936,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj1102-11941",
+   "name": "Pangbourne Meadow, River Thames",
+   "lat": 51.48682521935274,
+   "lon": -1.083940641648369,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-27300",
+   "name": "Par Sands",
+   "lat": 50.34695147768081,
+   "lon": -4.692854628695517,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3102-28500",
+   "name": "Pendower",
+   "lat": 50.205650385263674,
+   "lon": -4.94783256502555,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-27900",
+   "name": "Pentewan",
+   "lat": 50.287537976881396,
+   "lon": -4.782583402457527,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30400",
+   "name": "Penzance",
+   "lat": 50.11465387695735,
+   "lon": -5.5355728915244,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3102-31800",
+   "name": "Perranporth",
+   "lat": 50.34935602310362,
+   "lon": -5.155098900544113,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-31900",
+   "name": "Perranporth Penhale Sands",
+   "lat": 50.35935172958828,
+   "lon": -5.151402771236902,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30100",
+   "name": "Perranuthnoe",
+   "lat": 50.11223580545538,
+   "lon": -5.44249847946612,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2201-14400",
+   "name": "Pevensey Bay",
+   "lat": 50.80997428191775,
+   "lon": 0.350368683032284,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4100-26510",
+   "name": "Plymouth Firestone Bay",
+   "lat": 50.36071493547671,
+   "lon": -4.161237326373048,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4100-26400",
+   "name": "Plymouth Hoe East",
+   "lat": 50.36391544289469,
+   "lon": -4.140895275468601,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4100-26500",
+   "name": "Plymouth Hoe West",
+   "lat": 50.36400976974736,
+   "lon": -4.14553973374772,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3103-29500",
+   "name": "Poldhu Cove",
+   "lat": 50.03353543801929,
+   "lon": -5.261297725976499,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-27200",
+   "name": "Polkerris",
+   "lat": 50.33785853107068,
+   "lon": -4.681518057926255,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-28000",
+   "name": "Polstreath",
+   "lat": 50.27436607251723,
+   "lon": -4.78420121717727,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29400",
+   "name": "Polurrian Cove",
+   "lat": 50.023330677378155,
+   "lon": -5.256277429751976,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33300",
+   "name": "Polzeath",
+   "lat": 50.574807678958884,
+   "lon": -4.916442737581546,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2102-19170",
+   "name": "Poole Branksome Chine",
+   "lat": 50.70589220936583,
+   "lon": -1.909943393969187,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2102-19190",
+   "name": "Poole Canford Cliffs Chine",
+   "lat": 50.7004503224046,
+   "lon": -1.920502967848092,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2102-19400",
+   "name": "Poole Harbour Lake",
+   "lat": 50.71383032434879,
+   "lon": -2.025252753585668,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2102-19450",
+   "name": "Poole Harbour Rockley Sands",
+   "lat": 50.71931148651304,
+   "lon": -2.040129811985227,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2102-19350",
+   "name": "Poole Sandbanks Peninsular",
+   "lat": 50.68868038945296,
+   "lon": -1.937369325612276,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2102-19200",
+   "name": "Poole Shore Road Beach",
+   "lat": 50.69464678358298,
+   "lon": -1.929361726434004,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2305-34900",
+   "name": "Porlock Weir",
+   "lat": 51.219009713770575,
+   "lon": -3.626267702315258,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-32340",
+   "name": "Porth",
+   "lat": 50.42466218851614,
+   "lon": -5.05702836579692,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3103-28900",
+   "name": "Porthallow",
+   "lat": 50.06855769742675,
+   "lon": -5.079319250900065,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3104-32550",
+   "name": "Porthcothan",
+   "lat": 50.509016460983155,
+   "lon": -5.023542515803301,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-28550",
+   "name": "Porthcurnick",
+   "lat": 50.18612904255592,
+   "lon": -4.972549323471114,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-30600",
+   "name": "Porthcurno",
+   "lat": 50.04289896158366,
+   "lon": -5.650440231086796,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30900",
+   "name": "Porthgwidden",
+   "lat": 50.217196038143136,
+   "lon": -5.476692927688384,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-31200",
+   "name": "Porthkidney Sands",
+   "lat": 50.19410570682622,
+   "lon": -5.439418396508773,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29800",
+   "name": "Porthleven Sands",
+   "lat": 50.081047434835746,
+   "lon": -5.314853125567395,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-28400",
+   "name": "Porthluney",
+   "lat": 50.236773121760834,
+   "lon": -4.843300092072096,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3105-30800",
+   "name": "Porthmeor",
+   "lat": 50.21528489056019,
+   "lon": -5.483423953578554,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-31000",
+   "name": "Porthminster",
+   "lat": 50.20865951327619,
+   "lon": -5.476352469666611,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29000",
+   "name": "Porthoustock",
+   "lat": 50.05555308399595,
+   "lon": -5.064233762602137,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-27800",
+   "name": "Porthpean",
+   "lat": 50.32356183624416,
+   "lon": -4.765719191997011,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3102-31600",
+   "name": "Porthtowan",
+   "lat": 50.28750549757236,
+   "lon": -5.242453199265106,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T09:30:55",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20800",
+   "name": "Portland Harbour Castle Cove",
+   "lat": 50.59630543390464,
+   "lon": -2.459686889130563,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2206-20900",
+   "name": "Portland Harbour Sandsfoot Castle",
+   "lat": 50.594230680451375,
+   "lon": -2.463551833001375,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3106-28100",
+   "name": "Portmellon",
+   "lat": 50.26182964398326,
+   "lon": -4.785574720409609,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3103-31500",
+   "name": "Portreath",
+   "lat": 50.26121685732411,
+   "lon": -5.293671282719442,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26600",
+   "name": "Portwrinkle",
+   "lat": 50.361443659255194,
+   "lon": -4.307686824050995,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-29900",
+   "name": "Praa Sands East",
+   "lat": 50.09926528948838,
+   "lon": -5.378769187638989,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3103-30000",
+   "name": "Praa Sands West",
+   "lat": 50.10322853083056,
+   "lon": -5.390937537533112,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4304-34300",
+   "name": "Putsborough",
+   "lat": 51.14580018961564,
+   "lon": -4.220918668527864,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12850",
+   "name": "Ramsgate Sands",
+   "lat": 51.33223078633673,
+   "lon": 1.424911174620844,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12900",
+   "name": "Ramsgate Western Undercliffe",
+   "lat": 51.32660421706023,
+   "lon": 1.406272751424865,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-27100",
+   "name": "Readymoney Cove",
+   "lat": 50.32951544639139,
+   "lon": -4.645214976125489,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1202-06300",
+   "name": "Redcar Coatham",
+   "lat": 54.62207042887753,
+   "lon": -1.081591150286448,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc1202-06500",
+   "name": "Redcar Granville",
+   "lat": 54.61735121010068,
+   "lon": -1.052274439805824,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1202-06400",
+   "name": "Redcar Lifeboat Station",
+   "lat": 54.62005944833288,
+   "lon": -1.060760245168095,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1202-06600",
+   "name": "Redcar Stray",
+   "lat": 54.60552364856422,
+   "lon": -1.033971487256716,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-07700",
+   "name": "Reighton",
+   "lat": 54.16912811684886,
+   "lon": -0.249812947593646,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20300",
+   "name": "Ringstead Bay",
+   "lat": 50.63103636510807,
+   "lon": -2.351353705935561,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3308-19001",
+   "name": "River Avon at Fordingbridge",
+   "lat": 50.92632,
+   "lon": -1.78854,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk1500-19002",
+   "name": "River Avon at Queen Elizabeth Gardens",
+   "lat": 51.067665274192855,
+   "lon": -1.802179259170573,
+   "classification": null,
+   "risk": "normal",
+   "riskExpiresAt": "2026-06-02T09:13:53",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1406-10860",
+   "name": "River Deben Estuary, Waldringfield",
+   "lat": 52.05172,
+   "lon": 1.33273,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2301-36051",
+   "name": "River Frome at Farleigh Hungerford",
+   "lat": 51.31791,
+   "lon": -2.28093,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd4308-46501",
+   "name": "River Ribble at Edisford Bridge",
+   "lat": 53.86847,
+   "lon": -2.41728,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukg2100-36070",
+   "name": "River Severn at Ironbridge",
+   "lat": 52.62933,
+   "lon": -2.49179,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukg2200-36071",
+   "name": "River Severn in Shrewsbury",
+   "lat": 52.710372,
+   "lon": -2.7567062,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukg2200-36060",
+   "name": "River Teme in Ludlow",
+   "lat": 52.36643,
+   "lon": -2.72537,
+   "classification": "Poor",
+   "risk": "increased",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2304-35201",
+   "name": "River Tone at French Weir Park",
+   "lat": 51.01809,
+   "lon": -3.11285,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-07200",
+   "name": "Robin Hoods Bay",
+   "lat": 54.43015948260695,
+   "lon": -0.531866931933285,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2300-05600",
+   "name": "Roker - Sunderland",
+   "lat": 54.9257461762398,
+   "lon": -1.364919659939741,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2100-14850",
+   "name": "Rottingdean Beach",
+   "lat": 50.80179,
+   "lon": -0.05673,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-06900",
+   "name": "Runswick Bay",
+   "lat": 54.53181308435666,
+   "lon": -0.748706406679334,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf2208-09702",
+   "name": "Rutland Water Sykes Lane",
+   "lat": 52.66320858080605,
+   "lon": -0.61313993149942,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf2208-09701",
+   "name": "Rutland Water Whitwell Creek",
+   "lat": 52.663507,
+   "lon": -0.631862,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-17900",
+   "name": "Ryde",
+   "lat": 50.73080613175428,
+   "lon": -1.149793713177086,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-25200",
+   "name": "Salcombe North Sands",
+   "lat": 50.23012909971451,
+   "lon": -3.780566590690735,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-25300",
+   "name": "Salcombe South Sands",
+   "lat": 50.22603027118593,
+   "lon": -3.783918780827058,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1202-06700",
+   "name": "Saltburn",
+   "lat": 54.58679597238242,
+   "lon": -0.969778459729026,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2100-14800",
+   "name": "Saltdean",
+   "lat": 50.79930831490036,
+   "lon": -0.041673206528577,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13350",
+   "name": "Sandgate Granville Parade",
+   "lat": 51.073164967502315,
+   "lon": 1.145905463450204,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-18400",
+   "name": "Sandown",
+   "lat": 50.654947044783555,
+   "lon": -1.150612952667514,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke2206-07000",
+   "name": "Sandsend",
+   "lat": 54.50138423331686,
+   "lon": -0.66735831817604,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4204-13000",
+   "name": "Sandwich Bay",
+   "lat": 51.28259786416355,
+   "lon": 1.379663263660137,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4301-22200",
+   "name": "Sandy Bay",
+   "lat": 50.60986094240923,
+   "lon": -3.368019840885045,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd6300-40752",
+   "name": "Sandy Lane, Chester",
+   "lat": 53.1874391898726,
+   "lon": -2.87006710945084,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33700",
+   "name": "Sandymouth",
+   "lat": 50.860925775452294,
+   "lon": -4.556801840988395,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4304-34100",
+   "name": "Saunton Sands",
+   "lat": 51.11654312335549,
+   "lon": -4.222372667722457,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-07300",
+   "name": "Scarborough North Bay",
+   "lat": 54.29337296091158,
+   "lon": -0.407209250068013,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2206-07400",
+   "name": "Scarborough South Bay",
+   "lat": 54.28204183674201,
+   "lon": -0.395234352981026,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1305-10310",
+   "name": "Sea Palling",
+   "lat": 52.790656743151374,
+   "lon": 1.603939806618614,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13400",
+   "name": "Seabrook",
+   "lat": 51.07080697611591,
+   "lon": 1.121803015201279,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2300-05500",
+   "name": "Seaburn - Sunderland",
+   "lat": 54.937525686267996,
+   "lon": -1.366294907696416,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2203-14600",
+   "name": "Seaford",
+   "lat": 50.771301392423304,
+   "lon": 0.09501500163392,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-18000",
+   "name": "Seagrove",
+   "lat": 50.716303024289644,
+   "lon": -1.106853577320607,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1404-05800",
+   "name": "Seaham Beach",
+   "lat": 54.84750991362038,
+   "lon": -1.338116445554125,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1404-05700",
+   "name": "Seaham Hall Beach",
+   "lat": 54.85044887956588,
+   "lon": -1.341494769532371,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2102-03800",
+   "name": "Seahouses North",
+   "lat": 55.59018054023254,
+   "lon": -1.666807530612919,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1103-45600",
+   "name": "Seascale",
+   "lat": 54.395283881418386,
+   "lon": -3.489340855778572,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3101-26800",
+   "name": "Seaton (Cornwall)",
+   "lat": 50.36435089286344,
+   "lon": -4.38643443196306,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4301-21600",
+   "name": "Seaton (Devon)",
+   "lat": 50.70335620945877,
+   "lon": -3.070515206918154,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1101-06100",
+   "name": "Seaton Carew Centre",
+   "lat": 54.65991462463847,
+   "lon": -1.180725164551955,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1101-06000",
+   "name": "Seaton Carew North",
+   "lat": 54.66466849885708,
+   "lon": -1.186040311789457,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc1101-06200",
+   "name": "Seaton Carew North Gare",
+   "lat": 54.649631926600186,
+   "lon": -1.164659079919262,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2103-04700",
+   "name": "Seaton Sluice",
+   "lat": 55.08722766387016,
+   "lon": -1.478296232612282,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2205-21200",
+   "name": "Seatown",
+   "lat": 50.72209005507471,
+   "lon": -2.824817306435447,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2403-15900",
+   "name": "Selsey",
+   "lat": 50.736289294798816,
+   "lon": -0.770298440368953,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30700",
+   "name": "Sennen",
+   "lat": 50.07874145122392,
+   "lon": -5.697623804417832,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4306-22900",
+   "name": "Shaldon",
+   "lat": 50.539818591210306,
+   "lon": -3.502375831944526,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-18500",
+   "name": "Shanklin",
+   "lat": 50.62698814304571,
+   "lon": -1.173158277125955,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3101-26570",
+   "name": "Sharrow",
+   "lat": 50.347591487423465,
+   "lon": -4.259643504303614,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1201-09801",
+   "name": "Sheep's Green, River Cam",
+   "lat": 52.19607,
+   "lon": 0.11683,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4209-11950",
+   "name": "Sheerness",
+   "lat": 51.44326276918685,
+   "lon": 0.760235343877594,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-19600",
+   "name": "Shell Bay North",
+   "lat": 50.67843453077423,
+   "lon": -1.948790956624016,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1305-10100",
+   "name": "Sheringham",
+   "lat": 52.945955107765705,
+   "lon": 1.20851236475474,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3100-11770",
+   "name": "Shoebury East",
+   "lat": 51.531726378852966,
+   "lon": 0.803842239043013,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3100-11780",
+   "name": "Shoeburyness",
+   "lat": 51.52298814071129,
+   "lon": 0.774182218494224,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2401-15200",
+   "name": "Shoreham Beach",
+   "lat": 50.82657968050896,
+   "lon": -0.271301418312344,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-27400",
+   "name": "Shorthorn Beach",
+   "lat": 50.33761446482151,
+   "lon": -4.722965713318486,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4301-21900",
+   "name": "Sidmouth Jacobs Ladder",
+   "lat": 50.67525114254649,
+   "lon": -3.247920430683992,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4301-21800",
+   "name": "Sidmouth Town",
+   "lat": 50.67618469413079,
+   "lon": -3.243033974073603,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd1103-45200",
+   "name": "Silecroft",
+   "lat": 54.218948132063815,
+   "lon": -3.35108537499338,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukf3102-09700",
+   "name": "Skegness",
+   "lat": 53.14417404168892,
+   "lon": 0.349548479360714,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-08600",
+   "name": "Skipsea",
+   "lat": 53.96195146198696,
+   "lon": -0.19017729503645,
+   "classification": "Closed",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-24900",
+   "name": "Slapton Sands Monument",
+   "lat": 50.28591183040938,
+   "lon": -3.645075514028272,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25000",
+   "name": "Slapton Sands Torcross",
+   "lat": 50.26620429944796,
+   "lon": -3.652114272074961,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2204-05300",
+   "name": "South Shields",
+   "lat": 54.99974636302765,
+   "lon": -1.409085633008525,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3100-11902",
+   "name": "Southend Chalkwell",
+   "lat": 51.53739087248782,
+   "lon": 0.672951759736441,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3100-11830",
+   "name": "Southend Jubilee",
+   "lat": 51.527778682731686,
+   "lon": 0.72328663806192,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3100-11800",
+   "name": "Southend Thorpe Bay",
+   "lat": 51.52886881078944,
+   "lon": 0.753632019781134,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3100-11850",
+   "name": "Southend Three Shells",
+   "lat": 51.53298538027784,
+   "lon": 0.71206117584268,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukh3100-11900",
+   "name": "Southend Westcliff Bay",
+   "lat": 51.53536180804658,
+   "lon": 0.686965498944973,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd5300-41500",
+   "name": "Southport",
+   "lat": 53.65319869379517,
+   "lon": -3.027283040613478,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3100-16600",
+   "name": "Southsea East",
+   "lat": 50.7786534035037,
+   "lon": -1.079424297745562,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2401-15100",
+   "name": "Southwick",
+   "lat": 50.82873425373243,
+   "lon": -0.235579708150519,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1407-10850",
+   "name": "Southwold The Denes",
+   "lat": 52.319374676698395,
+   "lon": 1.678661081999749,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1407-10830",
+   "name": "Southwold The Pier",
+   "lat": 52.33080938939501,
+   "lon": 1.686951566051651,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2102-03600",
+   "name": "Spittal",
+   "lat": 55.756856682381226,
+   "lon": -1.988831300159957,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4303-41800",
+   "name": "St Annes",
+   "lat": 53.74912757964811,
+   "lon": -3.040374437657318,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd4303-41900",
+   "name": "St Annes North",
+   "lat": 53.759732155265255,
+   "lon": -3.050875569413882,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukd1103-45920",
+   "name": "St Bees",
+   "lat": 54.48992806066554,
+   "lon": -3.608570305633333,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-18100",
+   "name": "St Helens",
+   "lat": 50.69858655635361,
+   "lon": -1.098623643929827,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2202-14150",
+   "name": "St Leonards",
+   "lat": 50.84990177939676,
+   "lon": 0.551467017008555,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4204-13200",
+   "name": "St Margaret`s Bay",
+   "lat": 51.1506235954886,
+   "lon": 1.385739372031037,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-24600",
+   "name": "St Mary's Bay (Devon)",
+   "lat": 50.385234188764414,
+   "lon": -3.503618601249454,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4208-13700",
+   "name": "St Mary's Bay (Kent)",
+   "lat": 51.01058771257017,
+   "lon": 0.982304921293757,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12400",
+   "name": "St Mildred's Bay, Westgate",
+   "lat": 51.384887262981415,
+   "lon": 1.342764656145183,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-24640",
+   "name": "Steamer Quay, Dart Estuary",
+   "lat": 50.42496,
+   "lon": -3.67869,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-24620",
+   "name": "Stoke Gabriel, Dart Estuary",
+   "lat": 50.40036,
+   "lon": -3.62295,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3305-16700",
+   "name": "Stokes Bay",
+   "lat": 50.77757335746597,
+   "lon": -1.150364175942044,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-19700",
+   "name": "Studland Knoll House",
+   "lat": 50.65207839043268,
+   "lon": -1.952837307031449,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33500",
+   "name": "Summerleaze",
+   "lat": 50.831168031253235,
+   "lon": -4.552050639196887,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukf3102-09200",
+   "name": "Sutton-on-Sea",
+   "lat": 53.31461492256482,
+   "lon": 0.283819652889238,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke2204-08905",
+   "name": "Swale above Richmond Falls",
+   "lat": 54.40057771187233,
+   "lon": -1.734679072511629,
+   "classification": null,
+   "risk": null,
+   "riskExpiresAt": null,
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2204-19800",
+   "name": "Swanage Central",
+   "lat": 50.61341975801455,
+   "lon": -1.957511535566838,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3102-28700",
+   "name": "Swanpool",
+   "lat": 50.140617662512916,
+   "lon": -5.075826818894453,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4202-12120",
+   "name": "Tankerton",
+   "lat": 51.36543634344041,
+   "lon": 1.045826991432158,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4306-22700",
+   "name": "Teignmouth Holcombe",
+   "lat": 50.56188347018894,
+   "lon": -3.47464131412136,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4306-22800",
+   "name": "Teignmouth Town",
+   "lat": 50.545365262332695,
+   "lon": -3.493462511562593,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uki1106-11940",
+   "name": "The Serpentine - Hyde Park",
+   "lat": 51.50490501476789,
+   "lon": -0.169070691536189,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25600",
+   "name": "Thurlestone North",
+   "lat": 50.26393386441149,
+   "lon": -3.861806883994573,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-25500",
+   "name": "Thurlestone South",
+   "lat": 50.260394427262284,
+   "lon": -3.858161252047522,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-32320",
+   "name": "Tolcarne",
+   "lat": 50.41766180364849,
+   "lon": -5.073472516392133,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-23800",
+   "name": "Torre Abbey",
+   "lat": 50.462437951767605,
+   "lon": -3.535992499539414,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-17500",
+   "name": "Totland Bay",
+   "lat": 50.680817762452946,
+   "lon": -1.545669214184667,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-32300",
+   "name": "Towan",
+   "lat": 50.4150444662613,
+   "lon": -5.084326471601593,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33350",
+   "name": "Trebarwith Strand",
+   "lat": 50.64496675477914,
+   "lon": -4.761636038784498,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3101-26560",
+   "name": "Tregonhawke",
+   "lat": 50.34085546067812,
+   "lon": -4.242879702830213,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3102-31700",
+   "name": "Trevaunance Cove",
+   "lat": 50.32038678132352,
+   "lon": -5.201232297230354,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33000",
+   "name": "Trevone Bay",
+   "lat": 50.54573665118223,
+   "lon": -4.977469481015343,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk3104-32600",
+   "name": "Treyarnon Bay",
+   "lat": 50.52613078547197,
+   "lon": -5.022661275963966,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2203-04900",
+   "name": "Tynemouth Cullercoats",
+   "lat": 55.03478000872418,
+   "lon": -1.431022555333661,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukc2203-05200",
+   "name": "Tynemouth King Edwards Bay",
+   "lat": 55.01932098156056,
+   "lon": -1.418995258941081,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2203-05000",
+   "name": "Tynemouth Long Sands North",
+   "lat": 55.0304197376092,
+   "lon": -1.428675063333903,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2203-05100",
+   "name": "Tynemouth Long Sands South",
+   "lat": 55.0240770277515,
+   "lon": -1.423274938092462,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-31350",
+   "name": "Upton Towans",
+   "lat": 50.215181048375264,
+   "lon": -5.402911509386382,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-28300",
+   "name": "Vault Beach",
+   "lat": 50.23488377867148,
+   "lon": -4.787649664814819,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-18600",
+   "name": "Ventnor",
+   "lat": 50.59310640825722,
+   "lon": -1.209947267658163,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd5400-41000",
+   "name": "Wallasey",
+   "lat": 53.433595652453334,
+   "lon": -3.077281007983427,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj1403-11947",
+   "name": "Wallingford Beach, River Thames",
+   "lat": 51.60005,
+   "lon": -1.12032,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1102-44200",
+   "name": "Walney Biggar Bank",
+   "lat": 54.0950172499533,
+   "lon": -3.258361064821108,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1102-44300",
+   "name": "Walney Sandy Gap",
+   "lat": 54.102157318181,
+   "lon": -3.263165688451287,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1102-44400",
+   "name": "Walney West Shore",
+   "lat": 54.120790258083154,
+   "lon": -3.271628121287912,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12630",
+   "name": "Walpole Bay, Margate",
+   "lat": 51.392250950887004,
+   "lon": 1.399130061418621,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3311-11250",
+   "name": "Walton",
+   "lat": 51.84705828437147,
+   "lon": 1.273281114220594,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4305-24680",
+   "name": "Warfleet Creek, Dart Estuary",
+   "lat": 50.34251,
+   "lon": -3.57344,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2101-04200",
+   "name": "Warkworth",
+   "lat": 55.35120750368777,
+   "lon": -1.592797501571366,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4200-23200",
+   "name": "Watcombe",
+   "lat": 50.49561770972719,
+   "lon": -3.515298325303885,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3106-32400",
+   "name": "Watergate Bay",
+   "lat": 50.44375094456302,
+   "lon": -5.042622328517265,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1305-10000",
+   "name": "Wells",
+   "lat": 52.9735988523048,
+   "lon": 0.84908086480549,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4305-26200",
+   "name": "Wembury",
+   "lat": 50.317977901348236,
+   "lon": -4.085168112667163,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk2205-21000",
+   "name": "West Bay (West)",
+   "lat": 50.710968643628284,
+   "lon": -2.766537776781116,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4210-12350",
+   "name": "West Bay, Westgate",
+   "lat": 51.38319742671541,
+   "lon": 1.33230604116729,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj4202-12100",
+   "name": "West Beach, Whitstable",
+   "lat": 51.3543282013388,
+   "lon": 1.011764270825496,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd5400-40750",
+   "name": "West Kirby",
+   "lat": 53.37049628009628,
+   "lon": -3.193165228018245,
+   "classification": "Sufficient",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh3306-11750",
+   "name": "West Mersea",
+   "lat": 51.770397383556734,
+   "lon": 0.930236739496514,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukh1305-10125",
+   "name": "West Runton",
+   "lat": 52.94171092852974,
+   "lon": 1.252784566705983,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj2403-16100",
+   "name": "West Wittering",
+   "lat": 50.776494304924896,
+   "lon": -0.912101831012926,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj4210-12450",
+   "name": "Westbrook Bay, Margate",
+   "lat": 51.38613803927582,
+   "lon": 1.363168673097685,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk1202-35800",
+   "name": "Weston Main",
+   "lat": 51.34124950897945,
+   "lon": -2.983376453172808,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk1202-35900",
+   "name": "Weston-super-Mare Sand Bay",
+   "lat": 51.36447617689369,
+   "lon": -2.966090885973957,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk1202-35700",
+   "name": "Weston-super-Mare Uphill Slipway",
+   "lat": 51.32470854613234,
+   "lon": -2.99031356730742,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukk4307-33900",
+   "name": "Westward Ho!",
+   "lat": 51.0437632688899,
+   "lon": -4.236176438537621,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20700",
+   "name": "Weymouth Central",
+   "lat": 50.614446773533786,
+   "lon": -2.452231804596249,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk2206-20600",
+   "name": "Weymouth Lodmoor",
+   "lat": 50.62587065787878,
+   "lon": -2.442162623042448,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke4100-08901",
+   "name": "Wharfe at Cromwheel, Ilkley",
+   "lat": 53.93188669519488,
+   "lon": -1.816182633584011,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke4200-08904",
+   "name": "Wharfe at Wilderness Carpark",
+   "lat": 53.92655,
+   "lon": -1.38542,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3105-30500",
+   "name": "Wherry Town",
+   "lat": 50.10891717077118,
+   "lon": -5.544900667001265,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "uke2206-07100",
+   "name": "Whitby",
+   "lat": 54.49170190701437,
+   "lon": -0.624582951581293,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj3400-18300",
+   "name": "Whitecliff Bay",
+   "lat": 50.671933347827874,
+   "lon": -1.094251144937834,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukc2203-04800",
+   "name": "Whitley Bay",
+   "lat": 55.04889045289796,
+   "lon": -1.445143727316345,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk3104-33400",
+   "name": "Widemouth Sand",
+   "lat": 50.793089011925076,
+   "lon": -4.55763724415553,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-08200",
+   "name": "Wilsthorpe",
+   "lat": 54.066240104944484,
+   "lon": -0.207501208719827,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2204-14000",
+   "name": "Winchelsea",
+   "lat": 50.906400668932136,
+   "lon": 0.718147800278008,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1203-45700",
+   "name": "Windermere, Fellfoot",
+   "lat": 54.274517826926775,
+   "lon": -2.953765741222596,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1203-45625",
+   "name": "Windermere, Lakeside YMCA",
+   "lat": 54.30040358552448,
+   "lon": -2.961464279216157,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1203-45650",
+   "name": "Windermere, Millerground Landing",
+   "lat": 54.380713971346744,
+   "lon": -2.922541305375967,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukd1203-45675",
+   "name": "Windermere, Rayrigg Meadow",
+   "lat": 54.3781618660443,
+   "lon": -2.922499452360544,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "uke1200-08900",
+   "name": "Withernsea",
+   "lat": 53.73083311626485,
+   "lon": 0.036014677995315,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukj1402-11946",
+   "name": "Wolvercote Mill Stream",
+   "lat": 51.78081990807167,
+   "lon": -1.295961521722681,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  },
+  {
+   "id": "ukk4304-34400",
+   "name": "Woolacombe Village",
+   "lat": 51.17164430892172,
+   "lon": -4.209713896735271,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2407-15400",
+   "name": "Worthing",
+   "lat": 50.80725993550858,
+   "lon": -0.384825087481915,
+   "classification": "Good",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj2407-15350",
+   "name": "Worthing Beach House",
+   "lat": 50.81068,
+   "lon": -0.36086,
+   "classification": "Poor",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": true
+  },
+  {
+   "id": "ukj3400-18350",
+   "name": "Yaverland",
+   "lat": 50.66179758773984,
+   "lon": -1.133213855766716,
+   "classification": "Excellent",
+   "risk": "normal",
+   "riskExpiresAt": "2026-08-26T08:29:00",
+   "rainSensitive": false
+  }
+ ]
+}

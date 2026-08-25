@@ -1,0 +1,18 @@
+node_modules/
+vendor/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+dist/
+build/
+.cache/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+# Large generated geodata — regenerate rather than read
+site/coast.pmtiles
+site/*.geojson

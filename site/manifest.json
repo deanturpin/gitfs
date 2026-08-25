@@ -1,0 +1,19 @@
+{
+  "name": "Get In The Fucking Sea",
+  "short_name": "gitfs",
+  "description": "Should you get in? Sea temperature, waves, wind, tide and water quality for swimmers, surfers, paddleboarders and divers.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#06283d",
+  "theme_color": "#06283d",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
