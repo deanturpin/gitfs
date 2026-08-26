@@ -45,6 +45,27 @@ function tideTurns(times, heights) {
 }
 
 /**
+ * The tide either side of now, for drawing.
+ *
+ * A height in metres relative to mean sea level means very little on its own —
+ * minus 0.2 is not a depth of water, it is a position within a range nobody has
+ * been shown. Handing over the curve lets the app draw the cycle and mark where
+ * you are on it, which is the thing that makes the number readable.
+ *
+ * Six hours either way, so a little over one full cycle is visible.
+ */
+function tideSeries(times, heights, at = Date.now(), hours = 6) {
+  const span = hours * 3600 * 1000;
+  const points = [];
+  for (let i = 0; i < times.length; i += 1) {
+    if (heights[i] === null || heights[i] === undefined) continue;
+    const when = Date.parse(times[i]);
+    if (Math.abs(when - at) <= span) points.push({ at: when, height: heights[i] });
+  }
+  return points.length > 3 ? points : null;
+}
+
+/**
  * Where the tide is right now: how deep, and which way it is going.
  *
  * The card already shows when the next high and low water are, which answers
@@ -137,6 +158,7 @@ export async function conditions(lat, lon) {
     isDay: air.is_day === undefined ? null : Boolean(air.is_day),
     tide: tideTurns(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
     tideNow: tideNow(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
+    tideSeries: tideSeries(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
     // Light, not weather. A swim after sunset is a different proposition, and
     // a time needs no translating.
     sunrise: weather.daily?.sunrise?.[0] ?? null,

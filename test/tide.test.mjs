@@ -61,10 +61,22 @@ test('a gap in the series yields nothing rather than a wrong height', () => {
   assert.equal(tideNow(times, [1.2, null, -0.6], Date.parse('2026-08-26T13:30')), null);
 });
 
-test('the app asks for the tide state and draws it', () => {
+test('the app asks for the tide state and the curve, and draws both', () => {
   assert.match(providers, /tideNow: tideNow\(/, 'conditions does not carry the tide state');
+  assert.match(providers, /tideSeries: tideSeries\(/, 'conditions does not carry the curve');
   const app = readFileSync('site/app.js', 'utf8');
   assert.match(app, /live\.tideNow/, 'nothing renders the tide state');
+  assert.match(app, /tideCurve\(live\.tideSeries/, 'nothing draws the curve');
   assert.match(app, /g-tide-\$\{live\.tideNow\.rising \? 'high' : 'low'\}/,
     'the rising and falling glyphs should show which way it is going');
+});
+
+test('the height shown is measured up from low water, not from a chart datum', () => {
+  // Mean sea level is not something anyone standing on a beach can see, and a
+  // negative depth of water is nonsense. This must read zero at low water.
+  const app = readFileSync('site/app.js', 'utf8');
+  assert.match(app, /const aboveLow = live\.tideNow\.height - low;/,
+    'the displayed height should be relative to the cycle low');
+  assert.doesNotMatch(app, /relative to mean sea level/,
+    'the card should not be explaining a chart datum to swimmers');
 });

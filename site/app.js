@@ -174,6 +174,22 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     <p class="spot-name">
       <span class="spot-name-text">${spot.name}</span>
       ${(() => {
+        if (!live.tideNow || !live.tideSeries) return '';
+        // Measured up from the low water of this cycle rather than from mean
+        // sea level. A chart datum is not something anyone can see; how far the
+        // water has come in since low is. It reads zero at low water and the
+        // full range at high.
+        const low = Math.min(...live.tideSeries.map((p) => p.height));
+        const aboveLow = live.tideNow.height - low;
+        const way = live.tideNow.rising ? 'rising' : 'falling';
+        return `<span class="tidestate"
+          aria-label="Tide ${way}, ${aboveLow.toFixed(1)} metres above low water">
+          ${tideCurve(live.tideSeries, { at: Date.now(), height: live.tideNow.height })}
+          <b>${aboveLow.toFixed(1)}<i>m</i></b>
+          <svg class="phase" aria-hidden="true"><use href="#g-tide-${live.tideNow.rising ? 'high' : 'low'}"/></svg>
+        </span>`;
+      })()}
+      ${(() => {
         const sky = skyGlyph(live.weatherCode, live.isDay);
         return sky
           ? `<span class="sky"><svg aria-label="Current weather"><use href="#g-${sky}"/></svg></span>`
@@ -195,9 +211,6 @@ async function select(spot, distanceAway = null, spanMetres = null) {
       </div>
     </div>
     <div class="tide">
-      ${live.tideNow ? `<span aria-label="Tide ${live.tideNow.rising ? 'rising' : 'falling'}, ${live.tideNow.height.toFixed(1)} metres relative to mean sea level">
-        <svg aria-hidden="true"><use href="#g-tide-${live.tideNow.rising ? 'high' : 'low'}"/></svg>
-        ${live.tideNow.height > 0 ? '+' : ''}${live.tideNow.height.toFixed(1)}m</span>` : ''}
       ${next || '<span>—</span>'}
       ${live.sunrise ? `<span><svg aria-hidden="true"><use href="#g-sunrise"/></svg>
         <span aria-label="Sunrise at ${clock(live.sunrise)}">${clock(live.sunrise)}</span></span>` : ''}
@@ -231,6 +244,46 @@ function badge(percent) {
     // Unsupported, or refused because the app is not installed. Not worth
     // saying anything about: the badge is a bonus, not the app.
   }
+}
+
+/**
+ * The tide as a curve with your position marked on it.
+ *
+ * Drawn rather than stated because a height above mean sea level is a position
+ * within a range, and the range is the part that was missing: minus 0.2 metres
+ * says nothing until you can see it sits just below the middle of a cycle that
+ * runs from minus two to plus two.
+ *
+ * Scaled to whatever the window actually contains rather than to a fixed range,
+ * so a neap tide fills the same box as a spring one — the shape is the message,
+ * and the number beside it carries the size.
+ */
+function tideCurve(series, now) {
+  if (!series?.length) return '';
+  const width = 46;
+  const height = 16;
+  const from = series[0].at;
+  const to = series[series.length - 1].at;
+  const heights = series.map((p) => p.height);
+  const low = Math.min(...heights);
+  const high = Math.max(...heights);
+  const range = high - low || 1;
+
+  const x = (at) => ((at - from) / (to - from)) * width;
+  // Inverted, because high water should be at the top and SVG counts downwards.
+  const y = (h) => height - ((h - low) / range) * height;
+
+  const path = series
+    .map((p, i) => `${i ? 'L' : 'M'}${x(p.at).toFixed(1)} ${y(p.height).toFixed(1)}`)
+    .join(' ');
+
+  const at = Math.min(Math.max(now.at ?? Date.now(), from), to);
+  const markerY = now.height === undefined ? null : y(now.height);
+
+  return `<svg class="tidecurve" viewBox="0 0 ${width} ${height}" aria-hidden="true">
+    <path d="${path}"/>
+    ${markerY === null ? '' : `<circle cx="${x(at).toFixed(1)}" cy="${markerY.toFixed(1)}" r="2.6"/>`}
+  </svg>`;
 }
 
 /** Release the held height once there is something real to show. */
