@@ -10,7 +10,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
-import { style, points, CLASSIFICATION, VERDICT_COLOUR } from '../site/map-style.js';
+import { style, points, bobbing, BUOY_ICONS, CLASSIFICATION, VERDICT_COLOUR } from '../site/map-style.js';
 
 const spots = JSON.parse(readFileSync('site/data/bathing.json', 'utf8'));
 const buoys = JSON.parse(readFileSync('site/data/buoys.json', 'utf8'));
@@ -105,4 +105,80 @@ test('the title and the verdict are set at the same size', () => {
   assert.ok(verdict, 'no clamped size found for the verdict');
   assert.equal(title, verdict);
   assert.ok(sizes.length >= 2);
+});
+
+test('every buoy is given one of the drawn variants', () => {
+  const { features } = bobbing(buoys.stations);
+  assert.equal(features.length, buoys.stations.length);
+  for (const { properties } of features) {
+    assert.ok(
+      BUOY_ICONS.includes(properties.buoyIcon),
+      `${properties.name} asks for "${properties.buoyIcon}"`
+    );
+  }
+});
+
+test('a buoy keeps the same variant between builds', () => {
+  // Chosen from the station id, not randomly, so regenerating the readings
+  // every half hour does not tip every buoy to a new angle.
+  const first = bobbing(buoys.stations).features.map((f) => f.properties.buoyIcon);
+  const again = bobbing(buoys.stations).features.map((f) => f.properties.buoyIcon);
+  assert.deepEqual(first, again);
+});
+
+test('the variants are spread across the buoys', () => {
+  // The point is to look like floating rather than printing. Station ids differ
+  // by a digit or two, so a weak hash buckets them together — an earlier one
+  // put three buoys in four at the same angle.
+  const used = bobbing(buoys.stations).features.map((f) => f.properties.buoyIcon);
+  const fair = used.length / BUOY_ICONS.length;
+  for (const icon of BUOY_ICONS) {
+    const count = used.filter((u) => u === icon).length;
+    assert.ok(count > fair * 0.4, `${icon} used only ${count} times of ${used.length}`);
+  }
+});
+
+test('the buoy leans but its water does not', () => {
+  // A tilted waterline is why the lean is baked into the artwork rather than
+  // applied by rotating the finished icon. The rotation must not wrap the waves.
+  const app = readFileSync('site/app.js', 'utf8');
+  const rotated = app.match(/<g transform="rotate\(\$\{lean\}[^"]*">([\s\S]*?)<\/g>/)?.[1] ?? '';
+  assert.ok(rotated.includes('circle'), 'the buoy itself should sit inside the rotation');
+  assert.ok(!rotated.includes('opacity'), 'the waves should sit outside the rotation');
+  const style = readFileSync('site/map-style.js', 'utf8');
+  assert.doesNotMatch(style, /'icon-rotate'/, 'rotating the icon would tip the sea over');
+});
+
+test('the buoy icon is drawn in one colour, like the rest', () => {
+  const app = readFileSync('site/app.js', 'utf8');
+  const svg = app.match(/<svg xmlns[^`]*<\/svg>/s)?.[0] ?? '';
+  assert.ok(svg, 'no buoy artwork found');
+  const colours = new Set([...svg.matchAll(/#[0-9a-f]{6}/gi)].map((m) => m[0].toLowerCase()));
+  assert.equal(colours.size, 1, `buoy uses ${colours.size} colours: ${[...colours].join(', ')}`);
+});
+
+test('the shipped catalogue knows which way the beaches face', () => {
+  // fetch_bathing.py rewrites this file from the API, which has no such field,
+  // so a successful refresh drops it. shore_aspect.py has to run afterwards,
+  // in the Makefile and in the workflow. If that ordering is ever lost this is
+  // what notices — the failure is otherwise silent, and wind direction simply
+  // stops being taken into account.
+  const withAspect = spots.spots.filter((s) => typeof s.aspect === 'number');
+  assert.ok(
+    withAspect.length > spots.spots.length * 0.8,
+    `only ${withAspect.length} of ${spots.spots.length} spots have an aspect`
+  );
+});
+
+test('every derived aspect is a compass bearing', () => {
+  for (const spot of spots.spots) {
+    if (spot.aspect === null || spot.aspect === undefined) continue;
+    assert.ok(spot.aspect >= 0 && spot.aspect < 360, `${spot.name}: ${spot.aspect}`);
+  }
+});
+
+test('the spots without an aspect are the ones with no coast', () => {
+  // Inland bathing waters — lakes and rivers — have no shoreline to face.
+  const without = spots.spots.filter((s) => s.aspect === null || s.aspect === undefined);
+  assert.ok(without.length < 60, `${without.length} spots have no aspect`);
 });

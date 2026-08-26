@@ -1,21 +1,16 @@
 // MapLibre v6 is ESM with named exports and no default. Map is aliased
 // because the bare name shadows the global Map constructor.
 import { Map as MapLibre, AttributionControl, ScaleControl } from './vendor/maplibre-gl.mjs';
-import { conditions, local, distanceKm, nearest, adjacent, spanBounds } from './providers.js';
+import { conditions, local, distanceKm, nearest, adjacent, spanBounds, skyGlyph } from './providers.js';
 import { style, points, CLASSIFICATION, VERDICT_COLOUR } from './map-style.js';
 import { verdict } from './verdict.js';
 
-// A buoy further away than this is describing different water, so its reading
-// is offered as context rather than as this spot's temperature.
-const BUOY_RANGE_KM = 40;
+import { BUOY_RANGE_KM, BUOY_STALE_HOURS } from './thresholds.js';
 // How much coast to show once a position is known, as a distance rather than a
 // zoom level: the same zoom covers roughly 6 km on a phone and 20 km on a
 // desktop, so a number here would mean different things to different people.
 // One zoom level is a doubling, so each step out is twice the coast.
 const LOCATED_SPAN_M = 40_000;
-// Past this, a station has almost certainly stopped reporting rather than gone
-// quiet, and the UI must say so instead of implying freshness.
-const STALE_HOURS = 3;
 
 // Set synchronously, before anything is awaited, so a headless DOM dump always
 // sees it. Its absence means the modules never resolved or threw on the way in,
@@ -59,11 +54,16 @@ const clock = (iso) =>
   iso ? new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '';
 
 /** One tile. `measured` decides the mark, and the mark is the honest bit. */
-function tile(glyph, value, unit, label, measured) {
+function tile(glyph, value, unit, label, measured, blowingFrom = null) {
   if (value === null || value === undefined) return '';
   const rounded = typeof value === 'number' ? Math.round(value * 10) / 10 : value;
+  // Forecasts give the direction wind comes from; the arrow points the way it
+  // is going, which is what it looks like when you are standing in it.
+  const arrow = blowingFrom === null
+    ? ''
+    : `<svg class="whence" aria-hidden="true" style="transform:rotate(${(blowingFrom + 180) % 360}deg)"><use href="#g-arrow"/></svg>`;
   return `<div class="reading">
-    <svg aria-hidden="true"><use href="#g-${glyph}"/></svg>
+    <svg aria-hidden="true"><use href="#g-${glyph}"/></svg>${arrow}
     <div><b>${rounded}</b><small>${unit}</small></div>
     <i class="mark" ${measured ? 'data-measured' : ''}
        title="${measured ? 'Measured in the water' : 'Modelled'}"
@@ -95,10 +95,10 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     // The card is a fixed height, so it no longer collapses mid-fetch. Keep
     // the previous readings on screen and dim them, so only the name changes
     // until the new numbers arrive.
-    const name = panel.querySelector('.spot-name');
+    const name = panel.querySelector('.spot-name-text');
     if (name) name.textContent = spot.name;
   } else {
-    panel.innerHTML = `<p class="spot-name">${spot.name}</p>`;
+    panel.innerHTML = `<p class="spot-name"><span class="spot-name-text">${spot.name}</span></p>`;
   }
 
   let live;
@@ -112,7 +112,7 @@ async function select(spot, distanceAway = null, spanMetres = null) {
   }
 
   const buoy = nearestBuoy(spot);
-  const stale = buoy && hoursSince(buoy.station.observedAt) > STALE_HOURS;
+  const stale = buoy && hoursSince(buoy.station.observedAt) > BUOY_STALE_HOURS;
   // Prefer an instrument over a model whenever one is close enough and fresh.
   const useBuoy = buoy && !stale;
 
@@ -125,19 +125,36 @@ async function select(spot, distanceAway = null, spanMetres = null) {
   const waveHeight = useBuoy && buoy.station.waveHeight !== null
     ? buoy.station.waveHeight
     : modelled.waveHeight?.value ?? null;
+  const wavePeriod = useBuoy && buoy.station.peakPeriod !== null
+    ? buoy.station.peakPeriod
+    : modelled.wavePeriod?.value ?? null;
+
   const call = verdict({
     seaTemp,
     waveHeight,
+    wavePeriod,
     windSpeed: live.windSpeed?.value ?? null,
+    windGust: live.windGust?.value ?? null,
+    windDirection: live.windDirection?.value ?? null,
     feelsLike: live.feelsLike?.value ?? null,
     classification: spot.classification ?? null,
     risk: spot.risk ?? null,
+    // Derived from the coastline at build time; null for the inland waters in
+    // the catalogue, which have no shore to face.
+    aspect: spot.aspect ?? null,
   });
 
   const next = live.tide
     .filter((t) => Date.parse(t.time) > Date.now())
     .slice(0, 2)
-    .map((t) => `<span>${t.type === 'high' ? '▲' : '▼'} ${clock(t.time)}</span>`)
+    .map((t) => {
+      // The glyph beside these says tide; the triangle says which way. The
+      // accessible name has to say both, since neither survives being read out.
+      const high = t.type === 'high';
+      return `<span aria-label="${high ? 'High' : 'Low'} water at ${clock(t.time)}">` +
+        `<svg aria-hidden="true"><use href="#g-tide-${high ? 'high' : 'low'}"/></svg>` +
+        `${clock(t.time)}</span>`;
+    })
     .join('');
 
   badge(call.percent);
@@ -154,13 +171,22 @@ async function select(spot, distanceAway = null, spanMetres = null) {
       <span>${call.label}<small>${call.because ?? ''}</small></span>
       ${call.percent === null ? '' : `<b class="pct" aria-label="Rated ${call.percent} per cent">${call.percent}<i>%</i></b>`}
     </p>
-    <p class="spot-name">${spot.name}</p>
+    <p class="spot-name">
+      <span class="spot-name-text">${spot.name}</span>
+      ${(() => {
+        const sky = skyGlyph(live.weatherCode, live.isDay);
+        return sky
+          ? `<span class="sky"><svg aria-label="Current weather"><use href="#g-${sky}"/></svg></span>`
+          : '';
+      })()}
+    </p>
     <div class="readings">
       ${tile('temp', seaTemp, '°C', 'Sea temperature', Boolean(useBuoy))}
-      ${tile('wave', waveHeight, 'm', 'Wave height',
-        Boolean(useBuoy && buoy.station.waveHeight !== null))}
-      ${tile('wind', live.windSpeed?.value, 'mph', 'Wind speed', false)}
-      ${tile('temp', live.feelsLike?.value, '°C', 'Feels like on exit', false)}
+      ${tile('wave', waveHeight, wavePeriod ? `m · ${Math.round(wavePeriod)}s` : 'm',
+        'Wave height', Boolean(useBuoy && buoy.station.waveHeight !== null))}
+      ${tile('wind', live.windSpeed?.value, 'mph', 'Wind speed', false,
+        live.windDirection?.value ?? null)}
+      ${tile('chill', live.feelsLike?.value, '°C', 'Feels like getting out', false)}
       <div class="reading reading--word">
         <svg aria-hidden="true" style="color:${CLASSIFICATION[spot.classification] ?? 'var(--accent)'}"><use href="#g-drop"/></svg>
         <div><b style="color:${CLASSIFICATION[spot.classification] ?? 'inherit'}">${spot.classification ?? '—'}</b><small>${spot.risk ?? '—'}</small></div>
@@ -169,12 +195,11 @@ async function select(spot, distanceAway = null, spanMetres = null) {
       </div>
     </div>
     <div class="tide">
-      <svg aria-hidden="true" style="width:1rem;height:1rem;color:var(--accent)"><use href="#g-tide"/></svg>
       ${next || '<span>—</span>'}
-      ${live.sunrise ? `<span><svg aria-hidden="true" style="width:1rem;height:1rem;vertical-align:-.2em;color:var(--accent)"><use href="#g-sunrise"/></svg>
-        <span aria-label="Sunrise">${clock(live.sunrise)}</span></span>` : ''}
-      ${live.sunset ? `<span><svg aria-hidden="true" style="width:1rem;height:1rem;vertical-align:-.2em;color:var(--accent)"><use href="#g-sunset"/></svg>
-        <span aria-label="Sunset">${clock(live.sunset)}</span></span>` : ''}
+      ${live.sunrise ? `<span><svg aria-hidden="true"><use href="#g-sunrise"/></svg>
+        <span aria-label="Sunrise at ${clock(live.sunrise)}">${clock(live.sunrise)}</span></span>` : ''}
+      ${live.sunset ? `<span><svg aria-hidden="true"><use href="#g-sunset"/></svg>
+        <span aria-label="Sunset at ${clock(live.sunset)}">${clock(live.sunset)}</span></span>` : ''}
       ${distanceAway !== null ? `<span>⌖ ${Math.round(distanceAway)} km</span>` : ''}
       ${buoy ? `<span class="${stale ? 'stale' : ''}">${buoy.station.name}
         ${Math.round(buoy.km)} km · ${stale ? 'stale' : clock(buoy.station.observedAt)}</span>` : ''}
@@ -261,6 +286,46 @@ for (const layer of ['spots', 'buoys']) {
   map.on('mouseleave', layer, () => { map.getCanvas().style.cursor = ''; });
 }
 
+// A buoy sitting in the water, drawn rather than dotted: a body, a band, a
+// light on top, and a couple of waves at its foot.
+//
+// The lean is applied inside the artwork rather than by rotating the finished
+// icon, which is the whole reason there are three of these. Rotating the icon
+// tips the waves over with the buoy, and water does not do that. Here the buoy
+// leans about its own waterline while the sea stays level, which is what
+// bobbing actually looks like.
+//
+// Three variants rather than one so a row of buoys does not look stamped. Which
+// one a station gets is decided in map-style.js from its id, so it stays put
+// when the readings are regenerated every half hour.
+const buoyArt = (lean) => `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="68" viewBox="0 0 32 34"
+     fill="none" stroke="#3ec5e0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="rotate(${lean} 16 25)">
+    <circle cx="16" cy="5.5" r="2.6"/>
+    <path d="M16 8.1v3"/>
+    <path d="M10.6 11.1h10.8l-1.6 11.6a1.8 1.8 0 0 1-1.8 1.6h-4a1.8 1.8 0 0 1-1.8-1.6z"/>
+    <path d="M12.3 16.6h8.4"/>
+  </g>
+  <g opacity=".85">
+    <path d="M2 26.5c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
+    <path d="M2 31c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
+  </g>
+</svg>`;
+
+/** The lean each variant carries, in degrees. */
+export const BUOY_VARIANTS = { 'buoy-port': -11, 'buoy-level': -2, 'buoy-starboard': 10 };
+
+map.on('styleimagemissing', (e) => {
+  const lean = BUOY_VARIANTS[e.id];
+  if (lean === undefined || map.hasImage(e.id)) return;
+  const image = new Image(64, 68);
+  image.onload = () => {
+    // Checked again on arrival: two misses can be raised before the first loads.
+    if (!map.hasImage(e.id)) map.addImage(e.id, image, { pixelRatio: 2 });
+  };
+  image.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(buoyArt(lean));
+});
+
 // A scale, because every distance in the app is metric — the nearest buoy is
 // quoted in kilometres — and that number only means something if the map says
 // what a kilometre looks like at this zoom. Top right, since locate has the
@@ -273,9 +338,6 @@ map.on('load', () => {
   map.addControl(new ScaleControl({ maxWidth: 110, unit: 'metric' }), 'top-right');
 });
 
-// Attribution is a licence condition, not decoration: OGL, CC-BY and ODbL each
-// require it in the running app. Left in MapLibre's usual bottom-right corner,
-// where a map's credits belong and where nobody has to look at it.
 map.addControl(
   new AttributionControl({
     // Always expanded. A button to reveal the credits is one more control in

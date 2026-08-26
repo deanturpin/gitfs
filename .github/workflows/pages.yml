@@ -39,6 +39,12 @@ jobs:
       - name: Refresh bathing water forecasts
         run: python3 tools/fetch_bathing.py || echo "::warning::bathing refresh failed, shipping committed data"
 
+      # Rewrites the aspect into the freshly fetched catalogue. Without it a
+      # successful refresh would drop the field and every beach would lose its
+      # facing until the next deploy.
+      - name: Derive which way each beach faces
+        run: python3 tools/shore_aspect.py || echo "::warning::aspect derivation failed, wind direction will be ignored"
+
       # Stamp the commit onto local imports so a deploy cannot be half-applied.
       # Pages caches for four hours and files fall out of cache at different
       # times; a fresh app.js against a cached providers.js does not merely look

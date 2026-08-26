@@ -43,6 +43,7 @@ const FATAL = /ReferenceError|TypeError|SyntaxError|is not defined|is not a func
 const EXPECTED = [
   ['map container', /id="map"/],
   ['glyph set', /id="g-temp"/],
+  ['distinct chill glyph', /id="g-chill"/],
   ['banner', /id="banner"/],
   ['app booted', /data-app="(booting|ready)"/],
   ['swipe glyph', /id="g-swipe"/],

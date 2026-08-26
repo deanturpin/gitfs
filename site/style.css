@@ -78,9 +78,17 @@ button svg { width: 1.35rem; height: 1.35rem; }
 #panel[data-open] { transform: none; }
 
 .spot-name {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
   font-family: var(--display);
   font-size: 1.25rem; font-weight: 500; letter-spacing: .01em;
   margin: 0 0 .6rem;
+}
+
+/* The name yields before the weather does: a long place name is truncated
+   rather than pushing the sky off the end of the line. */
+.spot-name-text {
+  min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 .readings {
@@ -89,8 +97,8 @@ button svg { width: 1.35rem; height: 1.35rem; }
 }
 
 .reading {
-  display: flex; align-items: center; gap: .5rem;
-  padding: .5rem .6rem;
+  display: flex; align-items: center; gap: .4rem;
+  padding: .45rem .5rem;
   border: 1px solid var(--edge); border-radius: .6rem;
 }
 .reading svg { width: 1.25rem; height: 1.25rem; flex: none; color: var(--accent); }
@@ -99,7 +107,15 @@ button svg { width: 1.35rem; height: 1.35rem; }
    long word like "Excellent" pushed out of its tile rather than fitting in it.
    min-width lets it shrink; the ellipsis catches anything longer still. */
 .reading > div { min-width: 0; }
-.reading > div > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.reading > div > * { display: block; white-space: nowrap; }
+
+/* Only words are allowed to ellipsis. A truncated number is worse than none —
+   "20…" could be 20.8 or 209 — so numeric tiles are given room instead, and
+   the digits shrink to fit rather than being cut off.
+   Oswald has no tabular figures, so font-variant-numeric does nothing and a
+   zero is markedly wider than a one: 20.8 measures 39px where 21.7 measures 34.
+   That five pixel difference was the whole bug. */
+.reading--word > div > * { overflow: hidden; text-overflow: ellipsis; }
 
 /* Tiles holding a word rather than a number need more room than the grid gives
    a two or three digit number, but not a whole row to themselves — two columns
@@ -109,8 +125,8 @@ button svg { width: 1.35rem; height: 1.35rem; }
 .reading--word b { font-size: 1.15rem; }
 .reading b {
   font-family: var(--display);
-  font-size: 1.4rem; font-weight: 500;
-  font-variant-numeric: tabular-nums; line-height: 1.05;
+  font-size: 1.25rem; font-weight: 500;
+  line-height: 1.05;
 }
 .reading small { display: block; color: var(--dim); font-size: .7rem; }
 
@@ -127,8 +143,14 @@ button svg { width: 1.35rem; height: 1.35rem; }
 }
 .mark[data-measured] { background: var(--accent); }
 
-.tide { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .6rem; color: var(--dim); font-size: .8rem; }
-.tide span { font-variant-numeric: tabular-nums; }
+.tide {
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+  margin-top: .6rem; color: var(--dim); font-size: .8rem;
+}
+
+/* Each entry is a glyph and its time, kept together. */
+.tide span { display: inline-flex; align-items: center; gap: .25rem; }
+.tide svg { width: 1rem; height: 1rem; color: var(--accent); flex: none; }
 
 .stale { color: #ffb454; }
 
@@ -408,4 +430,22 @@ button[data-state="failed"] { color: #f87171; border-color: #f87171; }
 
 @media (prefers-reduced-motion: reduce) {
   #locatehint { animation: none; }
+}
+
+/* The sky, sitting with the other things that describe the day rather than the
+   water. Slightly larger than the glyphs beside it, since it is the only one
+   carrying its meaning entirely in its shape. */
+.sky { flex: none; display: flex; }
+.sky svg {
+  width: 1.3rem; height: 1.3rem;
+  color: var(--ink); opacity: .8;
+}
+
+/* The wind's direction, beside its speed. Dimmer than the glyph it follows:
+   which way it blows matters less than how hard, until it is offshore. */
+.reading .whence {
+  width: .8rem; height: .8rem;
+  margin-left: -.2rem;
+  color: var(--accent); opacity: .65;
+  flex: none;
 }

@@ -8,6 +8,8 @@
 // instrument in the water from a model's opinion of it, and the UI must render
 // those differently — that distinction is the whole point of the app.
 
+import { MARINE_MAX_OFFSET_KM } from './thresholds.js';
+
 const MARINE = 'https://marine-api.open-meteo.com/v1/marine';
 const FORECAST = 'https://api.open-meteo.com/v1/forecast';
 
@@ -64,7 +66,7 @@ export async function conditions(lat, lon) {
       query(FORECAST, {
         latitude: lat,
         longitude: lon,
-        current: 'temperature_2m,apparent_temperature,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation',
+        current: 'temperature_2m,apparent_temperature,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation,weather_code,is_day',
         daily: 'sunrise,sunset',
         wind_speed_unit: 'mph',
       })
@@ -86,7 +88,7 @@ export async function conditions(lat, lon) {
   return {
     sampledAt,
     sampleOffsetKm,
-    marineApplies: sampleOffsetKm <= 25,
+    marineApplies: sampleOffsetKm <= MARINE_MAX_OFFSET_KM,
     seaTemp: metric(sea.sea_surface_temperature, '°C', source, false, at),
     waveHeight: metric(sea.wave_height, 'm', source, false, at),
     wavePeriod: metric(sea.wave_period, 's', source, false, at),
@@ -97,6 +99,10 @@ export async function conditions(lat, lon) {
     windGust: metric(air.wind_gusts_10m, 'mph', source, false, at),
     windDirection: metric(air.wind_direction_10m, '°', source, false, at),
     precipitation: metric(air.precipitation, 'mm', source, false, at),
+    // WMO weather code, and whether the sun is up — the same code means a
+    // different picture at night.
+    weatherCode: air.weather_code ?? null,
+    isDay: air.is_day === undefined ? null : Boolean(air.is_day),
     tide: tideTurns(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
     // Light, not weather. A swim after sunset is a different proposition, and
     // a time needs no translating.
@@ -222,4 +228,25 @@ export function spanBounds(spot, metres) {
     [spot.lon - halfLon, spot.lat - halfLat],
     [spot.lon + halfLon, spot.lat + halfLat],
   ];
+}
+
+/**
+ * WMO weather code to one of a handful of glyphs.
+ *
+ * The full code list has around thirty entries and draws distinctions a
+ * swimmer does not care about — the difference between light and moderate
+ * drizzle changes nothing about whether to get in. These collapse to what is
+ * worth a picture: is it clear, is it grey, is it falling on you.
+ */
+export function skyGlyph(code, isDay = true) {
+  if (code === null || code === undefined) return null;
+  if (code === 0) return isDay === false ? 'moon' : 'sun';
+  if (code <= 2) return isDay === false ? 'moon' : 'suncloud';
+  if (code === 3) return 'cloud';
+  if (code <= 48) return 'fog';
+  if (code <= 67) return 'rain';
+  if (code <= 77) return 'snow';
+  if (code <= 82) return 'rain';
+  if (code <= 86) return 'snow';
+  return 'storm';
 }

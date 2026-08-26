@@ -9,6 +9,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { verdict, PERSONAS, VERDICTS } from '../site/verdict.js';
+import {
+  HELL_YEAH_AT, HMMM_AT, MAX_WAVE_HEIGHT_M, MIN_SEA_TEMP_C, YEAH_AT,
+} from '../site/thresholds.js';
 
 /** A day at the seaside, described the way a swimmer would describe it. */
 const day = (over) => ({
@@ -67,11 +70,23 @@ test('vetoes explain themselves', () => {
   assert.equal(verdict(day({ classification: 'Closed' })).because, 'closed');
 });
 
-test('the veto thresholds sit where we think they do', () => {
-  assert.equal(verdict(day({ waveHeight: 1.5 })).because !== 'too rough', true);
-  assert.equal(verdict(day({ waveHeight: 1.51 })).because, 'too rough');
-  assert.equal(verdict(day({ seaTemp: 6 })).because !== 'dangerously cold', true);
-  assert.equal(verdict(day({ seaTemp: 5.9 })).because, 'dangerously cold');
+test('the veto thresholds sit where the constants say they do', () => {
+  // Written against the named constants rather than repeating the numbers, so
+  // changing a threshold in thresholds.js moves the test with it instead of
+  // leaving two places disagreeing about what the rule is.
+  assert.notEqual(verdict(day({ waveHeight: MAX_WAVE_HEIGHT_M })).because, 'too rough');
+  assert.equal(verdict(day({ waveHeight: MAX_WAVE_HEIGHT_M + 0.01 })).because, 'too rough');
+  assert.notEqual(verdict(day({ seaTemp: MIN_SEA_TEMP_C })).because, 'dangerously cold');
+  assert.equal(verdict(day({ seaTemp: MIN_SEA_TEMP_C - 0.1 })).because, 'dangerously cold');
+});
+
+test('the bands are in order and inside the scale', () => {
+  // A threshold file makes these easy to mistype into nonsense.
+  assert.ok(HELL_YEAH_AT > YEAH_AT, 'HELL YEAH must need a better score than YEAH');
+  assert.ok(YEAH_AT > HMMM_AT, 'YEAH must need a better score than HMMM');
+  for (const at of [HELL_YEAH_AT, YEAH_AT, HMMM_AT]) {
+    assert.ok(at > 0 && at < 1, `${at} is outside the nought to one scale`);
+  }
 });
 
 // ---------------------------------------------------------------------------

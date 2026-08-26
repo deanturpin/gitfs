@@ -1,4 +1,4 @@
-.PHONY: all help serve stop data buoys bathing coast og test smoke lint clean deploy
+.PHONY: all help serve stop data buoys bathing aspect coast og test smoke lint clean deploy
 
 PORT ?= 8765
 
@@ -49,7 +49,7 @@ smoke: stop
 	  status=0; node scripts/smoke.mjs / || status=1; \
 	  pkill -f "http.server $(PORT)" 2>/dev/null; exit $$status
 
-data: buoys bathing
+data: buoys bathing aspect
 
 # 53 station pages at a deliberately polite rate, so about a minute. Stations
 # without a position are skipped and reported rather than failing the run.
@@ -58,6 +58,11 @@ buoys:
 
 bathing:
 	@python3 tools/fetch_bathing.py
+
+# Which way each beach faces, derived from the coastline rather than written
+# down 464 times. Depends on bathing.json existing, so it runs after it.
+aspect:
+	@python3 tools/shore_aspect.py
 
 # Rarely needed: coastlines do not move.
 coast:

@@ -40,14 +40,69 @@
   <symbol id="g-temp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
     <path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/>
   </symbol>
+  <!-- The sky, in the few states worth a picture. WMO codes collapse to these
+       in skyGlyph(); the distinction between light and moderate drizzle changes
+       nothing about whether to get in. -->
+  <symbol id="g-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="4.2"/>
+    <path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/>
+  </symbol>
+  <symbol id="g-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
+  </symbol>
+  <symbol id="g-suncloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 6.5V5M4.4 8 3.3 6.9M11.6 8l1.1-1.1M4 12H2.5"/>
+    <circle cx="8" cy="11.5" r="2.8"/>
+    <path d="M10.5 19.5h7a3.5 3.5 0 0 0 .3-7 5 5 0 0 0-9.5 1.2 3 3 0 0 0 2.2 5.8z"/>
+  </symbol>
+  <symbol id="g-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 18.5h10.5a3.9 3.9 0 0 0 .3-7.8 5.6 5.6 0 0 0-10.7 1.3A3.3 3.3 0 0 0 7 18.5z"/>
+  </symbol>
+  <symbol id="g-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 15.5h10.5a3.9 3.9 0 0 0 .3-7.8 5.6 5.6 0 0 0-10.7 1.3A3.3 3.3 0 0 0 7 15.5z"/>
+    <path d="M9 19v2M13 19v2.5M17 19v2"/>
+  </symbol>
+  <symbol id="g-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 15.5h10.5a3.9 3.9 0 0 0 .3-7.8 5.6 5.6 0 0 0-10.7 1.3A3.3 3.3 0 0 0 7 15.5z"/>
+    <path d="M9 19.5h.01M13 21h.01M17 19.5h.01"/>
+  </symbol>
+  <symbol id="g-fog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M3 9h18M5 13h14M3 17h18"/>
+  </symbol>
+  <symbol id="g-storm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 14.5h10.5a3.9 3.9 0 0 0 .3-7.8 5.6 5.6 0 0 0-10.7 1.3A3.3 3.3 0 0 0 7 14.5z"/>
+    <path d="M13 16l-2.5 4h3.5L11.5 23"/>
+  </symbol>
+
+  <!-- Wind chill: a thermometer with the wind blowing past it. Distinct from
+       the plain thermometer, because the card shows two temperatures and a
+       wordless interface cannot give them the same picture. -->
+  <!-- Points the way the wind is going. Rotated inline, since the angle is a
+       reading rather than a style. -->
+  <symbol id="g-arrow" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.5 18 21l-6-4.4L6 21z"/>
+  </symbol>
+  <symbol id="g-chill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M7 13.4V4.5a1.75 1.75 0 1 1 3.5 0v8.9a3.5 3.5 0 1 1-3.5 0z"/>
+    <path d="M15 8h4"/><path d="M15 12.5h6"/><path d="M15 17h4"/>
+  </symbol>
   <symbol id="g-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
     <path d="M2 8c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M2 14c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M2 20c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/>
   </symbol>
   <symbol id="g-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
     <path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 16h15a3 3 0 1 1-3 3"/>
   </symbol>
-  <symbol id="g-tide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-    <path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M3 21h18"/>
+  <!-- Tide, drawn like the sun times it sits beside: the thing itself, with an
+       arrow saying which way it is going. Water rising to high, falling to low. -->
+  <symbol id="g-tide-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3v5"/><path d="m8.5 6.5 3.5-3.5 3.5 3.5"/>
+    <path d="M2 15c2.5 0 2.5-2.5 5-2.5s2.5 2.5 5 2.5 2.5-2.5 5-2.5 2.5 2.5 5 2.5"/>
+    <path d="M2 20c2.5 0 2.5-2.5 5-2.5s2.5 2.5 5 2.5 2.5-2.5 5-2.5 2.5 2.5 5 2.5"/>
+  </symbol>
+  <symbol id="g-tide-low" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 8V3"/><path d="m8.5 4.5 3.5 3.5 3.5-3.5"/>
+    <path d="M2 15c2.5 0 2.5-2.5 5-2.5s2.5 2.5 5 2.5 2.5-2.5 5-2.5 2.5 2.5 5 2.5"/>
+    <path d="M2 20c2.5 0 2.5-2.5 5-2.5s2.5 2.5 5 2.5 2.5-2.5 5-2.5 2.5 2.5 5 2.5"/>
   </symbol>
   <symbol id="g-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
     <path d="M12 3s6 6.4 6 10.2A6 6 0 0 1 6 13.2C6 9.4 12 3 12 3z"/>

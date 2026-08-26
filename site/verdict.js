@@ -8,40 +8,45 @@
 //
 // The plan's rule stands: never show this without the readings that produced
 // it. A number nobody can interrogate is a number nobody believes.
+//
+// What each reading means lives in conditions.js. This file only decides how
+// much each one matters and what to call the result.
 
-/** Piecewise-linear mapping from a reading to 0 (awful) through 1 (ideal). */
-const curve = (stops) => (value) => {
-  if (value === null || value === undefined) return null;
-  const [firstAt, firstScore] = stops[0];
-  if (value <= firstAt) return firstScore;
-  for (let i = 1; i < stops.length; i += 1) {
-    const [at, score] = stops[i];
-    const [prevAt, prevScore] = stops[i - 1];
-    if (value <= at) {
-      return prevScore + ((value - prevAt) / (at - prevAt)) * (score - prevScore);
-    }
-  }
-  return stops[stops.length - 1][1];
-};
+import {
+  QUALITY,
+  driftScore,
+  effectiveWave,
+  exitScore,
+  offshoreness,
+  seaTempScore,
+  waveScore,
+  windScore,
+} from './conditions.js';
 
-// Sea temperature dominates, but UK swimmers acclimatise: 15 °C is a pleasant
-// summer swim, not a hardship, so the curve is generous in the middle.
-const seaTempScore = curve([[5, 0], [10, 0.35], [15, 0.75], [18, 1], [24, 1]]);
-const waveScore = curve([[0, 1], [0.5, 0.85], [1, 0.45], [1.5, 0.15], [2.5, 0]]);
-const windScore = curve([[0, 1], [15, 0.65], [25, 0.3], [40, 0]]);
-// What it feels like getting out, wet, in the wind — the part people remember
-// as "freezing" long after a perfectly reasonable swim.
-const exitScore = curve([[0, 0], [8, 0.35], [14, 0.7], [20, 1]]);
+import {
+  HELL_YEAH_AT,
+  HMMM_AT,
+  MAX_WAVE_HEIGHT_M,
+  MIN_SEA_TEMP_C,
+  MIN_WEIGHT_COVERAGE,
+  OFFSHORE_VETO_STRENGTH,
+  OFFSHORE_VETO_WIND_MPH,
+  WEAKEST_LINK_SHARE,
+  YEAH_AT,
+} from './thresholds.js';
 
-const QUALITY = { Excellent: 1, Good: 0.8, Sufficient: 0.55, Poor: 0.15, Closed: 0 };
+// Re-exported so callers have one place to import the judgement from.
+export { offshoreness };
+
 
 export const PERSONAS = {
   swim: {
-    seaTemp: 0.34,
-    quality: 0.22,
-    waves: 0.18,
-    exit: 0.14,
-    wind: 0.12,
+    seaTemp: 0.30,
+    quality: 0.20,
+    waves: 0.16,
+    exit: 0.12,
+    wind: 0.10,
+    drift: 0.12,
   },
 };
 
@@ -59,8 +64,15 @@ export const VERDICTS = {
 function veto(reading) {
   if (reading.classification === 'Closed') return 'closed';
   if (reading.risk && reading.risk !== 'normal') return 'pollution risk';
-  if (reading.waveHeight !== null && reading.waveHeight > 1.5) return 'too rough';
-  if (reading.seaTemp !== null && reading.seaTemp < 6) return 'dangerously cold';
+  if (reading.waveHeight !== null && reading.waveHeight > MAX_WAVE_HEIGHT_M) return 'too rough';
+  if (reading.seaTemp !== null && reading.seaTemp < MIN_SEA_TEMP_C) return 'dangerously cold';
+  // A strong wind blowing off the land will take you with it, and it does so
+  // over water that looks invitingly flat. This is the one condition here that
+  // is more dangerous for looking pleasant.
+  const offshore = offshoreness(reading.windDirection, reading.aspect);
+  if (offshore !== null
+      && offshore > OFFSHORE_VETO_STRENGTH
+      && (reading.windSpeed ?? 0) >= OFFSHORE_VETO_WIND_MPH) return 'blown offshore';
   return null;
 }
 
@@ -75,12 +87,17 @@ export function verdict(reading, persona = PERSONAS.swim) {
   // honest thing to show for a beach that is shut.
   if (blocked) return { ...VERDICTS.no, score: 0, percent: 0, because: blocked };
 
+  const offshore = offshoreness(reading.windDirection, reading.aspect);
+
   const factors = {
     seaTemp: seaTempScore(reading.seaTemp),
-    waves: waveScore(reading.waveHeight),
-    wind: windScore(reading.windSpeed),
+    waves: waveScore(effectiveWave(reading.waveHeight, reading.wavePeriod)),
+    // Gusts are what actually knocks you about and chills you, so the stronger
+    // of the two is what counts.
+    wind: windScore(Math.max(reading.windSpeed ?? 0, reading.windGust ?? 0) || reading.windSpeed),
     exit: exitScore(reading.feelsLike),
     quality: reading.classification ? QUALITY[reading.classification] ?? 0.5 : null,
+    drift: driftScore(offshore, reading.windSpeed),
   };
 
   let total = 0;
@@ -99,11 +116,11 @@ export function verdict(reading, persona = PERSONAS.swim) {
   // as its worst aspect, so the weakest factor pulls the result down.
   const average = total / weighed;
   const weakestScore = Math.min(...contributing);
-  const score = 0.7 * average + 0.3 * weakestScore;
+  const score = (1 - WEAKEST_LINK_SHARE) * average + WEAKEST_LINK_SHARE * weakestScore;
   // Confidence needs coverage. With most of the weight missing — no sea
   // temperature, say — a high average is an opinion formed from the factors
   // that happened to be available, so it must not read as a confident yes.
-  const thin = weighed < 0.6;
+  const thin = weighed < MIN_WEIGHT_COVERAGE;
   // The weakest contributor is the honest explanation for anything short of a
   // yes, and it is what the swimmer can actually plan around.
   const weakest = Object.entries(factors)
@@ -118,9 +135,9 @@ export function verdict(reading, persona = PERSONAS.swim) {
   // warm one score within 0.01 of each other, so the line between them is a
   // judgement rather than a measurement, and it is drawn on the cautious side:
   // chop is a hazard a swimmer feels immediately.
-  let band = score >= 0.8 ? VERDICTS.yes
-    : score >= 0.66 ? VERDICTS.good
-    : score >= 0.33 ? VERDICTS.hmm
+  let band = score >= HELL_YEAH_AT ? VERDICTS.yes
+    : score >= YEAH_AT ? VERDICTS.good
+    : score >= HMMM_AT ? VERDICTS.hmm
     : VERDICTS.no;
   // Without the readings to back it, a confident yes becomes a shrug.
   if (thin && (band === VERDICTS.yes || band === VERDICTS.good)) band = VERDICTS.hmm;
