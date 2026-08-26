@@ -45,53 +45,26 @@ function tideTurns(times, heights) {
 }
 
 /**
- * The tide either side of now, for drawing.
+ * The half cycle we are currently inside: the turning point just passed, the
+ * one coming, and how far between them we are.
  *
- * A height in metres relative to mean sea level means very little on its own —
- * minus 0.2 is not a depth of water, it is a position within a range nobody has
- * been shown. Handing over the curve lets the app draw the cycle and mark where
- * you are on it, which is the thing that makes the number readable.
- *
- * Six hours either way, so a little over one full cycle is visible.
+ * More useful than a window of hours, because it is the thing a swimmer
+ * actually holds in their head — low at ten past six, high at half twelve, and
+ * we are two thirds of the way up. The times bound it, so the number in the
+ * middle needs no datum to be understood.
  */
-function tideSeries(times, heights, at = Date.now(), hours = 6) {
-  const span = hours * 3600 * 1000;
-  const points = [];
-  for (let i = 0; i < times.length; i += 1) {
-    if (heights[i] === null || heights[i] === undefined) continue;
-    const when = Date.parse(times[i]);
-    if (Math.abs(when - at) <= span) points.push({ at: when, height: heights[i] });
-  }
-  return points.length > 3 ? points : null;
-}
-
-/**
- * Where the tide is right now: how deep, and which way it is going.
- *
- * The card already shows when the next high and low water are, which answers
- * "when" and not "what is it doing". Standing on a beach, the useful facts are
- * whether the water is coming in or going out and how far up it is — a falling
- * tide two hours off low is a different proposition from the same height rising.
- *
- * Height is relative to mean sea level, so it is negative below the middle of
- * the range rather than being a depth of water. Interpolated between the hourly
- * samples, because a tide moves a good deal inside an hour.
- */
-function tideNow(times, heights, at = Date.now()) {
-  if (!times?.length) return null;
-  for (let i = 0; i < times.length - 1; i += 1) {
-    const start = Date.parse(times[i]);
-    const end = Date.parse(times[i + 1]);
-    if (at < start || at > end) continue;
-    const from = heights[i];
-    const to = heights[i + 1];
-    if (from === null || to === null) return null;
-    const through = (at - start) / (end - start);
+function tidePhase(turns, at = Date.now()) {
+  if (!turns?.length) return null;
+  for (let i = 0; i < turns.length - 1; i += 1) {
+    const from = Date.parse(turns[i].time);
+    const to = Date.parse(turns[i + 1].time);
+    if (at < from || at > to) continue;
     return {
-      height: from + (to - from) * through,
-      // Rising or falling now, taken from the direction of travel across the
-      // hour we are inside rather than from the nearest turning point.
-      rising: to > from,
+      from: turns[i],
+      to: turns[i + 1],
+      // Nought at the turning point behind us, one at the one ahead.
+      through: (at - from) / (to - from),
+      rising: turns[i + 1].type === 'high',
     };
   }
   return null;
@@ -131,6 +104,7 @@ export async function conditions(lat, lon) {
   const at = sea.time ?? air.time ?? null;
   const source = 'open-meteo';
 
+  const turns = tideTurns(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []);
   const sampledAt = { lat: marine.latitude, lon: marine.longitude };
   // How far the marine grid moved us. A few kilometres is the grid snapping to
   // its nearest wet cell and is fine. Tens of kilometres means it found the sea
@@ -156,9 +130,8 @@ export async function conditions(lat, lon) {
     // different picture at night.
     weatherCode: air.weather_code ?? null,
     isDay: air.is_day === undefined ? null : Boolean(air.is_day),
-    tide: tideTurns(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
-    tideNow: tideNow(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
-    tideSeries: tideSeries(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
+    tide: turns,
+    tidePhase: tidePhase(turns),
     // Light, not weather. A swim after sunset is a different proposition, and
     // a time needs no translating.
     sunrise: weather.daily?.sunrise?.[0] ?? null,

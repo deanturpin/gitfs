@@ -450,28 +450,17 @@ button[data-state="failed"] { color: #f87171; border-color: #f87171; }
   flex: none;
 }
 
-/* The tide as a curve with a dot on it, beside the weather on the name line.
-   The shape carries the cycle and the number carries the size, which is what a
-   bare height above mean sea level could never say on its own. */
-.tidestate {
-  display: inline-flex; align-items: center; gap: .3rem;
-  flex: none;
-}
-.tidecurve {
+/* The half cycle: a turning point and its time at each end, and the curve
+   between them carrying where we are. Replaces two separate entries that gave
+   the times without the shape. */
+.tidephase { display: inline-flex; align-items: center; gap: .25rem; }
+.phasecurve {
   width: 2.9rem; height: 1rem;
+  margin: 0 .1rem;
   overflow: visible;
 }
-.tidecurve path {
-  fill: none; stroke: var(--accent); stroke-width: 1.6;
-  stroke-linecap: round; stroke-linejoin: round; opacity: .55;
+.phasecurve path {
+  fill: none; stroke: var(--accent); stroke-width: 1.5;
+  stroke-linecap: round; opacity: .5;
 }
-.tidecurve circle { fill: var(--ink); }
-.tidestate b {
-  font-family: var(--display); font-size: .85rem; font-weight: 500;
-  color: var(--dim);
-}
-.tidestate b i { font-style: normal; font-size: .75em; opacity: .7; }
-
-/* Rising or falling, using the same pair of glyphs as the turning points below
-   so the two are obviously talking about the same thing. */
-.tidestate .phase { width: .9rem; height: .9rem; color: var(--accent); flex: none; }
+.phasecurve circle { fill: var(--ink); }

@@ -144,18 +144,16 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     aspect: spot.aspect ?? null,
   });
 
-  const next = live.tide
-    .filter((t) => Date.parse(t.time) > Date.now())
-    .slice(0, 2)
-    .map((t) => {
-      // The glyph beside these says tide; the triangle says which way. The
-      // accessible name has to say both, since neither survives being read out.
-      const high = t.type === 'high';
-      return `<span aria-label="${high ? 'High' : 'Low'} water at ${clock(t.time)}">` +
-        `<svg aria-hidden="true"><use href="#g-tide-${high ? 'high' : 'low'}"/></svg>` +
-        `${clock(t.time)}</span>`;
-    })
-    .join('');
+  // One picture carrying both turning points, their times and where we are
+  // between them, in place of two separate entries that said neither.
+  const phase = live.tidePhase;
+  const next = phase
+    ? `<span class="tidephase" aria-label="${phase.from.type === 'low' ? 'Low' : 'High'} water at ${clock(phase.from.time)}, ${phase.to.type === 'low' ? 'low' : 'high'} at ${clock(phase.to.time)}, tide ${phase.rising ? 'rising' : 'falling'}">
+        <svg aria-hidden="true"><use href="#g-tide-${phase.from.type}"/></svg>${clock(phase.from.time)}
+        ${tidePhaseWidget(phase)}
+        <svg aria-hidden="true"><use href="#g-tide-${phase.to.type}"/></svg>${clock(phase.to.time)}
+      </span>`
+    : '';
 
   badge(call.percent);
 
@@ -173,22 +171,6 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     </p>
     <p class="spot-name">
       <span class="spot-name-text">${spot.name}</span>
-      ${(() => {
-        if (!live.tideNow || !live.tideSeries) return '';
-        // Measured up from the low water of this cycle rather than from mean
-        // sea level. A chart datum is not something anyone can see; how far the
-        // water has come in since low is. It reads zero at low water and the
-        // full range at high.
-        const low = Math.min(...live.tideSeries.map((p) => p.height));
-        const aboveLow = live.tideNow.height - low;
-        const way = live.tideNow.rising ? 'rising' : 'falling';
-        return `<span class="tidestate"
-          aria-label="Tide ${way}, ${aboveLow.toFixed(1)} metres above low water">
-          ${tideCurve(live.tideSeries, { at: Date.now(), height: live.tideNow.height })}
-          <b>${aboveLow.toFixed(1)}<i>m</i></b>
-          <svg class="phase" aria-hidden="true"><use href="#g-tide-${live.tideNow.rising ? 'high' : 'low'}"/></svg>
-        </span>`;
-      })()}
       ${(() => {
         const sky = skyGlyph(live.weatherCode, live.isDay);
         return sky
@@ -247,42 +229,42 @@ function badge(percent) {
 }
 
 /**
- * The tide as a curve with your position marked on it.
+ * The half cycle we are in: low water at one end, high at the other, and a
+ * marker showing how far between them we are.
  *
- * Drawn rather than stated because a height above mean sea level is a position
- * within a range, and the range is the part that was missing: minus 0.2 metres
- * says nothing until you can see it sits just below the middle of a cycle that
- * runs from minus two to plus two.
+ * A cosine, because that is very close to what a tide does and it is the shape
+ * everybody already pictures. Drawn rising or falling to match, so the curve
+ * always runs the way the water is going — low on the left when it is coming
+ * in, high on the left when it is going out.
  *
- * Scaled to whatever the window actually contains rather than to a fixed range,
- * so a neap tide fills the same box as a spring one — the shape is the message,
- * and the number beside it carries the size.
+ * The times at each end are what make it readable. A height needs a datum
+ * explaining before it means anything; "low at 06:12, high at 12:30, and you
+ * are here" needs none.
  */
-function tideCurve(series, now) {
-  if (!series?.length) return '';
-  const width = 46;
-  const height = 16;
-  const from = series[0].at;
-  const to = series[series.length - 1].at;
-  const heights = series.map((p) => p.height);
-  const low = Math.min(...heights);
-  const high = Math.max(...heights);
-  const range = high - low || 1;
+function tidePhaseWidget(phase) {
+  if (!phase) return '';
+  const width = 44;
+  const height = 15;
+  const pad = 1.6;
 
-  const x = (at) => ((at - from) / (to - from)) * width;
-  // Inverted, because high water should be at the top and SVG counts downwards.
-  const y = (h) => height - ((h - low) / range) * height;
+  // Half a cosine across the box. Rising runs from the bottom to the top;
+  // falling is the same curve upside down.
+  const y = (t) => {
+    const swing = (1 - Math.cos(Math.PI * t)) / 2;
+    const up = phase.rising ? swing : 1 - swing;
+    return height - pad - up * (height - pad * 2);
+  };
 
-  const path = series
-    .map((p, i) => `${i ? 'L' : 'M'}${x(p.at).toFixed(1)} ${y(p.height).toFixed(1)}`)
-    .join(' ');
+  const steps = 16;
+  const path = Array.from({ length: steps + 1 }, (_, i) => {
+    const t = i / steps;
+    return `${i ? 'L' : 'M'}${(t * width).toFixed(1)} ${y(t).toFixed(1)}`;
+  }).join(' ');
 
-  const at = Math.min(Math.max(now.at ?? Date.now(), from), to);
-  const markerY = now.height === undefined ? null : y(now.height);
-
-  return `<svg class="tidecurve" viewBox="0 0 ${width} ${height}" aria-hidden="true">
+  const at = Math.min(Math.max(phase.through, 0), 1);
+  return `<svg class="phasecurve" viewBox="0 0 ${width} ${height}" aria-hidden="true">
     <path d="${path}"/>
-    ${markerY === null ? '' : `<circle cx="${x(at).toFixed(1)}" cy="${markerY.toFixed(1)}" r="2.6"/>`}
+    <circle cx="${(at * width).toFixed(1)}" cy="${y(at).toFixed(1)}" r="2.7"/>
   </svg>`;
 }
 

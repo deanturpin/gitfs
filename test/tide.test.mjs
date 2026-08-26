@@ -10,73 +10,77 @@ import { readFileSync } from 'node:fs';
 
 const providers = readFileSync('site/providers.js', 'utf8');
 
-// The function is internal to the module, so exercise the same arithmetic here
-// against the shape the API returns. Kept in step by the last test below.
-function tideNow(times, heights, at) {
-  if (!times?.length) return null;
-  for (let i = 0; i < times.length - 1; i += 1) {
-    const start = Date.parse(times[i]);
-    const end = Date.parse(times[i + 1]);
-    if (at < start || at > end) continue;
-    const from = heights[i];
-    const to = heights[i + 1];
-    if (from === null || to === null) return null;
-    const through = (at - start) / (end - start);
-    return { height: from + (to - from) * through, rising: to > from };
+// tidePhase is internal to the module, so the same arithmetic is exercised
+// here against the shape tideTurns produces. The last test keeps the two in
+// step by asserting the module still wires it up.
+function tidePhase(turns, at) {
+  if (!turns?.length) return null;
+  for (let i = 0; i < turns.length - 1; i += 1) {
+    const from = Date.parse(turns[i].time);
+    const to = Date.parse(turns[i + 1].time);
+    if (at < from || at > to) continue;
+    return {
+      from: turns[i],
+      to: turns[i + 1],
+      through: (at - from) / (to - from),
+      rising: turns[i + 1].type === 'high',
+    };
   }
   return null;
 }
 
-const times = ['2026-08-26T12:00', '2026-08-26T13:00', '2026-08-26T14:00'];
-const falling = [1.2, 0.4, -0.6];
+const turns = [
+  { type: 'low', time: '2026-08-26T06:12', height: -1.9 },
+  { type: 'high', time: '2026-08-26T12:30', height: 1.8 },
+  { type: 'low', time: '2026-08-26T18:45', height: -1.7 },
+];
 
-test('the height is interpolated within the hour', () => {
-  // A tide moves a long way inside an hour, so the hourly sample on its own is
-  // not the height you are standing in.
-  const half = tideNow(times, falling, Date.parse('2026-08-26T13:30'));
-  assert.ok(Math.abs(half.height - -0.1) < 1e-9, `got ${half.height}`);
+test('it finds the half cycle we are inside', () => {
+  const phase = tidePhase(turns, Date.parse('2026-08-26T09:00'));
+  assert.equal(phase.from.type, 'low');
+  assert.equal(phase.to.type, 'high');
 });
 
-test('it reads falling water as falling', () => {
-  assert.equal(tideNow(times, falling, Date.parse('2026-08-26T13:30')).rising, false);
+test('rising and falling are read from the turning point ahead', () => {
+  assert.equal(tidePhase(turns, Date.parse('2026-08-26T09:00')).rising, true);
+  assert.equal(tidePhase(turns, Date.parse('2026-08-26T15:00')).rising, false);
 });
 
-test('it reads rising water as rising', () => {
-  const rising = [-0.6, 0.4, 1.2];
-  assert.equal(tideNow(times, rising, Date.parse('2026-08-26T13:30')).rising, true);
+test('progress runs from nought at one turning point to one at the next', () => {
+  const at = tidePhase(turns, Date.parse('2026-08-26T06:12'));
+  assert.ok(Math.abs(at.through) < 1e-9, `got ${at.through}`);
+  const later = tidePhase(turns, Date.parse('2026-08-26T12:30'));
+  assert.ok(Math.abs(later.through) < 1e-9 || Math.abs(later.through - 1) < 1e-9);
+  const middle = tidePhase(turns, Date.parse('2026-08-26T09:21'));
+  assert.ok(Math.abs(middle.through - 0.5) < 0.01, `got ${middle.through}`);
 });
 
-test('the samples themselves come back unchanged', () => {
-  const at = tideNow(times, falling, Date.parse('2026-08-26T13:00'));
-  assert.ok(Math.abs(at.height - 0.4) < 1e-9, `got ${at.height}`);
+test('a time outside the turning points yields nothing rather than extrapolating', () => {
+  assert.equal(tidePhase(turns, Date.parse('2026-08-25T23:00')), null);
+  assert.equal(tidePhase(turns, Date.parse('2026-08-27T09:00')), null);
+  assert.equal(tidePhase([], Date.now()), null);
 });
 
-test('a time outside the series yields nothing rather than extrapolating', () => {
-  // The forecast is two days long; asking beyond it should not invent a tide.
-  assert.equal(tideNow(times, falling, Date.parse('2026-08-27T09:00')), null);
-  assert.equal(tideNow([], [], Date.now()), null);
-});
-
-test('a gap in the series yields nothing rather than a wrong height', () => {
-  assert.equal(tideNow(times, [1.2, null, -0.6], Date.parse('2026-08-26T13:30')), null);
-});
-
-test('the app asks for the tide state and the curve, and draws both', () => {
-  assert.match(providers, /tideNow: tideNow\(/, 'conditions does not carry the tide state');
-  assert.match(providers, /tideSeries: tideSeries\(/, 'conditions does not carry the curve');
+test('the app asks for the phase and draws it', () => {
+  assert.match(providers, /tidePhase: tidePhase\(turns\)/, 'conditions does not carry the phase');
   const app = readFileSync('site/app.js', 'utf8');
-  assert.match(app, /live\.tideNow/, 'nothing renders the tide state');
-  assert.match(app, /tideCurve\(live\.tideSeries/, 'nothing draws the curve');
-  assert.match(app, /g-tide-\$\{live\.tideNow\.rising \? 'high' : 'low'\}/,
-    'the rising and falling glyphs should show which way it is going');
+  assert.match(app, /tidePhaseWidget\(phase\)/, 'nothing draws the phase');
+  assert.match(app, /clock\(phase\.from\.time\)/, 'the turning point behind us has no time');
+  assert.match(app, /clock\(phase\.to\.time\)/, 'the turning point ahead has no time');
 });
 
-test('the height shown is measured up from low water, not from a chart datum', () => {
+test('the curve runs the way the water is going', () => {
+  // Low on the left when it is coming in, high on the left when it is going
+  // out — the picture should never contradict the arrow beside it.
+  const app = readFileSync('site/app.js', 'utf8');
+  assert.match(app, /const up = phase\.rising \? swing : 1 - swing;/,
+    'the curve should invert when the tide is falling');
+});
+
+test('the card explains no chart datum to swimmers', () => {
   // Mean sea level is not something anyone standing on a beach can see, and a
-  // negative depth of water is nonsense. This must read zero at low water.
+  // negative depth of water is nonsense on its face. Times either end of a
+  // curve need no datum at all.
   const app = readFileSync('site/app.js', 'utf8');
-  assert.match(app, /const aboveLow = live\.tideNow\.height - low;/,
-    'the displayed height should be relative to the cycle low');
-  assert.doesNotMatch(app, /relative to mean sea level/,
-    'the card should not be explaining a chart datum to swimmers');
+  assert.doesNotMatch(app, /mean sea level/, 'the card should not mention a chart datum');
 });
