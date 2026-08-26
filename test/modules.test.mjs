@@ -11,10 +11,10 @@ import { readdirSync, mkdtempSync, copyFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const modules = readdirSync('site').filter((f) => f.endsWith('.js'));
+const modules = readdirSync('public').filter((f) => f.endsWith('.js'));
 
 test('there are modules to check', () => {
-  assert.ok(modules.length >= 4, `found only ${modules.length} modules in site/`);
+  assert.ok(modules.length >= 4, `found only ${modules.length} modules in public/`);
 });
 
 for (const name of modules) {
@@ -24,7 +24,7 @@ for (const name of modules) {
     const dir = mkdtempSync(join(tmpdir(), 'gitfs-parse-'));
     try {
       const copy = join(dir, name.replace(/\.js$/, '.mjs'));
-      copyFileSync(join('site', name), copy);
+      copyFileSync(join('public', name), copy);
       execFileSync(process.execPath, ['--check', copy], { stdio: 'pipe' });
     } catch (error) {
       assert.fail(`${name} failed to parse:\n${error.stderr?.toString() ?? error.message}`);

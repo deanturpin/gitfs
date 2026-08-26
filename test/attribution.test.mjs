@@ -8,13 +8,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { style } from '../site/map-style.js';
+import { style } from '../public/map-style.js';
 
-const spots = JSON.parse(readFileSync('site/data/bathing.json', 'utf8'));
-const buoys = JSON.parse(readFileSync('site/data/buoys.json', 'utf8'));
+const spots = JSON.parse(readFileSync('public/data/bathing.json', 'utf8'));
+const buoys = JSON.parse(readFileSync('public/data/buoys.json', 'utf8'));
 const built = style(spots.spots, buoys.stations);
-const app = readFileSync('site/app.js', 'utf8');
-const css = readFileSync('site/style.css', 'utf8');
+const app = readFileSync('public/app.js', 'utf8');
+const css = readFileSync('public/style.css', 'utf8');
 
 test('every data source carries an attribution', () => {
   for (const [name, source] of Object.entries(built.sources)) {

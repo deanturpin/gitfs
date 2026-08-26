@@ -8,7 +8,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const providers = readFileSync('site/providers.js', 'utf8');
+const providers = readFileSync('public/providers.js', 'utf8');
 
 // tidePhase is internal to the module, so the same arithmetic is exercised
 // here against the shape tideTurns produces. The last test keeps the two in
@@ -63,7 +63,7 @@ test('a time outside the turning points yields nothing rather than extrapolating
 
 test('the app asks for the phase and draws it', () => {
   assert.match(providers, /tidePhase: tidePhase\(turns\)/, 'conditions does not carry the phase');
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   assert.match(app, /tidePhaseWidget\(phase\)/, 'nothing draws the phase');
   assert.match(app, /clock\(phase\.from\.time\)/, 'the turning point behind us has no time');
   assert.match(app, /clock\(phase\.to\.time\)/, 'the turning point ahead has no time');
@@ -72,7 +72,7 @@ test('the app asks for the phase and draws it', () => {
 test('the curve runs the way the water is going', () => {
   // Low on the left when it is coming in, high on the left when it is going
   // out — the picture should never contradict the arrow beside it.
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   assert.match(app, /const up = phase\.rising \? swing : 1 - swing;/,
     'the curve should invert when the tide is falling');
 });
@@ -81,6 +81,6 @@ test('the card explains no chart datum to swimmers', () => {
   // Mean sea level is not something anyone standing on a beach can see, and a
   // negative depth of water is nonsense on its face. Times either end of a
   // curve need no datum at all.
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   assert.doesNotMatch(app, /mean sea level/, 'the card should not mention a chart datum');
 });

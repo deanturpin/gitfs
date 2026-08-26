@@ -8,10 +8,10 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { verdict, PERSONAS, VERDICTS } from '../site/verdict.js';
+import { verdict, PERSONAS, VERDICTS } from '../public/verdict.js';
 import {
   HELL_YEAH_AT, HMMM_AT, MAX_WAVE_HEIGHT_M, MIN_SEA_TEMP_C, YEAH_AT,
-} from '../site/thresholds.js';
+} from '../public/thresholds.js';
 
 /** A day at the seaside, described the way a swimmer would describe it. */
 const day = (over) => ({

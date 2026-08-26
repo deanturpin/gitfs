@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuild site/data/coast.geojson from OpenStreetMap land polygons.
+# Rebuild public/data/coast.geojson from OpenStreetMap land polygons.
 #
 # Rarely needed — coastlines do not move, and the upstream file is rebuilt
 # daily only to repair breaks in the OSM coastline. Output is ODbL; see
@@ -14,7 +14,7 @@ set -euo pipefail
 BBOX="${BBOX:--11,49.5,2.2,61}"          # Britain, Ireland and Shetland
 SRC="simplified-land-polygons-complete-3857"
 URL="https://osmdata.openstreetmap.de/download/${SRC}.zip"
-OUT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/site/data/coast.geojson"
+OUT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/public/data/coast.geojson"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 

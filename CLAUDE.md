@@ -21,7 +21,7 @@ cache with a bill attached.
   `access-control-allow-origin: *`.
 - Sources without CORS headers are regenerated into static JSON on a schedule
   by GitHub Actions and served as ordinary assets.
-- The deployable site is everything under `site/`. The Pages workflow uploads
+- The deployable site is everything under `public/`. The Pages workflow uploads
   that directory and nothing else.
 
 ## Gotchas
@@ -46,6 +46,12 @@ These cost real time to discover. Do not rediscover them.
   Environment Agency, which does not cover Wales, Scotland or Northern Ireland.
   The CCO buoys do reach Wales, so parts of the map have measurements and no
   spots. Do not describe the coverage as UK-wide.
+- **The Environment Agency blocks GitHub's runners.** `fetch_bathing.py`
+  returns 403 in CI while working from a normal machine; several user agents
+  were tried from an allowed address and all succeeded, so it is the data
+  centre address range being refused rather than the request. The workflow
+  therefore falls back to the committed copy and fails the build once that copy
+  is three days old. Refresh it with `make bathing` locally.
 - **CCO has no API.** 53 buoy stations, HTML only, at
   `coastalmonitoring.org/realtimedata/?chart=<id>&tab=waves`. Their robots.txt
   blocks several automated agents, so send a descriptive User-Agent with a
@@ -94,7 +100,10 @@ running app, not merely in a file.
 
 ## Commands
 
-There is no build step yet. `site/` is served as-is.
+`tools/build.sh` is the one build definition, run by both GitHub Actions and
+Cloudflare Pages. Defining a step in either builder alone means the other
+silently skips it, which for the commit stamp and the import versioning is not
+obviously broken until somebody's cache serves a mismatched module graph.
 
 - `markdownlint *.md` — lint before committing; tables are exempt from the line
   length rule via `.markdownlint.json`.

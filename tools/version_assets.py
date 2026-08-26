@@ -21,7 +21,7 @@ import re
 import sys
 from pathlib import Path
 
-SITE = Path(__file__).resolve().parent.parent / "site"
+SITE = Path(__file__).resolve().parent.parent / "public"
 
 
 def main():

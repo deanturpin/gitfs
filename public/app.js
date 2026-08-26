@@ -2,10 +2,10 @@
 // because the bare name shadows the global Map constructor.
 import { Map as MapLibre, AttributionControl, ScaleControl } from './vendor/maplibre-gl.mjs';
 import { conditions, local, distanceKm, nearest, adjacent, spanBounds, skyGlyph } from './providers.js';
-import { style, points, CLASSIFICATION, VERDICT_COLOUR } from './map-style.js';
+import { style, points, bobbing, CLASSIFICATION, VERDICT_COLOUR } from './map-style.js';
 import { verdict } from './verdict.js';
 
-import { BUOY_RANGE_KM, BUOY_STALE_HOURS } from './thresholds.js';
+import { BUOY_RANGE_KM, BUOY_STALE_HOURS, REFRESH_MINUTES } from './thresholds.js';
 // How much coast to show once a position is known, as a distance rather than a
 // zoom level: the same zoom covers roughly 6 km on a phone and 20 km on a
 // desktop, so a number here would mean different things to different people.
@@ -22,10 +22,68 @@ const el = (id) => document.getElementById(id);
 const panel = el('panel');
 
 // Whatever the panel is currently describing, so paging has somewhere to
-// start from.
+// start from, and how far away it was if we arrived by locating — a refresh
+// must not quietly drop that.
 let current = null;
+let currentDistance = null;
 
-const [spotData, buoyData] = await Promise.all([local.spots(), local.buoys()]);
+// A buoy sitting in the water, drawn rather than dotted: a body, a band, a
+// light on top, and a couple of waves at its foot.
+//
+// The lean is applied inside the artwork rather than by rotating the finished
+// icon, which is the whole reason there are three of these. Rotating the icon
+// tips the waves over with the buoy, and water does not do that. Here the buoy
+// leans about its own waterline while the sea stays level, which is what
+// bobbing actually looks like.
+//
+// Three variants rather than one so a row of buoys does not look stamped. Which
+// one a station gets is decided in map-style.js from its id, so it stays put
+// when the readings are regenerated every half hour.
+const buoyArt = (lean) => `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="68" viewBox="0 0 32 34"
+     fill="none" stroke="#3ec5e0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="rotate(${lean} 16 25)">
+    <circle cx="16" cy="5.5" r="2.6"/>
+    <path d="M16 8.1v3"/>
+    <path d="M10.6 11.1h10.8l-1.6 11.6a1.8 1.8 0 0 1-1.8 1.6h-4a1.8 1.8 0 0 1-1.8-1.6z"/>
+    <path d="M12.3 16.6h8.4"/>
+  </g>
+  <g opacity=".85">
+    <path d="M2 26.5c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
+    <path d="M2 31c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
+  </g>
+</svg>`;
+
+/** The lean each variant carries, in degrees. */
+export const BUOY_VARIANTS = { 'buoy-port': -11, 'buoy-level': -2, 'buoy-starboard': 10 };
+
+/**
+ * Decode all three buoy drawings before the map exists.
+ *
+ * MapLibre wants an image registered by the time a symbol layer asks for it. A
+ * styleimagemissing handler that loads one asynchronously is too late: the
+ * image does arrive and the buoys do appear, but the map has already logged
+ * that it could not be loaded, which reads in the console like a broken map.
+ *
+ * Decoding first and registering the moment the map is constructed means it is
+ * never asked for something that is not there.
+ */
+async function buoyImages() {
+  const decoded = await Promise.all(
+    Object.entries(BUOY_VARIANTS).map(async ([id, lean]) => {
+      const image = new Image(64, 68);
+      image.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(buoyArt(lean));
+      await image.decode();
+      return [id, image];
+    })
+  );
+  return decoded;
+}
+
+let [spotData, buoyData, buoyArtwork] = await Promise.all([
+  local.spots(),
+  local.buoys(),
+  buoyImages(),
+]);
 
 // A marker the smoke test can assert on. Counting what loaded proves the
 // modules resolved and the data arrived, neither of which needs a GPU — unlike
@@ -81,17 +139,19 @@ function nearestBuoy(spot) {
   return best;
 }
 
-async function select(spot, distanceAway = null, spanMetres = null) {
+async function select(spot, distanceAway = null, spanMetres = null, { quiet = false } = {}) {
   const wasOpen = panel.hasAttribute('data-open');
   current = spot;
+  if (!quiet) currentDistance = distanceAway;
   // Mark it on the map, so the card and the coast agree about where you are.
   map.getSource('selected')?.setData(points([spot]));
   panel.setAttribute('data-open', '');
   // Set for both paths: opening the card for the first time is when there is
-  // least on screen and the swell has most to say.
-  panel.setAttribute('data-loading', '');
+  // least on screen and the swell has most to say. A quiet refresh sets
+  // nothing, so a card left open does not blink every ten minutes.
+  if (!quiet) panel.setAttribute('data-loading', '');
 
-  if (wasOpen) {
+  if (wasOpen && !quiet) {
     // The card is a fixed height, so it no longer collapses mid-fetch. Keep
     // the previous readings on screen and dim them, so only the name changes
     // until the new numbers arrive.
@@ -129,6 +189,20 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     ? buoy.station.peakPeriod
     : modelled.wavePeriod?.value ?? null;
 
+  // When the readings describe, not when they were fetched. The forecast
+  // publishes on the quarter hour, so a card can be a few minutes old the
+  // moment it is drawn — saying so is the honest version.
+  const observed = clock(live.seaTemp?.observedAt ?? live.airTemp?.observedAt ?? null);
+
+  // The Environment Agency's pollution forecast expires each morning. If the
+  // catalogue has not been refreshed since, the stored risk is yesterday's
+  // answer to today's question — so it is dropped rather than shown, and the
+  // verdict simply does without it.
+  const riskLive = spot.riskExpiresAt
+    ? Date.parse(spot.riskExpiresAt) > Date.now()
+    : false;
+  const risk = riskLive ? spot.risk : null;
+
   const call = verdict({
     seaTemp,
     waveHeight,
@@ -138,7 +212,7 @@ async function select(spot, distanceAway = null, spanMetres = null) {
     windDirection: live.windDirection?.value ?? null,
     feelsLike: live.feelsLike?.value ?? null,
     classification: spot.classification ?? null,
-    risk: spot.risk ?? null,
+    risk: risk ?? null,
     // Derived from the coastline at build time; null for the inland waters in
     // the catalogue, which have no shore to face.
     aspect: spot.aspect ?? null,
@@ -148,11 +222,24 @@ async function select(spot, distanceAway = null, spanMetres = null) {
   // between them, in place of two separate entries that said neither.
   const phase = live.tidePhase;
   const next = phase
-    ? `<span class="tidephase" aria-label="${phase.from.type === 'low' ? 'Low' : 'High'} water at ${clock(phase.from.time)}, ${phase.to.type === 'low' ? 'low' : 'high'} at ${clock(phase.to.time)}, tide ${phase.rising ? 'rising' : 'falling'}">
-        <svg aria-hidden="true"><use href="#g-tide-${phase.from.type}"/></svg>${clock(phase.from.time)}
-        ${tidePhaseWidget(phase)}
-        <svg aria-hidden="true"><use href="#g-tide-${phase.to.type}"/></svg>${clock(phase.to.time)}
-      </span>`
+    ? (() => {
+        // The curve says which end is which — it rises towards high water and
+        // falls towards low — so the glyphs that used to flank the times were
+        // repeating what the picture already showed.
+        //
+        // The depth follows: measured up from the lower of the two turning
+        // points, so it reads nought at low water and the full range at high,
+        // and interpolated along the same cosine the curve is drawn from.
+        const swing = (1 - Math.cos(Math.PI * Math.min(Math.max(phase.through, 0), 1))) / 2;
+        const now = phase.from.height + (phase.to.height - phase.from.height) * swing;
+        const depth = now - Math.min(phase.from.height, phase.to.height);
+        return `<span class="tidephase" aria-label="${phase.from.type === 'low' ? 'Low' : 'High'} water at ${clock(phase.from.time)}, ${phase.to.type === 'low' ? 'low' : 'high'} at ${clock(phase.to.time)}, ${depth.toFixed(1)} metres above low water and ${phase.rising ? 'rising' : 'falling'}">
+          ${clock(phase.from.time)}
+          ${tidePhaseWidget(phase)}
+          ${clock(phase.to.time)}
+          <b>${depth.toFixed(1)}<i>m</i></b>
+        </span>`;
+      })()
     : '';
 
   badge(call.percent);
@@ -166,7 +253,7 @@ async function select(spot, distanceAway = null, spanMetres = null) {
   settle();
   panel.innerHTML = `
     <p class="verdict" data-tone="${call.tone}">
-      <span>${call.label}<small>${call.because ?? ''}</small></span>
+      <span>${call.label}${observed ? `<em>@${observed}</em>` : ''}<small>${call.because ?? ''}</small></span>
       ${call.percent === null ? '' : `<b class="pct" aria-label="Rated ${call.percent} per cent">${call.percent}<i>%</i></b>`}
     </p>
     <p class="spot-name">
@@ -187,23 +274,27 @@ async function select(spot, distanceAway = null, spanMetres = null) {
       ${tile('chill', live.feelsLike?.value, '°C', 'Feels like getting out', false)}
       <div class="reading reading--word">
         <svg aria-hidden="true" style="color:${CLASSIFICATION[spot.classification] ?? 'var(--accent)'}"><use href="#g-drop"/></svg>
-        <div><b style="color:${CLASSIFICATION[spot.classification] ?? 'inherit'}">${spot.classification ?? '—'}</b><small>${spot.risk ?? '—'}</small></div>
+        <div><b style="color:${CLASSIFICATION[spot.classification] ?? 'inherit'}">${spot.classification ?? '—'}</b><small class="${riskLive ? '' : 'stale'}">${risk ?? '—'}</small></div>
         <i class="mark" title="Environment Agency forecast"
-           aria-label="Water quality ${spot.classification ?? 'unknown'}, risk ${spot.risk ?? 'unknown'}"></i>
+           aria-label="Water quality ${spot.classification ?? 'unknown'}, pollution risk ${risk ?? 'forecast expired'}"></i>
       </div>
     </div>
     <div class="tide">
       ${next || '<span>—</span>'}
-      ${live.sunrise ? `<span><svg aria-hidden="true"><use href="#g-sunrise"/></svg>
-        <span aria-label="Sunrise at ${clock(live.sunrise)}">${clock(live.sunrise)}</span></span>` : ''}
-      ${live.sunset ? `<span><svg aria-hidden="true"><use href="#g-sunset"/></svg>
-        <span aria-label="Sunset at ${clock(live.sunset)}">${clock(live.sunset)}</span></span>` : ''}
-      ${distanceAway !== null ? `<span>⌖ ${Math.round(distanceAway)} km</span>` : ''}
+      ${live.sunrise && live.sunset ? `<span aria-label="Sunrise at ${clock(live.sunrise)}, sunset at ${clock(live.sunset)}">
+        ${clock(live.sunrise)}
+        <svg aria-hidden="true"><use href="#g-sunrise"/></svg>
+        ${clock(live.sunset)}
+      </span>` : ''}
+      ${currentDistance !== null ? `<span>⌖ ${Math.round(currentDistance)} km</span>` : ''}
       ${buoy ? `<span class="${stale ? 'stale' : ''}">${buoy.station.name}
         ${Math.round(buoy.km)} km · ${stale ? 'stale' : clock(buoy.station.observedAt)}</span>` : ''}
     </div>`;
 
-  frameSpot(spot, spanMetres);
+  // A refresh must not move the map. Somebody may have panned away to look at
+  // the next bay along, and having it snap back would be worse than stale
+  // numbers.
+  if (!quiet) frameSpot(spot, spanMetres);
 }
 
 /**
@@ -312,6 +403,7 @@ function frameSpot(spot, spanMetres = null) {
 /** Give the whole map back when nothing is selected. */
 function closePanel() {
   current = null;
+  currentDistance = null;
   map.getSource('selected')?.setData(points([]));
   settle();
   panel.removeAttribute('data-open');
@@ -324,45 +416,6 @@ for (const layer of ['spots', 'buoys']) {
   map.on('mouseleave', layer, () => { map.getCanvas().style.cursor = ''; });
 }
 
-// A buoy sitting in the water, drawn rather than dotted: a body, a band, a
-// light on top, and a couple of waves at its foot.
-//
-// The lean is applied inside the artwork rather than by rotating the finished
-// icon, which is the whole reason there are three of these. Rotating the icon
-// tips the waves over with the buoy, and water does not do that. Here the buoy
-// leans about its own waterline while the sea stays level, which is what
-// bobbing actually looks like.
-//
-// Three variants rather than one so a row of buoys does not look stamped. Which
-// one a station gets is decided in map-style.js from its id, so it stays put
-// when the readings are regenerated every half hour.
-const buoyArt = (lean) => `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="68" viewBox="0 0 32 34"
-     fill="none" stroke="#3ec5e0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-  <g transform="rotate(${lean} 16 25)">
-    <circle cx="16" cy="5.5" r="2.6"/>
-    <path d="M16 8.1v3"/>
-    <path d="M10.6 11.1h10.8l-1.6 11.6a1.8 1.8 0 0 1-1.8 1.6h-4a1.8 1.8 0 0 1-1.8-1.6z"/>
-    <path d="M12.3 16.6h8.4"/>
-  </g>
-  <g opacity=".85">
-    <path d="M2 26.5c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
-    <path d="M2 31c2.3 0 2.3-2 4.7-2s2.3 2 4.6 2 2.3-2 4.7-2 2.3 2 4.7 2 2.3-2 4.6-2 2.3 2 4.7 2"/>
-  </g>
-</svg>`;
-
-/** The lean each variant carries, in degrees. */
-export const BUOY_VARIANTS = { 'buoy-port': -11, 'buoy-level': -2, 'buoy-starboard': 10 };
-
-map.on('styleimagemissing', (e) => {
-  const lean = BUOY_VARIANTS[e.id];
-  if (lean === undefined || map.hasImage(e.id)) return;
-  const image = new Image(64, 68);
-  image.onload = () => {
-    // Checked again on arrival: two misses can be raised before the first loads.
-    if (!map.hasImage(e.id)) map.addImage(e.id, image, { pixelRatio: 2 });
-  };
-  image.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(buoyArt(lean));
-});
 
 // A scale, because every distance in the app is metric — the nearest buoy is
 // quoted in kilometres — and that number only means something if the map says
@@ -373,7 +426,21 @@ map.on('styleimagemissing', (e) => {
 // the viewport, so it needs a map that has finished working out where it is.
 // Adding it straight away throws inside MapLibre.
 map.on('load', () => {
-  map.addControl(new ScaleControl({ maxWidth: 110, unit: 'metric' }), 'top-right');
+  // Registered immediately, before anything has been drawn, so the symbol layer
+// never asks for an image that is not yet there.
+for (const [id, image] of buoyArtwork) {
+  if (!map.hasImage(id)) map.addImage(id, image, { pixelRatio: 2 });
+}
+
+// A fallback for anything that empties the image store — a style reload would.
+// It should never fire in normal use; if it does, the buoys still appear and
+// MapLibre logs that it had to ask.
+map.on('styleimagemissing', (e) => {
+  const found = buoyArtwork.find(([id]) => id === e.id);
+  if (found && !map.hasImage(e.id)) map.addImage(e.id, found[1], { pixelRatio: 2 });
+});
+
+map.addControl(new ScaleControl({ maxWidth: 110, unit: 'metric' }), 'top-right');
 });
 
 map.addControl(
@@ -495,3 +562,49 @@ addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') page(-1);
   if (e.key === 'Escape') closePanel();
 });
+
+// Keep an open card current. The buoys are rescraped every half hour and the
+// forecast moves about as often, so this is not chasing anything faster than
+// the data changes.
+//
+// Paused while the tab is hidden, because refreshing a card nobody is looking
+// at is pure waste — and refreshed immediately on return, since coming back to
+// a card is exactly when its age matters.
+let refreshTimer = null;
+
+/**
+ * Refetch the measured readings as well as the forecast.
+ *
+ * Refreshing only the forecast would put a new time against a buoy reading
+ * hours old, which is the precise failure this app exists to avoid. The file is
+ * small and regenerated every half hour, so this is cheap and is the half that
+ * actually matters.
+ */
+async function refreshReadings() {
+  try {
+    const fresh = await local.buoys();
+    if (fresh?.stations?.length) {
+      buoyData = fresh;
+      map.getSource('buoys')?.setData(bobbing(fresh.stations));
+    }
+  } catch {
+    // Keep the readings we have; the card shows each station's own age.
+  }
+  if (current) await select(current, null, null, { quiet: true });
+}
+
+function scheduleRefresh() {
+  clearInterval(refreshTimer);
+  refreshTimer = setInterval(() => {
+    if (current && !document.hidden) refreshReadings();
+  }, REFRESH_MINUTES * 60_000);
+}
+
+addEventListener('visibilitychange', () => {
+  if (document.hidden || !current) return;
+  refreshReadings();
+  // Restart the clock, so returning does not leave a refresh due immediately.
+  scheduleRefresh();
+});
+
+scheduleRefresh();

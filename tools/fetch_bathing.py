@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build site/data/bathing.json from the Environment Agency.
+"""Build public/data/bathing.json from the Environment Agency.
 
 These 400-odd designated bathing waters are the app's swim spots: they are
 official, carry coordinates, and come with both an annual classification and a
@@ -20,7 +20,7 @@ from pathlib import Path
 API = "https://environment.data.gov.uk/doc/bathing-water.json?_pageSize={}"
 PAGE_SIZE = 1000
 UA = "gitfs/0.1 (sea conditions for swimmers; +https://github.com/deanturpin/gitfs)"
-OUT = Path(__file__).resolve().parent.parent / "site" / "data" / "bathing.json"
+OUT = Path(__file__).resolve().parent.parent / "public" / "data" / "bathing.json"
 
 
 def value(node, *path):

@@ -7,9 +7,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { nearest, distanceKm } from '../site/providers.js';
+import { nearest, distanceKm } from '../public/providers.js';
 
-const { spots } = JSON.parse(readFileSync('site/data/bathing.json', 'utf8'));
+const { spots } = JSON.parse(readFileSync('public/data/bathing.json', 'utf8'));
 
 const BRIGHTON = { lat: 50.8198, lon: -0.1372 };
 const BIRMINGHAM = { lat: 52.4862, lon: -1.8904 };

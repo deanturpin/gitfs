@@ -95,13 +95,43 @@ enough to be regenerated on a schedule.
 
 All verified live on 2026-08-25.
 
-| Source | Gives | Coverage | CORS | How it reaches the browser |
+| Source | Publishes | Coverage | CORS | How it reaches the browser |
 | --- | --- | --- | --- | --- |
-| Open-Meteo Marine | Sea temp, waves, swell, tide curve | Global | Yes | Direct fetch |
-| Open-Meteo Forecast | Air, wind, gusts, UV | Global | Yes | Direct fetch |
-| CCO buoys | Measured sea temp and wave height, 53 stations | England and Wales | No | Scraped every 30 min to `buoys.json` |
-| EA bathing water | Annual rating, daily risk forecast, 464 sites | England only | No | Fetched daily to `bathing.json` |
-| OSM land polygons | Coastline | Global, clipped to UK | n/a | Static asset, ODbL |
+| Open-Meteo Marine | Every 15 min | Global | Yes | Direct fetch |
+| Open-Meteo Forecast | Every 15 min | Global | Yes | Direct fetch |
+| CCO buoys | Every 30 min, 39 stations reporting position | England and Wales | No | Scraped to `buoys.json` |
+| EA pollution risk | Daily, expires 08:29 next morning | England only | No | `bathing.json`, refreshed by hand |
+| EA classification | Annually, previous season | England only | No | Same file |
+| OSM land polygons | Rebuilt daily upstream, taken once | Global, clipped to UK | n/a | Static asset |
+
+### How fresh a reading actually is
+
+The source's own cadence is only half of it — what matters is the age by the
+time it is read.
+
+| Reading | Source moves | Our copy lags | On screen |
+| --- | --- | --- | --- |
+| Waves, period, wind, air, tide | 15 min | none — the browser fetches it | Live, refreshed every 10 min while a card is open |
+| Measured sea temp and wave height | 30 min | 30 to 70 min | Up to about 100 min old; each station shows its own time, and is marked stale past 3 hours |
+| Pollution risk | Daily | until someone runs `make bathing` | Dropped entirely once expired |
+| Bathing water classification | Annually | irrelevant at that cadence | Shown as-is |
+
+Three things are worth knowing about that table.
+
+**The scheduled job is not punctual.** A `*/30` cron on GitHub Actions fired at
+gaps of 55, 55, 30, 69 and 63 minutes in one measured afternoon, so treat it as
+roughly hourly. Cloudflare's cron triggers would be punctual, which is one of
+the better arguments for moving.
+
+**The pollution refresh is broken in CI.** The Environment Agency returns 403 to
+GitHub's runners — it blocks the address range, not the request, confirmed by
+trying several user agents from a machine it allows. The workflow falls back to
+the committed copy and fails the build once that copy is three days old.
+
+**The live readings were never the stale ones.** Waves, wind, tide and air come
+straight from the browser to Open-Meteo on every card open. Only the measured
+buoy readings and the pollution forecast pass through a file, and both show
+their age.
 
 Open-Meteo returns a usable tidal curve as `sea_level_height_msl`, so no
 separate tide API is needed for a high-or-low read. The Admiralty API remains an

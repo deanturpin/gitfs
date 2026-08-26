@@ -9,9 +9,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { adjacent } from '../site/providers.js';
+import { adjacent } from '../public/providers.js';
 
-const { spots } = JSON.parse(readFileSync('site/data/bathing.json', 'utf8'));
+const { spots } = JSON.parse(readFileSync('public/data/bathing.json', 'utf8'));
 const find = (name) => {
   const spot = spots.find((s) => s.name === name);
   assert.ok(spot, `no spot named ${name}`);

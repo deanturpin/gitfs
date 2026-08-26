@@ -9,8 +9,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const html = readFileSync('site/index.html', 'utf8');
-const app = readFileSync('site/app.js', 'utf8');
+const html = readFileSync('public/index.html', 'utf8');
+const app = readFileSync('public/app.js', 'utf8');
 
 /** Glyph ids referenced by the tiles the card renders. */
 const tileGlyphs = [...app.matchAll(/tile\('([a-z-]+)'/g)].map((m) => m[1]);
@@ -40,19 +40,36 @@ test('every symbol referenced anywhere is defined', () => {
 });
 
 test('glyphs referenced by name at runtime exist', () => {
-  // These are built from a template — `#g-tide-${high ? 'high' : 'low'}` — so
-  // no scan of the source can see them. A symbol that is not there renders as
-  // empty space, which on a row of times reads as a missing reading.
-  for (const id of ['g-tide-high', 'g-tide-low']) {
-    assert.match(html, new RegExp(`id="${id}"`), `no symbol for ${id}`);
+  // Built from templates — `#g-${glyph}` for the tiles, `#g-${sky}` for the
+  // weather — so no scan of the source can see them. A symbol that is not there
+  // renders as empty space rather than failing.
+  const app = readFileSync('public/app.js', 'utf8');
+  const skies = ['sun', 'moon', 'suncloud', 'cloud', 'rain', 'snow', 'fog', 'storm'];
+  for (const id of skies) {
+    assert.match(html, new RegExp(`id="g-${id}"`), `no symbol for g-${id}`);
   }
+  assert.match(app, /#g-\$\{sky\}/, 'the weather glyph should be chosen at runtime');
 });
 
-test('the tide and sun glyphs are drawn the same way', () => {
-  // They sit side by side on one row and mean the same shape of thing: an
-  // event, and which direction it goes. If one gains a viewBox the other lacks,
-  // they stop matching in size.
-  const boxes = ['g-tide-high', 'g-tide-low', 'g-sunrise', 'g-sunset'].map((id) => {
+test('no symbol is defined that nothing uses', () => {
+  // Dead artwork is easy to leave behind when a row is rearranged: removing the
+  // glyphs flanking the tide times orphaned three symbols at once.
+  const app = readFileSync('public/app.js', 'utf8');
+  const defined = [...html.matchAll(/id="(g-[a-z-]+)"/g)].map((m) => m[1]);
+  const orphans = defined.filter((id) => {
+    const bare = id.replace(/^g-/, '');
+    return !html.includes(`#${id}"`)
+      && !app.includes(`#${id}"`)
+      && !app.includes(`'${bare}'`)
+      && !(['sun', 'moon', 'suncloud', 'cloud', 'rain', 'snow', 'fog', 'storm'].includes(bare));
+  });
+  assert.deepEqual(orphans, [], `symbols nothing references: ${orphans.join(', ')}`);
+});
+
+test('the sky glyphs are all drawn on the same viewBox', () => {
+  // They stand in for one another in the same slot, so a different box would
+  // make the weather appear to change size when it changes state.
+  const boxes = ['g-sun', 'g-cloud', 'g-rain', 'g-storm'].map((id) => {
     const found = html.match(new RegExp(`id="${id}" viewBox="([^"]+)"`));
     assert.ok(found, `${id} has no viewBox`);
     return found[1];
@@ -62,7 +79,7 @@ test('the tide and sun glyphs are drawn the same way', () => {
 
 test('no reading still relies on an inline style for its glyph size', () => {
   // Sizes belong in the stylesheet; an inline one silently wins over it later.
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   assert.doesNotMatch(app, /<svg[^>]*style="[^"]*width:/, 'glyph sized inline');
 });
 
@@ -70,8 +87,8 @@ test('every buoy variant named in the code is drawn and registered', () => {
   // The style asks for the icon by a data property rather than by name, so a
   // variant that nothing registers cannot be spotted by reading the style — it
   // just draws nothing where a buoy should be.
-  const app = readFileSync('site/app.js', 'utf8');
-  const style = readFileSync('site/map-style.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
+  const style = readFileSync('public/map-style.js', 'utf8');
   const named = [...style.matchAll(/'(buoy-[a-z]+)'/g)].map((m) => m[1]);
   assert.ok(named.length >= 2, `found ${named.length} buoy variants`);
   for (const variant of named) {
@@ -83,7 +100,7 @@ test('nothing is registered twice', () => {
   // A stray duplicate of a top-level block is not a syntax error when the
   // copies land in different scopes, so it survives a parse and quietly
   // doubles up.
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   const handlers = app.match(/map\.on\('styleimagemissing'/g) ?? [];
   assert.equal(handlers.length, 1, `${handlers.length} styleimagemissing handlers`);
   const art = app.match(/^const buoyArt =/gm) ?? [];

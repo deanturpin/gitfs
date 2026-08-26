@@ -10,10 +10,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
-import { style, points, bobbing, BUOY_ICONS, CLASSIFICATION, VERDICT_COLOUR } from '../site/map-style.js';
+import { style, points, bobbing, BUOY_ICONS, CLASSIFICATION, VERDICT_COLOUR } from '../public/map-style.js';
 
-const spots = JSON.parse(readFileSync('site/data/bathing.json', 'utf8'));
-const buoys = JSON.parse(readFileSync('site/data/buoys.json', 'utf8'));
+const spots = JSON.parse(readFileSync('public/data/bathing.json', 'utf8'));
+const buoys = JSON.parse(readFileSync('public/data/buoys.json', 'utf8'));
 
 test('style validates against the MapLibre specification', () => {
   const errors = validateStyleMin(style(spots.spots, buoys.stations));
@@ -87,7 +87,7 @@ test('every verdict tone has a colour for the map ring', () => {
 test('the verdict palette matches the stylesheet', () => {
   // Two copies of a colour is one too many; if they drift, the map and the
   // card say different things about the same spot.
-  const css = readFileSync('site/style.css', 'utf8');
+  const css = readFileSync('public/style.css', 'utf8');
   for (const [tone, colour] of Object.entries(VERDICT_COLOUR)) {
     const rule = new RegExp(`\\.verdict\\[data-tone="${tone}"\\]\\s*\\{\\s*color:\\s*${colour}`, 'i');
     assert.match(css, rule, `.verdict[data-tone="${tone}"] does not use ${colour}`);
@@ -97,7 +97,7 @@ test('the verdict palette matches the stylesheet', () => {
 test('the title and the verdict are set at the same size', () => {
   // The question and the answer are the two loudest things in the app. They
   // drift apart the moment one is adjusted without the other.
-  const css = readFileSync('site/style.css', 'utf8');
+  const css = readFileSync('public/style.css', 'utf8');
   const sizes = [...css.matchAll(/font-size:\s*(clamp\([^)]*\))/g)].map((m) => m[1]);
   const title = css.match(/#banner h1 \{[^}]*font-size:\s*(clamp\([^)]*\))/s)?.[1];
   const verdict = css.match(/\.verdict \{[^}]*font-size:\s*(clamp\([^)]*\))/s)?.[1];
@@ -141,16 +141,16 @@ test('the variants are spread across the buoys', () => {
 test('the buoy leans but its water does not', () => {
   // A tilted waterline is why the lean is baked into the artwork rather than
   // applied by rotating the finished icon. The rotation must not wrap the waves.
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   const rotated = app.match(/<g transform="rotate\(\$\{lean\}[^"]*">([\s\S]*?)<\/g>/)?.[1] ?? '';
   assert.ok(rotated.includes('circle'), 'the buoy itself should sit inside the rotation');
   assert.ok(!rotated.includes('opacity'), 'the waves should sit outside the rotation');
-  const style = readFileSync('site/map-style.js', 'utf8');
+  const style = readFileSync('public/map-style.js', 'utf8');
   assert.doesNotMatch(style, /'icon-rotate'/, 'rotating the icon would tip the sea over');
 });
 
 test('the buoy icon is drawn in one colour, like the rest', () => {
-  const app = readFileSync('site/app.js', 'utf8');
+  const app = readFileSync('public/app.js', 'utf8');
   const svg = app.match(/<svg xmlns[^`]*<\/svg>/s)?.[0] ?? '';
   assert.ok(svg, 'no buoy artwork found');
   const colours = new Set([...svg.matchAll(/#[0-9a-f]{6}/gi)].map((m) => m[0].toLowerCase()));
@@ -181,4 +181,26 @@ test('the spots without an aspect are the ones with no coast', () => {
   // Inland bathing waters — lakes and rivers — have no shoreline to face.
   const without = spots.spots.filter((s) => s.aspect === null || s.aspect === undefined);
   assert.ok(without.length < 60, `${without.length} spots have no aspect`);
+});
+
+test('the shipped pollution forecasts have not expired', () => {
+  // The Environment Agency's forecast lapses each morning, and their API
+  // refuses GitHub's runners, so the committed copy is what ships. An expired
+  // forecast presented as current is precisely the failure this app exists to
+  // avoid, so its age is asserted rather than assumed.
+  const withExpiry = spots.spots.filter((s) => s.riskExpiresAt);
+  assert.ok(withExpiry.length > 400, `only ${withExpiry.length} spots carry a forecast`);
+  const expired = withExpiry.filter((s) => Date.parse(s.riskExpiresAt) < Date.now());
+  assert.ok(
+    expired.length < withExpiry.length * 0.1,
+    `${expired.length} of ${withExpiry.length} forecasts have expired — run \`make bathing\``
+  );
+});
+
+test('the app refuses to show an expired forecast', () => {
+  const app = readFileSync('public/app.js', 'utf8');
+  assert.match(app, /Date\.parse\(spot\.riskExpiresAt\) > Date\.now\(\)/,
+    'the card should check the forecast is still valid');
+  assert.match(app, /risk: risk \?\? null/,
+    'an expired forecast should not reach the verdict');
 });

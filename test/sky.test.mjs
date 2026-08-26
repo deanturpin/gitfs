@@ -7,9 +7,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { skyGlyph } from '../site/providers.js';
+import { skyGlyph } from '../public/providers.js';
 
-const html = readFileSync('site/index.html', 'utf8');
+const html = readFileSync('public/index.html', 'utf8');
 
 test('the recognisable states map as expected', () => {
   assert.equal(skyGlyph(0), 'sun');

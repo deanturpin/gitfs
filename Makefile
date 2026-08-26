@@ -1,4 +1,4 @@
-.PHONY: all help serve stop data buoys bathing aspect coast og test smoke lint clean deploy
+.PHONY: all help serve stop build data buoys bathing aspect coast og test smoke lint clean deploy
 
 PORT ?= 8765
 
@@ -8,13 +8,14 @@ help:
 	@echo "gitfs — sea conditions for swimmers, surfers, paddlers and divers"
 	@echo ""
 	@echo "  make serve     Serve on http://localhost:$(PORT)"
-	@echo "                 No build step: site/ is served exactly as Pages serves it"
+	@echo "                 Serves public/ as built; run make build first if stale"
 	@echo "  make stop      Stop a server holding port $(PORT)"
 	@echo "  make test      Validate the map style and the generated data"
 	@echo "  make smoke     Load the page in a browser and fail on any error"
+	@echo "  make build     Everything between a checkout and a deployable public/"
 	@echo "  make data      Refresh buoy readings and bathing water forecasts"
 	@echo "  make coast     Rebuild the coastline from OpenStreetMap (slow, 24MB)"
-	@echo "  make og        Rerender the link preview card to site/og.png"
+	@echo "  make og        Rerender the link preview card to public/og.png"
 	@echo "  make lint      Lint the markdown"
 	@echo ""
 	@echo "  make deploy M=\"what changed and why\""
@@ -23,8 +24,8 @@ help:
 # MapLibre v6 is ESM-only and a wrong type fails the import with an error that
 # blames the module rather than the server.
 serve: stop
-	@echo "serving site/ on http://localhost:$(PORT)"
-	@cd site && python3 -m http.server $(PORT)
+	@echo "serving public/ on http://localhost:$(PORT)"
+	@cd public && python3 -m http.server $(PORT)
 
 stop:
 	@pkill -f "http.server $(PORT)" 2>/dev/null && echo "stopped server on $(PORT)" || true
@@ -41,13 +42,17 @@ test:
 # sleeping a fixed two seconds. A smoke test that fails intermittently is worse
 # than none, because it teaches you to ignore it.
 smoke: stop
-	@cd site && python3 -m http.server $(PORT) >/dev/null 2>&1 & \
+	@cd public && python3 -m http.server $(PORT) >/dev/null 2>&1 & \
 	  for i in $$(seq 1 30); do \
 	    curl -sf -o /dev/null http://localhost:$(PORT)/ && break; \
 	    sleep 0.3; \
 	  done; \
 	  status=0; node scripts/smoke.mjs / || status=1; \
 	  pkill -f "http.server $(PORT)" 2>/dev/null; exit $$status
+
+# What both builders run. Writes only into public/.
+build:
+	@bash tools/build.sh
 
 data: buoys bathing aspect
 
@@ -75,14 +80,14 @@ CHROME ?= /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 og:
 	"$(CHROME)" --headless=new --disable-gpu --hide-scrollbars --no-sandbox \
 	  --window-size=1200,630 --default-background-color=06283d \
-	  --screenshot=site/og.png "file://$(PWD)/tools/og-card.html"
-	@echo "site/og.png rerendered"
+	  --screenshot=public/og.png "file://$(PWD)/tools/og-card.html"
+	@echo "public/og.png rerendered"
 
 lint:
 	@npx markdownlint-cli *.md
 
 clean:
-	@rm -f site/data/*.json site/data/coast.geojson
+	@rm -f public/data/*.json public/data/coast.geojson
 
 # Commit message is required — never generate a generic one.
 deploy:

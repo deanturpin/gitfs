@@ -22,8 +22,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-COAST = ROOT / "site" / "data" / "coast.geojson"
-SPOTS = ROOT / "site" / "data" / "bathing.json"
+COAST = ROOT / "public" / "data" / "coast.geojson"
+SPOTS = ROOT / "public" / "data" / "bathing.json"
 
 # How far to step off the shoreline when testing which side is sea, in metres.
 #

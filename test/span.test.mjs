@@ -7,7 +7,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spanBounds, distanceKm } from '../site/providers.js';
+import { spanBounds, distanceKm } from '../public/providers.js';
 
 const BRIGHTON = { lat: 50.8198, lon: -0.1372 };
 const SHETLAND = { lat: 60.15, lon: -1.15 };

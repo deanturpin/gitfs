@@ -16,11 +16,11 @@ import { join } from 'node:path';
 /** Run the versioner over a throwaway copy of the tree. */
 function versioned(stamp = 'testsha') {
   const dir = mkdtempSync(join(tmpdir(), 'gitfs-version-'));
-  cpSync('site', join(dir, 'site'), { recursive: true });
+  cpSync('public', join(dir, 'public'), { recursive: true });
   cpSync('tools', join(dir, 'tools'), { recursive: true });
   execFileSync(process.execPath === '' ? 'python3' : 'python3',
     [join(dir, 'tools', 'version_assets.py'), stamp], { stdio: 'pipe' });
-  const read = (p) => readFileSync(join(dir, 'site', p), 'utf8');
+  const read = (p) => readFileSync(join(dir, 'public', p), 'utf8');
   const out = { app: read('app.js'), html: read('index.html') };
   rmSync(dir, { recursive: true, force: true });
   return out;

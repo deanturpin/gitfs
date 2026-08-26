@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build site/data/buoys.json from the Channel Coastal Observatory.
+"""Build public/data/buoys.json from the Channel Coastal Observatory.
 
 CCO publishes no API, so this parses their real-time HTML tables. Data is
 Open Government Licence v3. Their robots.txt blocks several automated agents,
@@ -26,7 +26,7 @@ INDEX = "https://coastalmonitoring.org/realtimedata/"
 STATION = INDEX + "?chart={}&tab=waves"
 UA = "gitfs/0.1 (sea conditions for swimmers; +https://github.com/deanturpin/gitfs)"
 DELAY = 0.4
-OUT = Path(__file__).resolve().parent.parent / "site" / "data" / "buoys.json"
+OUT = Path(__file__).resolve().parent.parent / "public" / "data" / "buoys.json"
 
 # Header text mapped onto the key we publish. Anything unlisted is ignored.
 FIELDS = {

@@ -7,8 +7,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { verdict, offshoreness } from '../site/verdict.js';
-import { OFFSHORE_VETO_WIND_MPH } from '../site/thresholds.js';
+import { verdict, offshoreness } from '../public/verdict.js';
+import { OFFSHORE_VETO_WIND_MPH } from '../public/thresholds.js';
 
 // A beach facing south has its land to the north.
 const SOUTH_FACING = 180;

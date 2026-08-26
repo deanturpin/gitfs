@@ -30,45 +30,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Regenerate the data that blocks CORS and so cannot be fetched by the
-      # browser. A source having a moment must not take the site down with it:
-      # on failure the committed copy ships instead, and the page shows its age.
-      - name: Refresh buoy readings
-        run: python3 tools/fetch_buoys.py || echo "::warning::buoy refresh failed, shipping committed data"
-
-      - name: Refresh bathing water forecasts
-        run: python3 tools/fetch_bathing.py || echo "::warning::bathing refresh failed, shipping committed data"
-
-      # Rewrites the aspect into the freshly fetched catalogue. Without it a
-      # successful refresh would drop the field and every beach would lose its
-      # facing until the next deploy.
-      - name: Derive which way each beach faces
-        run: python3 tools/shore_aspect.py || echo "::warning::aspect derivation failed, wind direction will be ignored"
-
-      # Stamp the commit onto local imports so a deploy cannot be half-applied.
-      # Pages caches for four hours and files fall out of cache at different
-      # times; a fresh app.js against a cached providers.js does not merely look
-      # stale, it fails to start.
-      - name: Version the module graph
-        run: python3 tools/version_assets.py "${GITHUB_SHA::7}"
-
-      # Version tracking: stamp the short commit hash into the page. Fails
-      # loudly if the placeholder has gone, because a substitution that matches
-      # nothing is otherwise a silent no-op — which is exactly how the version
-      # marker was lost once already.
-      - name: Inject commit hash
-        run: |
-          grep -q "__COMMIT__" site/index.html || {
-            echo "::error::__COMMIT__ placeholder missing from site/index.html"
-            exit 1
-          }
-          sed -i "s/__COMMIT__/${GITHUB_SHA::7}/g" site/index.html
+      # One build definition, shared with Cloudflare Pages, so neither builder
+      # can quietly skip a step the other does. See tools/build.sh.
+      - name: Build
+        run: bash tools/build.sh
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: public
 
       - id: deployment
         uses: actions/deploy-pages@v4

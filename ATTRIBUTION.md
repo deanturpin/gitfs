@@ -27,7 +27,7 @@ These must appear in the running application, not only in this file.
 - Coastline data © OpenStreetMap contributors, available under the Open
   Database Licence.
 - Oswald is used under the SIL Open Font Licence and is self-hosted in
-  `site/vendor/fonts`, so the app makes no third-party request and works
+  `public/vendor/fonts`, so the app makes no third-party request and works
   offline.
 
 ## ODbL share-alike

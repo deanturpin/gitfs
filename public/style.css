@@ -203,6 +203,14 @@ button svg { width: 1.35rem; height: 1.35rem; }
   opacity: .75; font-variant-numeric: tabular-nums;
 }
 .verdict .pct i { font-style: normal; font-size: .7em; opacity: .7; }
+.verdict em {
+  font-style: normal;
+  font-size: .42em; font-weight: 500;
+  letter-spacing: 0; opacity: .5;
+  margin-left: .35em;
+  vertical-align: .18em;
+}
+
 .verdict small {
   /* Always rendered, empty when the verdict needs no justifying, and a fixed
      height so the line is reserved either way. Otherwise a HELL YEAH — which
@@ -453,7 +461,12 @@ button[data-state="failed"] { color: #f87171; border-color: #f87171; }
 /* The half cycle: a turning point and its time at each end, and the curve
    between them carrying where we are. Replaces two separate entries that gave
    the times without the shape. */
-.tidephase { display: inline-flex; align-items: center; gap: .25rem; }
+.tidephase { display: inline-flex; align-items: center; gap: .3rem; }
+.tidephase b {
+  font-family: var(--display); font-weight: 500;
+  color: var(--ink); opacity: .8;
+}
+.tidephase b i { font-style: normal; font-size: .8em; opacity: .7; }
 .phasecurve {
   width: 2.9rem; height: 1rem;
   margin: 0 .1rem;

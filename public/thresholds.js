@@ -116,6 +116,15 @@ export const BUOY_RANGE_KM = 40;
 export const BUOY_STALE_HOURS = 3;
 
 /**
+ * How often the open card refetches its readings, in minutes.
+ *
+ * The buoys are rescraped every half hour and the forecast updates about as
+ * often, so anything faster is asking the same question twice. Ten minutes
+ * keeps a card left open on a windowsill honest without hammering anybody.
+ */
+export const REFRESH_MINUTES = 10;
+
+/**
  * How far the marine model may snap away from the point asked for, in km,
  * before its readings are discarded.
  *
