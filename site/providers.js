@@ -45,6 +45,38 @@ function tideTurns(times, heights) {
 }
 
 /**
+ * Where the tide is right now: how deep, and which way it is going.
+ *
+ * The card already shows when the next high and low water are, which answers
+ * "when" and not "what is it doing". Standing on a beach, the useful facts are
+ * whether the water is coming in or going out and how far up it is — a falling
+ * tide two hours off low is a different proposition from the same height rising.
+ *
+ * Height is relative to mean sea level, so it is negative below the middle of
+ * the range rather than being a depth of water. Interpolated between the hourly
+ * samples, because a tide moves a good deal inside an hour.
+ */
+function tideNow(times, heights, at = Date.now()) {
+  if (!times?.length) return null;
+  for (let i = 0; i < times.length - 1; i += 1) {
+    const start = Date.parse(times[i]);
+    const end = Date.parse(times[i + 1]);
+    if (at < start || at > end) continue;
+    const from = heights[i];
+    const to = heights[i + 1];
+    if (from === null || to === null) return null;
+    const through = (at - start) / (end - start);
+    return {
+      height: from + (to - from) * through,
+      // Rising or falling now, taken from the direction of travel across the
+      // hour we are inside rather than from the nearest turning point.
+      rising: to > from,
+    };
+  }
+  return null;
+}
+
+/**
  * Live conditions for a point.
  *
  * Note the returned position: the marine grid is coarse and snaps requests to
@@ -104,6 +136,7 @@ export async function conditions(lat, lon) {
     weatherCode: air.weather_code ?? null,
     isDay: air.is_day === undefined ? null : Boolean(air.is_day),
     tide: tideTurns(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
+    tideNow: tideNow(marine.hourly?.time ?? [], marine.hourly?.sea_level_height_msl ?? []),
     // Light, not weather. A swim after sunset is a different proposition, and
     // a time needs no translating.
     sunrise: weather.daily?.sunrise?.[0] ?? null,

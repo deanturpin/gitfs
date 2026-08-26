@@ -195,6 +195,9 @@ async function select(spot, distanceAway = null, spanMetres = null) {
       </div>
     </div>
     <div class="tide">
+      ${live.tideNow ? `<span aria-label="Tide ${live.tideNow.rising ? 'rising' : 'falling'}, ${live.tideNow.height.toFixed(1)} metres relative to mean sea level">
+        <svg aria-hidden="true"><use href="#g-tide-${live.tideNow.rising ? 'high' : 'low'}"/></svg>
+        ${live.tideNow.height > 0 ? '+' : ''}${live.tideNow.height.toFixed(1)}m</span>` : ''}
       ${next || '<span>—</span>'}
       ${live.sunrise ? `<span><svg aria-hidden="true"><use href="#g-sunrise"/></svg>
         <span aria-label="Sunrise at ${clock(live.sunrise)}">${clock(live.sunrise)}</span></span>` : ''}
