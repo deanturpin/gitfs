@@ -1,22 +1,29 @@
-name: Deploy to Pages
+name: Deploy redirect to Pages
+
+# The app moved to the gitfs2 repository, deployed to Cloudflare Pages. This
+# repository now publishes a signpost and nothing else.
+#
+# The half-hourly refresh is gone with it. It existed to keep buoy readings
+# fresh, and GitHub's scheduler was never punctual enough for that — measured
+# at a median of 63 minutes and a worst case of over five hours, which is the
+# reason the app moved hosts in the first place.
+#
+# This workflow is disabled. It is kept, rather than deleted, so the redirect
+# can be redeployed by hand when the domain is settled: run it from the Actions
+# tab, or `gh workflow run pages.yml -R deanturpin/gitfs` after enabling it.
 
 on:
-  push:
-    branches: [main]
-  # Buoys report every half hour. GitHub's scheduler is not punctual and
-  # routinely fires 10 to 30 minutes late, so treat this as roughly hourly and
-  # let the UI show each station's own observation time.
-  schedule:
-    - cron: '*/30 * * * *'
   workflow_dispatch:
+
+# Where the old address sends people. The one place the new domain is written.
+env:
+  TARGET: https://gitfs.sima.one/
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Never let two deploys race; queue rather than cancel so a data refresh
-# already in flight still reaches production.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -30,16 +37,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # One build definition, shared with Cloudflare Pages, so neither builder
-      # can quietly skip a step the other does. See tools/build.sh.
-      - name: Build
-        run: bash tools/build.sh
+      - name: Stamp the target into the redirect
+        run: |
+          set -euo pipefail
+          # Bare host for the visible link; full URL everywhere else.
+          label="${TARGET#https://}"
+          label="${label%/}"
+          sed -e "s|__TARGET_LABEL__|${label}|g" -e "s|__TARGET__|${TARGET}|g" \
+            redirect/index.html > redirect/index.stamped
+          mv redirect/index.stamped redirect/index.html
+          # Pages serves 404.html for any unknown path, so a deep link that was
+          # never a real page on the old site is redirected as well.
+          cp redirect/index.html redirect/404.html
+          # A placeholder reaching production would be a broken link.
+          ! grep -q '__TARGET' redirect/index.html
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: redirect
 
       - id: deployment
         uses: actions/deploy-pages@v4

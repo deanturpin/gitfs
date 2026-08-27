@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get In The Fucking Sea has moved</title>
+
+<!--
+  This repository no longer hosts the app. It lives at gitfs2, deployed to
+  Cloudflare Pages, and everything here is a signpost pointing at it.
+
+  The domain is not settled yet, so it is not written here. __TARGET__ is
+  substituted at deploy time from a single value in .github/workflows/pages.yml
+  — change it there and re-run the workflow by hand. 404.html is generated from
+  this file at the same time, so an unknown path redirects too.
+-->
+
+<link rel="canonical" href="__TARGET__">
+<meta http-equiv="refresh" content="0; url=__TARGET__">
+
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem; padding: 1.5rem; text-align: center;
+    background: #06283d; color: #e7f2f8;
+    font: 1rem/1.5 system-ui, -apple-system, sans-serif;
+  }
+  h1 { font-size: 1.25rem; font-weight: 600; margin: 0; }
+  p { margin: 0; opacity: .7; max-width: 28rem; }
+  a { color: #4ade80; font-weight: 600; }
+</style>
+
+<h1>Get in the fucking sea &mdash; elsewhere</h1>
+<p>This address has moved. If you are not sent on automatically:</p>
+<p><a href="__TARGET__">__TARGET_LABEL__</a></p>
+
+<script>
+  // Carry any query or fragment across, so a shared link to a particular spot
+  // still lands on that spot. Runs before the meta refresh in practice, and
+  // replace() keeps the dead address out of the back button.
+  location.replace('__TARGET__' + location.search + location.hash);
+</script>
