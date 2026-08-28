@@ -17,7 +17,7 @@ on:
 
 # Where the old address sends people. The one place the new domain is written.
 env:
-  TARGET: https://gitfs.sima.one/
+  TARGET: https://getinthesea.uk/
 
 permissions:
   contents: read
